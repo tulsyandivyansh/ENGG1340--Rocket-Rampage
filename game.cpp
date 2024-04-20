@@ -10,7 +10,7 @@
 using namespace std;
 
 //Define game window size
-int gameWindowSizeY = 25;
+int gameWindowSizeY = 30;
 int gameWindowSizeX = 60;
 
 //The Player class keeps track of the player's name, score, and remaining lives
@@ -187,11 +187,11 @@ int game(string playerName) {
     wrefresh(gameWindow);
 
     //Create a window to show controls
-    WINDOW* commandsWindow = newwin(3, 60, 28, 0);
+    WINDOW* commandsWindow = newwin(3, 60, 33, 0);
     //Draw a box around the command window
     box(commandsWindow, 0, 0);
     //Print instructions
-    mvwprintw(commandsWindow, 1, 1, "[<][>]:Move Paddle                                [Q]:Quit");
+    mvwprintw(commandsWindow, 1, 1, "[<][>]:Move Paddle        [A]: Shoot            [Q]:Quit");
     //Refresh command window initially
     wrefresh(commandsWindow);
 
@@ -203,7 +203,7 @@ int game(string playerName) {
 
 
     Paddle paddle;
-    paddle.init(17, 30);
+    paddle.init(22, 30);
     //Draw all the components and refresh the game window initially
     level.draw(gameWindow);
     paddle.draw(gameWindow);
@@ -234,10 +234,19 @@ int game(string playerName) {
         }
 
         //Initialize new ball on losing a life
-        if(input == 'a') {
+        if(input == 'a' || input == 'A') {
             balls.push_back(Ball((paddle.y)+5, (paddle.x)+2, -1));
+            ball_num++;
+            if (ball_num == 50){
+                died = true;
+                break;
+            }
         }
-        for(int i = 0; i < ball_num; i++){
+        for(int i = balls.size()-1; i >= 0; i--){
+             if (balls[i].y == 2){
+                balls.erase(balls.begin() + i);
+                continue;
+             }
              balls[i].erase(gameWindow);
 
         //Update ball position
@@ -271,4 +280,3 @@ int game(string playerName) {
 
     return 0;
 }
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ~                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     ~                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     ~                                                                                                                                                                                                                                  
