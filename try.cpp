@@ -12,7 +12,7 @@ using namespace std;
 //Define game window size
 int gameWindowSizeY = 30;
 int gameWindowSizeX = 60;
-int occurence = 0;
+int iteration = 0;
 //The Player class keeps track of the player's name, score, and remaining lives
 class Player {
 public:
@@ -34,7 +34,7 @@ class Enemy {
 public:
     string sprite = ("|0|\n"
                      "\\0/\n");
-    int x, y;
+    int x, y, dy;
 
     Enemy(int y, int x) {
         this->y = y;
@@ -58,9 +58,65 @@ public:
             mvwprintw(window, y+i+1, x, "    ");
         }
     }
-
+    
 };
 
+void speed(vector <Enemy> enemy, WINDOW* gameWindow, Player player, int iteration, int create, int speed){
+    if(iteration % create == 0){
+        enemy.push_back(Enemy(0, rand()%55));            
+    }
+
+    for(int i=0; i <= enemy.size()-1;i++){
+        if(enemy[i].y ==25)
+        {
+            enemy[i].erase(gameWindow);
+            player.lives -= 1;
+            enemy.erase(enemy.begin() + i);
+            continue;
+        }
+        if(iteration % speed == 0){
+            enemy[i].erase(gameWindow);
+            (enemy[i].y)+=1;
+            enemy[i].draw(gameWindow);
+            wrefresh(gameWindow);
+        }
+    }
+}
+int level(int iteration){
+    if (iteration < 200){
+        return 1; 
+    }
+    else if (iteration < 400){
+        return 2;
+    }
+    else if (iteration < 600){
+        return 3;
+    }
+    else if (iteration < 800){
+        return 4;
+    }
+    else if (iteration < 1000){
+        return 5;
+    }
+    else if (iteration < 1200){
+        return 6;
+    }
+    else if (iteration < 1400){
+        return 7;
+    }
+    else if (iteration < 1600){
+        return 8;
+    }
+    else if (iteration < 1800){
+        return 9;
+    }
+    else if (iteration < 2000){
+        return 10;
+    }
+    else{
+        return 11; 
+    }
+}
 //The Paddle class represents the player's paddle and is responsible for moving it left and right based on user input
 class Paddle {
 public:
@@ -182,7 +238,7 @@ int game(string playerName) {
 
     //Initialize the player, level, ball and paddle
     Player player;
-    player.init(playerName, 0, 3);
+    player.init(playerName, 0, 100);
 
 
     Paddle paddle;
@@ -214,36 +270,50 @@ int game(string playerName) {
             died = true;
             break;
         }
-         if(occurence%10 == 0){
-            enemy.push_back(Enemy(0, rand()%55 +2));
-
-        }
-
-            wrefresh(gameWindow);
-
-            for(int i=0; i <= enemy.size()-1;i++){
-
-                if(enemy[i].y >=25)
-                {
-                    enemy[i].erase(gameWindow);
-                    enemy.erase(enemy.begin() + i);
-                    continue;
-                }
-                enemy[i].erase(gameWindow);
-                (enemy[i].y)+=1;
-                enemy[i].draw(gameWindow);
-                wrefresh(gameWindow);
-
-
-            }
-
+        
+        wrefresh(gameWindow);
+        switch(level(iteration)){
+            case 1:
+                speed(enemy, gameWindow, player, iteration, 20, 5);
+                break;
+            case 2:
+                speed(enemy, gameWindow, player, iteration, 15, 4);
+                break;
+            case 3:
+                speed(enemy, gameWindow, player, iteration, 10, 4);
+                break;
+            case 4:
+                speed(enemy, gameWindow, player, iteration, 8, 3);
+                break;
+            case 5:
+                speed(enemy, gameWindow, player, iteration, 7, 3);
+                break;
+            case 6:
+                speed(enemy, gameWindow, player, iteration, 6, 3);
+                break;
+            case 7:
+                speed(enemy, gameWindow, player, iteration, 5, 3);
+                break;
+            case 8:
+                speed(enemy, gameWindow, player, iteration, 5, 2);
+                break;
+            case 9:
+                speed(enemy, gameWindow, player, iteration, 4, 2);
+                break;
+            case 10:
+                speed(enemy, gameWindow, player, iteration, 3, 2);
+                break;
+            case 11:
+                speed(enemy, gameWindow, player, iteration, 3, 1);
+                break;
+        }    
 
 
         //Initialize new ball on losing a life
         if(input == 'a' || input == 'A') {
             balls.push_back(Ball((paddle.y)+5, (paddle.x)+2, -1));
             ball_num++;
-            if (ball_num == 50){
+            if (ball_num == 2000){
                 died = true;
                 break;
             }
@@ -260,23 +330,6 @@ int game(string playerName) {
              balls[i].y += balls[i].dy;
              balls[i].draw(gameWindow);
         }
-        for(int i = balls.size()-1; i >= 0; i--){
-            for(int j=0; j <= enemy.size()-1;j++){
-                if(balls[i].x == enemy[j].x || balls[i].x == enemy[j].x +1 || balls[i].x == enemy[j].x +2)
-                {
-                    if(balls[i].y == enemy[j].y){
-                        balls[i].erase(gameWindow);
-                        balls.erase(balls.begin() + i);
-                        enemy[i].erase(gameWindow);
-                        enemy.erase(enemy.begin() + i);
-
-                    }
-                }
-
-            }
-        }
-        //Clears ball from last position to not leave a trail
-
         //Update paddle position
         paddle.erase(gameWindow);
         paddle.update(input);
@@ -294,9 +347,11 @@ int game(string playerName) {
         flushinp();
         //Sleep for 100000 microseconds before updating
         usleep(100000);
-        occurence++;
+        iteration++;
     }
-
+    delete gameWindow; 
+    delete infoWindow;
+    delete commandsWindow;
     if(died) gameOver(player.name, player.score);
     else mainmenu();
     return 0;
