@@ -26,18 +26,30 @@ int displayMainMenu() {
     // Current menu selection
     int currentSelection = 0;
     int userInput;
+        // Displaying the game title and decoration
 
     while(true) {
-        // Displaying the game title and decoration
-      mvwprintw(mainWin, 1, 2, "* * * * * * * * * * * * * * * * * * * * * * * * * * * * *");
-      mvwprintw(mainWin, 2, 2, "*                                                         *");
-      mvwprintw(mainWin, 3, 2, "*    M       M  IIIII  SSSSS  SSSSS  IIIII  L      EEEEE  *");
-      mvwprintw(mainWin, 4, 2, "*    MM     MM    I    S      S        I    L      E      *");
-      mvwprintw(mainWin, 5, 2, "*    M M   M M    I     SSS    SSS     I    L      EEEE   *");
-      mvwprintw(mainWin, 6, 2, "*    M  M M  M    I        S      S    I    L      E      *");
-      mvwprintw(mainWin, 7, 2, "*    M   M   M  IIIII  SSSSS  SSSSS  IIIII  LLLLL  EEEEE  *");
-      mvwprintw(mainWin, 8, 2, "*                                                         *");
-      mvwprintw(mainWin, 9, 2, "* * * * * * * * * * * * * * * * * * * * * * * * * * * * * *");
+        mvwprintw(mainWin, 1,2,  "* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *");
+        mvwprintw(mainWin, 1,2,  "*   *   *   *   *   *   *   *   *   *   *   *   *   *   *   * *  *  * ");
+        mvwprintw(mainWin, 1, 2, "*      ██████╗   ██████╗   ██████╗ ██╗  ██╗ ███████╗ ████████╗       *");
+        mvwprintw(mainWin, 1, 3, "*      ██╔══██╗ ██╔═══██╗ ██╔════╝ ██║ ██╔╝ ██╔════╝ ╚══██╔══╝       *");
+        mvwprintw(mainWin, 1, 4, "*      ██████╔╝ ██║   ██║ ██║      █████╔╝  █████╗      ██║          *");
+        mvwprintw(mainWin, 1, 5, "*      ██╔══██╗ ██║   ██║ ██║      ██╔═██╗  ██╔══╝      ██║          *");
+        mvwprintw(mainWin, 1, 6, "*      ██║  ██║ ╚██████╔╝ ╚██████╗ ██║  ██╗ ███████╗    ██║          *");
+        mvwprintw(mainWin, 1, 7, "*      ╚═╝  ╚═╝  ╚═════╝   ╚═════╝ ╚═╝  ╚═╝ ╚══════╝    ╚═╝          *");
+        mvwprintw(mainWin, 1, 8, "*                                                                    *");
+        mvwprintw(mainWin, 1, 9, "* ██████╗   █████╗  ███╗   ███╗ ██████╗   █████╗   ██████╗  ███████╗ *");
+        mvwprintw(mainWin, 1, 10,"* ██╔══██╗ ██╔══██╗ ████╗ ████║ ██╔══██╗ ██╔══██╗ ██╔════╝  ██╔════╝ *");
+        mvwprintw(mainWin, 1, 11,"* ██████╔╝ ███████║ ██╔████╔██║ ██████╔╝ ███████║ ██║  ███╗ █████╗   *");
+        mvwprintw(mainWin, 1, 12,"* ██╔══██╗ ██╔══██║ ██║╚██╔╝██║ ██╔═══╝  ██╔══██║ ██║   ██║ ██╔══╝   8");
+        mvwprintw(mainWin, 1, 13,"* ██║  ██║ ██║  ██║ ██║ ╚═╝ ██║ ██║      ██║  ██║ ╚██████╔╝ ███████╗ *");
+        mvwprintw(mainWin, 1, 14,"* ╚═╝  ╚═╝ ╚═╝  ╚═╝ ╚═╝     ╚═╝ ╚═╝      ╚═╝  ╚═╝  ╚═════╝  ╚══════╝ *");
+        mvwprintw(mainWin, 1, 15,"* *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   * *");
+        mvwprintw(mainWin, 1, 16, "* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *  *");
+
+
+                                                            
+        
 
         // Iterate over options to display them
         for(int i = 0; i < 5; ++i) {
@@ -209,20 +221,20 @@ int displayCredits() {
     mvwprintw(creditsWindow, 21, 24, "Shrey");
 
     // Loop to handle navigation back to main menu
+ // Display ASCII art title "Credits"
     while (true) {
         // Display ASCII art title "Credits"
-        mvwprintw(creditsWindow, 1,2,"* * * * * * * * * * * * * * * * * * * * * * * * * * * * *");
-        mvwprintw(creditsWindow, 2,2,"*   *   *   *   *   *   *   *   *   *   *   *   *   *   *");
-        mvwprintw(creditsWindow, 3,2,"*  ________       *     *   *  *_   _*  __  *  * *      *");
-        mvwprintw(creditsWindow, 4,2,"* /   __   |  *    *  *   *    | | (_) |  |   *    * *  *");
-        mvwprintw(creditsWindow, 5,2,"* |  |  |__| _ ___   ___    ___| |  _  |  |   _____     *");
-        mvwprintw(creditsWindow, 6,2,"* |  |  ___ | ' __| / _ \\  /  _  | | | | __| / ____| *  *");
-        mvwprintw(creditsWindow, 7,2,"* |  | |   ||  /   | ___/ |  (_| | | | | |   \\__  \\ *   *");
-        mvwprintw(creditsWindow, 8,2,"*  \\_______||__|    \\___|  \\__,__| |_| \\___| |____/  *  *");
-        mvwprintw(creditsWindow, 9,2,"*   *     *     *     *     *     *     *     *     *   *");
-        mvwprintw(creditsWindow, 10,2,"*     *     *     *     *     *     *     *     *    *  *");
-        mvwprintw(creditsWindow, 11,2,"* * * * * * * * * * * * * * * * * * * * * * * ** * * *  *");
-
+        mvwprintw(creditsWindow, 1,2,"* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *");
+        mvwprintw(creditsWindow, 2,2,"*   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *");
+        mvwprintw(creditsWindow, 1,2,"*   ██████╗ ██████╗  ███████╗ ██████╗  ██╗ ████████╗ ███████╗    *");
+        mvwprintw(creditsWindow, 1,2,"*  ██╔════╝ ██╔══██╗ ██╔════╝ ██╔══██╗ ██║ ╚══██╔══╝ ██╔════╝    *");
+        mvwprintw(creditsWindow, 1,2,"*  ██║      ██████╔╝ █████╗   ██║  ██║ ██║    ██║    ███████╗    *");
+        mvwprintw(creditsWindow, 1,2,"*  ██║      ██╔══██╗ ██╔══╝   ██║  ██║ ██║    ██║    ╚════██║    *");
+        mvwprintw(creditsWindow, 1,2,"*  ╚██████╗ ██║  ██║ ███████╗ ██████╔╝ ██║    ██║    ███████║    *");
+        mvwprintw(creditsWindow, 1,2,"*   ╚═════╝ ╚═╝  ╚═╝ ╚══════╝ ╚═════╝  ╚═╝    ╚═╝    ╚══════╝    *");
+        mvwprintw(creditsWindow, 2,2,"*   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *    *");
+        mvwprintw(creditsWindow, 11,2,"* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * ** * ");
+        
         // Display the "BACK TO HOME" option with bold and reverse video (highlight)
         wattron(creditsWindow, A_BOLD);
         wattron(creditsWindow, A_REVERSE);
@@ -258,29 +270,28 @@ int concludeGameSession(const string& playerName, int playerScore) {
     int userInput;
 
     // Loop until the user presses 'Enter'
-    while(true) {
         // Display "Game Over" graphics using ASCII art
-        mvwprintw(gameOverWindow, 1,2,"* * * * * * * * * * * * * * * * * * * * * * * * * * * * *");
-        mvwprintw(gameOverWindow, 2,2,"*   *   *   *   *   *   *   *   *   *   *   *   *   *   *");
-        mvwprintw(gameOverWindow, 3,2,"       *    ______    *       *         *     *    *  *");
-        mvwprintw(gameOverWindow, 4,2,"   *     * /  ____|      *      *    *     *     *    *");
-        mvwprintw(gameOverWindow, 5,2,"  *    *  |  |  ___   _____  _________     ___     *  *");
-        mvwprintw(gameOverWindow, 6,2,"    *   * |  | |_  | /  _  | |  _   _ \\  / _  \\  *    *");
-        mvwprintw(gameOverWindow, 7,2," *       *|  |__|  | | (_| | | | | | | ||  __/    *   *");
-        mvwprintw(gameOverWindow, 8,2," *     *   \\_______|  \\____| |_| |_| |_| \\____|    *  *");
-        mvwprintw(gameOverWindow, 9,2,"    *     *     *     *     *     *     *     *     *   *");
-        mvwprintw(gameOverWindow, 10,2,"*     *     *     *     *     *     *     *     *     *");
-        mvwprintw(gameOverWindow, 11,2,"  *      *   ______   *      *     *   *      *    * *");
-        mvwprintw(gameOverWindow, 12,2,"     *    * /  __  \\   *      *         *       *   *");
-        mvwprintw(gameOverWindow, 13,2,"  *     *  |  |  |  | __    __  ___   __ ___  *      *");
-        mvwprintw(gameOverWindow, 14,2,"     *    *|  |  |  | \\ \\  / / / _ \\ | '___|   *    *");
-        mvwprintw(gameOverWindow, 15,2,"         * |  `--'  |  \\ \\/ / |  __/ | /    *     *  *");
-        mvwprintw(gameOverWindow, 16,2," *     *    \\______/    \\__/   \\___| |_|   *   *    *");
-        mvwprintw(gameOverWindow, 17,2,"*     *     *     *     *     *     *     *     *    * *");
-        mvwprintw(gameOverWindow, 18,2,"   *     *     *     *     *     *     *     *    *    *"); 
-        mvwprintw(gameOverWindow, 19,2,"*     *     *     *     *     *     *     *     *    * *"); 
-        mvwprintw(gameOverWindow, 20,2,"   *     *     *     *     *     *     *     *    *    *");
-        mvwprintw(gameOverWindow, 21,2,"* * * * * * * * * * * * * * * * * * * * * * * * * * * *");
+    while(true) {
+        mvwprintw(gameOverWindow, 1,2,"* * * * * * * * * * * * * * * * * * * * * * * * * * * * * *");
+        mvwprintw(gameOverWindow, 2,2,"*   *   *   *   *   *   *   *   *   *   *   *   *   *   *  *");    
+        mvwprintw(gameOverWindow, 3,2,"  *   *   *  ██████╗  █████╗ ███╗   ███╗███████╗  *   *    *");    
+        mvwprintw(gameOverWindow, 3,2,"            ██╔════╝ ██╔══██╗████╗ ████║██╔════╝           *");    
+        mvwprintw(gameOverWindow, 3,2,"            ██║  ███╗███████║██╔████╔██║█████╗             *");
+        mvwprintw(gameOverWindow, 3,2,"            ██║   ██║██╔══██║██║╚██╔╝██║██╔══╝             *");
+        mvwprintw(gameOverWindow, 3,2,"            ╚██████╔╝██║  ██║██║ ╚═╝ ██║███████╗           *");
+        mvwprintw(gameOverWindow, 3,2,"             ╚═════╝ ╚═╝  ╚═╝╚═╝     ╚═╝╚══════╝           *");
+        mvwprintw(gameOverWindow, 3,2,"                                                           *");  
+        mvwprintw(gameOverWindow, 3,2,"               ██████╗ ██╗   ██╗███████╗██████╗            *");
+        mvwprintw(gameOverWindow, 3,2,"              ██╔═══██╗██║   ██║██╔════╝██╔══██╗           *");  
+        mvwprintw(gameOverWindow, 3,2,"              ██║   ██║██║   ██║█████╗  ██████╔╝           *");
+        mvwprintw(gameOverWindow, 3,2,"              ██║   ██║╚██╗ ██╔╝██╔══╝  ██╔══██╗           *");  
+        mvwprintw(gameOverWindow, 3,2,"              ╚██████╔╝ ╚████╔╝ ███████╗██║  ██║           *");  
+        mvwprintw(gameOverWindow, 3,2,"  *   *   *    ╚═════╝   ╚═══╝  ╚══════╝╚═╝  ╚═╝   *   *   *");
+        mvwprintw(gameOverWindow, 20,2,"*   *   *   *   *   *   *   *   *   *   *   *   *   *   *  *");
+        mvwprintw(gameOverWindow, 21,2,"* * * * * * * * * * * * * * * * * * * * * * * * * * * * * *");
+        
+                                  
+
 
         // Display the "BACK TO HOME" option with highlighting
         wattron(gameOverWindow, A_BOLD);  // Apply bold to the text
