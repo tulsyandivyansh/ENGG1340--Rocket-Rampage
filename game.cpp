@@ -12,7 +12,7 @@ using namespace std;
 //Define game window size
 int gameWindowSizeY = 30;
 int gameWindowSizeX = 60;
-
+int occurence = 0;
 //The Player class keeps track of the player's name, score, and remaining lives
 class Player {
 public:
@@ -30,50 +30,35 @@ public:
         this -> lives = lives;
     }
 };
-
-//The Brick class represents an individual brick and keeps track of its position and whether it has been destroyed
-class Brick {
+class Enemy {
 public:
-    //Brick art
-    string sprite = "#";
-    //Brick position
+    string sprite = ("|0|\n"
+                     "\\0/\n");
     int x, y;
-    bool isDestroyed;
-    //Initialize individual brick
-    void init(int y, int x) {
-        this -> y = y;
-        this -> x = x;
+
+    Enemy(int y, int x) {
+        this->y = y;
+        this->x = x;
     }
-};
 
-//The Level class represents a level of the game and is responsible for creating and drawing the bricks
-class Level {
-public:
-    int rows = 3;
-    int cols = 55;
-    //2D array to store map of bricks
-    Brick bricks[3][55];
-
-    //Initialize level
-    void init() {
-        for(int y = 0; y < rows; y++) {
-            for(int x = 0; x < cols; x++) {
-                Brick brick;
-                brick.init(y + 2, x + 2);
-                bricks[y][x] = brick;
-            }
+    void draw(WINDOW* gameWindow) {
+        int lineIndex = 0;
+        int startPos = 0;
+        int endPos = int(sprite.find('\n'));
+        while (endPos != string::npos) {
+            mvwprintw(gameWindow, y + lineIndex + 1, x,sprite.substr(startPos, endPos - startPos).c_str());
+            startPos = endPos + 1;
+            endPos =int( sprite.find('\n', startPos));
+            ++lineIndex;
         }
     }
 
-    void draw(WINDOW* window)  {
-        //check if bricks are destroyed and print bricks that aren't
-        for(int y = 0; y < rows; y++) {
-            for(int x = 0; x < cols; x++) {
-                if(!bricks[y][x].isDestroyed)
-                    mvwprintw(window, bricks[y][x].y, bricks[y][x].x, bricks[y][x].sprite.c_str());
-            }
+    void erase(WINDOW* window){
+        for (int i = 0; i < 3; ++i){
+            mvwprintw(window, y+i+1, x, "    ");
         }
     }
+
 };
 
 //The Paddle class represents the player's paddle and is responsible for moving it left and right based on user input
@@ -198,18 +183,15 @@ int game(string playerName) {
     //Initialize the player, level, ball and paddle
     Player player;
     player.init(playerName, 0, 3);
-    Level level;
-    level.init();
 
 
     Paddle paddle;
     paddle.init(22, 30);
     //Draw all the components and refresh the game window initially
-    level.draw(gameWindow);
     paddle.draw(gameWindow);
     wrefresh(gameWindow);
     vector<Ball> balls;
-
+    vector<Enemy> enemy;
     //Flags to handle losing a life and player death
     bool restart = false;
     bool died = false;
@@ -232,6 +214,31 @@ int game(string playerName) {
             died = true;
             break;
         }
+         if(occurence%10 == 0){
+            enemy.push_back(Enemy(0, rand()%55 +2));
+            
+        }
+
+            wrefresh(gameWindow);
+
+            for(int i=0; i <= enemy.size()-1;i++){
+
+                if(enemy[i].y >=25)
+                {
+                    enemy[i].erase(gameWindow);
+                    player.lives -= 1;
+                    enemy.erase(enemy.begin() + i);
+                    continue;
+                }
+                enemy[i].erase(gameWindow);
+                (enemy[i].y)+=1;
+                enemy[i].draw(gameWindow);
+                wrefresh(gameWindow);
+
+
+            }
+
+
 
         //Initialize new ball on losing a life
         if(input == 'a' || input == 'A') {
@@ -267,16 +274,16 @@ int game(string playerName) {
         wrefresh(infoWindow);
 
         //Refresh game window
-        level.draw(gameWindow);
         wrefresh(gameWindow);
 
         //Clear buffered input from previous frame
         flushinp();
         //Sleep for 100000 microseconds before updating
         usleep(100000);
+        occurence++;
     }
 
     if(died) gameOver(player.name, player.score);
     else mainmenu();
-
     return 0;
+}
