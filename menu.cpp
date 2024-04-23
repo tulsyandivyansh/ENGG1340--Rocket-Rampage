@@ -41,11 +41,11 @@ int displayMainMenu() {
         mvwprintw(mainWin, 1, 9, "* ██████╗   █████╗  ███╗   ███╗ ██████╗   █████╗   ██████╗  ███████╗ *");
         mvwprintw(mainWin, 1, 10,"* ██╔══██╗ ██╔══██╗ ████╗ ████║ ██╔══██╗ ██╔══██╗ ██╔════╝  ██╔════╝ *");
         mvwprintw(mainWin, 1, 11,"* ██████╔╝ ███████║ ██╔████╔██║ ██████╔╝ ███████║ ██║  ███╗ █████╗   *");
-        mvwprintw(mainWin, 1, 12,"* ██╔══██╗ ██╔══██║ ██║╚██╔╝██║ ██╔═══╝  ██╔══██║ ██║   ██║ ██╔══╝   8");
+        mvwprintw(mainWin, 1, 12,"* ██╔══██╗ ██╔══██║ ██║╚██╔╝██║ ██╔═══╝  ██╔══██║ ██║   ██║ ██╔══╝   *");
         mvwprintw(mainWin, 1, 13,"* ██║  ██║ ██║  ██║ ██║ ╚═╝ ██║ ██║      ██║  ██║ ╚██████╔╝ ███████╗ *");
         mvwprintw(mainWin, 1, 14,"* ╚═╝  ╚═╝ ╚═╝  ╚═╝ ╚═╝     ╚═╝ ╚═╝      ╚═╝  ╚═╝  ╚═════╝  ╚══════╝ *");
-        mvwprintw(mainWin, 1, 15,"* *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   * *");
-        mvwprintw(mainWin, 1, 16, "* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *  *");
+        mvwprintw(mainWin, 1, 15,"* *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *  *");
+        mvwprintw(mainWin, 1, 16, "* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *");
 
 
                                                             
@@ -287,7 +287,7 @@ int concludeGameSession(const string& playerName, int playerScore) {
         mvwprintw(gameOverWindow, 3,2,"              ██║   ██║╚██╗ ██╔╝██╔══╝  ██╔══██╗           *");  
         mvwprintw(gameOverWindow, 3,2,"              ╚██████╔╝ ╚████╔╝ ███████╗██║  ██║           *");  
         mvwprintw(gameOverWindow, 3,2,"  *   *   *    ╚═════╝   ╚═══╝  ╚══════╝╚═╝  ╚═╝   *   *   *");
-        mvwprintw(gameOverWindow, 20,2,"*   *   *   *   *   *   *   *   *   *   *   *   *   *   *  *");
+        mvwprintw(gameOverWindow, 20,2,"*   *   *   *   *   *   *   *   *   *   *   *   *   *   * *");
         mvwprintw(gameOverWindow, 21,2,"* * * * * * * * * * * * * * * * * * * * * * * * * * * * * *");
         
                                   
