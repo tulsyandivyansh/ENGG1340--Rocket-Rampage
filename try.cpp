@@ -12,7 +12,7 @@ using namespace std;
 //Define game window size
 int gameWindowSizeY = 30;
 int gameWindowSizeX = 60;
-
+int occurence = 0;
 //The Player class keeps track of the player's name, score, and remaining lives
 class Player {
 public:
@@ -52,7 +52,7 @@ public:
             ++lineIndex;
         }
     }
-    
+
     void erase(WINDOW* window){
         for (int i = 0; i < 3; ++i){
             mvwprintw(window, y+i+1, x, "    ");
@@ -214,16 +214,16 @@ int game(string playerName) {
             died = true;
             break;
         }
-         if(true){
+         if(occurence%10 == 0){
             enemy.push_back(Enemy(0, rand()%55 +2));
-            
+
         }
-            
+
             wrefresh(gameWindow);
-            
-            for(i=0; i <= enemy.size()-1;i++){
-                
-                if(enemy[i].y >=15)
+
+            for(int i=0; i <= enemy.size()-1;i++){
+
+                if(enemy[i].y >=25)
                 {
                     enemy[i].erase(gameWindow);
                     enemy.erase(enemy.begin() + i);
@@ -233,8 +233,8 @@ int game(string playerName) {
                 (enemy[i].y)+=1;
                 enemy[i].draw(gameWindow);
                 wrefresh(gameWindow);
-                
-                
+
+
             }
 
 
@@ -260,6 +260,21 @@ int game(string playerName) {
              balls[i].y += balls[i].dy;
              balls[i].draw(gameWindow);
         }
+        for(int i = balls.size()-1; i >= 0; i--){
+            for(int j=0; j <= enemy.size()-1;j++){
+                if(balls[i].x == enemy[j].x || balls[i].x == enemy[j].x +1 || balls[i].x == enemy[j].x +2)
+                {
+                    if(balls[i].y == enemy[j].y){
+                        balls[i].erase(gameWindow);
+                        balls.erase(balls.begin() + i);
+                        enemy[i].erase(gameWindow);
+                        enemy.erase(enemy.begin() + i);
+
+                    }
+                }
+
+            }
+        }
         //Clears ball from last position to not leave a trail
 
         //Update paddle position
@@ -279,10 +294,10 @@ int game(string playerName) {
         flushinp();
         //Sleep for 100000 microseconds before updating
         usleep(100000);
+        occurence++;
     }
 
     if(died) gameOver(player.name, player.score);
     else mainmenu();
-
     return 0;
 }
