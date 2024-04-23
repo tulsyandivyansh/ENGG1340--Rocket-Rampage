@@ -30,22 +30,22 @@ int displayMainMenu() {
 
     while(true) {
         mvwprintw(mainWin, 1,2,  "* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *");
-        mvwprintw(mainWin, 1,2,  "*   *   *   *   *   *   *   *   *   *   *   *   *   *   *   * *  *  * ");
-        mvwprintw(mainWin, 1, 2, "*      ██████╗   ██████╗   ██████╗ ██╗  ██╗ ███████╗ ████████╗       *");
-        mvwprintw(mainWin, 1, 3, "*      ██╔══██╗ ██╔═══██╗ ██╔════╝ ██║ ██╔╝ ██╔════╝ ╚══██╔══╝       *");
-        mvwprintw(mainWin, 1, 4, "*      ██████╔╝ ██║   ██║ ██║      █████╔╝  █████╗      ██║          *");
-        mvwprintw(mainWin, 1, 5, "*      ██╔══██╗ ██║   ██║ ██║      ██╔═██╗  ██╔══╝      ██║          *");
-        mvwprintw(mainWin, 1, 6, "*      ██║  ██║ ╚██████╔╝ ╚██████╗ ██║  ██╗ ███████╗    ██║          *");
-        mvwprintw(mainWin, 1, 7, "*      ╚═╝  ╚═╝  ╚═════╝   ╚═════╝ ╚═╝  ╚═╝ ╚══════╝    ╚═╝          *");
-        mvwprintw(mainWin, 1, 8, "*                                                                    *");
-        mvwprintw(mainWin, 1, 9, "* ██████╗   █████╗  ███╗   ███╗ ██████╗   █████╗   ██████╗  ███████╗ *");
-        mvwprintw(mainWin, 1, 10,"* ██╔══██╗ ██╔══██╗ ████╗ ████║ ██╔══██╗ ██╔══██╗ ██╔════╝  ██╔════╝ *");
-        mvwprintw(mainWin, 1, 11,"* ██████╔╝ ███████║ ██╔████╔██║ ██████╔╝ ███████║ ██║  ███╗ █████╗   *");
-        mvwprintw(mainWin, 1, 12,"* ██╔══██╗ ██╔══██║ ██║╚██╔╝██║ ██╔═══╝  ██╔══██║ ██║   ██║ ██╔══╝   *");
-        mvwprintw(mainWin, 1, 13,"* ██║  ██║ ██║  ██║ ██║ ╚═╝ ██║ ██║      ██║  ██║ ╚██████╔╝ ███████╗ *");
-        mvwprintw(mainWin, 1, 14,"* ╚═╝  ╚═╝ ╚═╝  ╚═╝ ╚═╝     ╚═╝ ╚═╝      ╚═╝  ╚═╝  ╚═════╝  ╚══════╝ *");
-        mvwprintw(mainWin, 1, 15,"* *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *  *");
-        mvwprintw(mainWin, 1, 16, "* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *");
+        mvwprintw(mainWin, 2,2,  "*   *   *   *   *   *   *   *   *   *   *   *   *   *   *   * *  *  * ");
+        mvwprintw(mainWin, 3, 2, "*      ██████╗   ██████╗   ██████╗ ██╗  ██╗ ███████╗ ████████╗       *");
+        mvwprintw(mainWin, 4, 2, "*      ██╔══██╗ ██╔═══██╗ ██╔════╝ ██║ ██╔╝ ██╔════╝ ╚══██╔══╝       *");
+        mvwprintw(mainWin, 5, 2, "*      ██████╔╝ ██║   ██║ ██║      █████╔╝  █████╗      ██║          *");
+        mvwprintw(mainWin, 6, 2, "*      ██╔══██╗ ██║   ██║ ██║      ██╔═██╗  ██╔══╝      ██║          *");
+        mvwprintw(mainWin, 7, 2, "*      ██║  ██║ ╚██████╔╝ ╚██████╗ ██║  ██╗ ███████╗    ██║          *");
+        mvwprintw(mainWin, 8, 2, "*      ╚═╝  ╚═╝  ╚═════╝   ╚═════╝ ╚═╝  ╚═╝ ╚══════╝    ╚═╝          *");
+        mvwprintw(mainWin, 9, 2, "*                                                                    *");
+        mvwprintw(mainWin, 10, 2,"* ██████╗   █████╗  ███╗   ███╗ ██████╗   █████╗   ██████╗  ███████╗ *");
+        mvwprintw(mainWin, 11, 2,"* ██╔══██╗ ██╔══██╗ ████╗ ████║ ██╔══██╗ ██╔══██╗ ██╔════╝  ██╔════╝ *");
+        mvwprintw(mainWin, 12, 2,"* ██████╔╝ ███████║ ██╔████╔██║ ██████╔╝ ███████║ ██║  ███╗ █████╗   *");
+        mvwprintw(mainWin, 13, 2,"* ██╔══██╗ ██╔══██║ ██║╚██╔╝██║ ██╔═══╝  ██╔══██║ ██║   ██║ ██╔══╝   *");
+        mvwprintw(mainWin, 14, 2,"* ██║  ██║ ██║  ██║ ██║ ╚═╝ ██║ ██║      ██║  ██║ ╚██████╔╝ ███████╗ *");
+        mvwprintw(mainWin, 15, 2,"* ╚═╝  ╚═╝ ╚═╝  ╚═╝ ╚═╝     ╚═╝ ╚═╝      ╚═╝  ╚═╝  ╚═════╝  ╚══════╝ *");
+        mvwprintw(mainWin, 16, 2,"* *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *  *");
+        mvwprintw(mainWin, 17, 2,"* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * **");
 
 
                                                             
@@ -226,14 +226,14 @@ int displayCredits() {
         // Display ASCII art title "Credits"
         mvwprintw(creditsWindow, 1,2,"* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *");
         mvwprintw(creditsWindow, 2,2,"*   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *");
-        mvwprintw(creditsWindow, 1,2,"*   ██████╗ ██████╗  ███████╗ ██████╗  ██╗ ████████╗ ███████╗    *");
-        mvwprintw(creditsWindow, 1,2,"*  ██╔════╝ ██╔══██╗ ██╔════╝ ██╔══██╗ ██║ ╚══██╔══╝ ██╔════╝    *");
-        mvwprintw(creditsWindow, 1,2,"*  ██║      ██████╔╝ █████╗   ██║  ██║ ██║    ██║    ███████╗    *");
-        mvwprintw(creditsWindow, 1,2,"*  ██║      ██╔══██╗ ██╔══╝   ██║  ██║ ██║    ██║    ╚════██║    *");
-        mvwprintw(creditsWindow, 1,2,"*  ╚██████╗ ██║  ██║ ███████╗ ██████╔╝ ██║    ██║    ███████║    *");
-        mvwprintw(creditsWindow, 1,2,"*   ╚═════╝ ╚═╝  ╚═╝ ╚══════╝ ╚═════╝  ╚═╝    ╚═╝    ╚══════╝    *");
-        mvwprintw(creditsWindow, 2,2,"*   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *    *");
-        mvwprintw(creditsWindow, 11,2,"* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * ** * ");
+        mvwprintw(creditsWindow, 3,2,"*   ██████╗ ██████╗  ███████╗ ██████╗  ██╗ ████████╗ ███████╗    *");
+        mvwprintw(creditsWindow, 4,2,"*  ██╔════╝ ██╔══██╗ ██╔════╝ ██╔══██╗ ██║ ╚══██╔══╝ ██╔════╝    *");
+        mvwprintw(creditsWindow, 5,2,"*  ██║      ██████╔╝ █████╗   ██║  ██║ ██║    ██║    ███████╗    *");
+        mvwprintw(creditsWindow, 6,2,"*  ██║      ██╔══██╗ ██╔══╝   ██║  ██║ ██║    ██║    ╚════██║    *");
+        mvwprintw(creditsWindow, 7,2,"*  ╚██████╗ ██║  ██║ ███████╗ ██████╔╝ ██║    ██║    ███████║    *");
+        mvwprintw(creditsWindow, 8,2,"*   ╚═════╝ ╚═╝  ╚═╝ ╚══════╝ ╚═════╝  ╚═╝    ╚═╝    ╚══════╝    *");
+        mvwprintw(creditsWindow, 9,2,"*   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *    *");
+        mvwprintw(creditsWindow, 10,2,"* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * ** * ");
         
         // Display the "BACK TO HOME" option with bold and reverse video (highlight)
         wattron(creditsWindow, A_BOLD);
@@ -275,20 +275,20 @@ int concludeGameSession(const string& playerName, int playerScore) {
         mvwprintw(gameOverWindow, 1,2,"* * * * * * * * * * * * * * * * * * * * * * * * * * * * * *");
         mvwprintw(gameOverWindow, 2,2,"*   *   *   *   *   *   *   *   *   *   *   *   *   *   *  *");    
         mvwprintw(gameOverWindow, 3,2,"  *   *   *  ██████╗  █████╗ ███╗   ███╗███████╗  *   *    *");    
-        mvwprintw(gameOverWindow, 3,2,"            ██╔════╝ ██╔══██╗████╗ ████║██╔════╝           *");    
-        mvwprintw(gameOverWindow, 3,2,"            ██║  ███╗███████║██╔████╔██║█████╗             *");
-        mvwprintw(gameOverWindow, 3,2,"            ██║   ██║██╔══██║██║╚██╔╝██║██╔══╝             *");
-        mvwprintw(gameOverWindow, 3,2,"            ╚██████╔╝██║  ██║██║ ╚═╝ ██║███████╗           *");
-        mvwprintw(gameOverWindow, 3,2,"             ╚═════╝ ╚═╝  ╚═╝╚═╝     ╚═╝╚══════╝           *");
-        mvwprintw(gameOverWindow, 3,2,"                                                           *");  
-        mvwprintw(gameOverWindow, 3,2,"               ██████╗ ██╗   ██╗███████╗██████╗            *");
-        mvwprintw(gameOverWindow, 3,2,"              ██╔═══██╗██║   ██║██╔════╝██╔══██╗           *");  
-        mvwprintw(gameOverWindow, 3,2,"              ██║   ██║██║   ██║█████╗  ██████╔╝           *");
-        mvwprintw(gameOverWindow, 3,2,"              ██║   ██║╚██╗ ██╔╝██╔══╝  ██╔══██╗           *");  
-        mvwprintw(gameOverWindow, 3,2,"              ╚██████╔╝ ╚████╔╝ ███████╗██║  ██║           *");  
-        mvwprintw(gameOverWindow, 3,2,"  *   *   *    ╚═════╝   ╚═══╝  ╚══════╝╚═╝  ╚═╝   *   *   *");
-        mvwprintw(gameOverWindow, 20,2,"*   *   *   *   *   *   *   *   *   *   *   *   *   *   * *");
-        mvwprintw(gameOverWindow, 21,2,"* * * * * * * * * * * * * * * * * * * * * * * * * * * * * *");
+        mvwprintw(gameOverWindow, 4,2,"            ██╔════╝ ██╔══██╗████╗ ████║██╔════╝           *");    
+        mvwprintw(gameOverWindow, 5,2,"            ██║  ███╗███████║██╔████╔██║█████╗             *");
+        mvwprintw(gameOverWindow, 6,2,"            ██║   ██║██╔══██║██║╚██╔╝██║██╔══╝             *");
+        mvwprintw(gameOverWindow, 7,2,"            ╚██████╔╝██║  ██║██║ ╚═╝ ██║███████╗           *");
+        mvwprintw(gameOverWindow, 8,2,"             ╚═════╝ ╚═╝  ╚═╝╚═╝     ╚═╝╚══════╝           *");
+        mvwprintw(gameOverWindow, 9,2,"                                                           *");  
+        mvwprintw(gameOverWindow, 10,2,"               ██████╗ ██╗   ██╗███████╗██████╗            *");
+        mvwprintw(gameOverWindow, 11,2,"              ██╔═══██╗██║   ██║██╔════╝██╔══██╗           *");  
+        mvwprintw(gameOverWindow, 12,2,"              ██║   ██║██║   ██║█████╗  ██████╔╝           *");
+        mvwprintw(gameOverWindow, 13,2,"              ██║   ██║╚██╗ ██╔╝██╔══╝  ██╔══██╗           *");  
+        mvwprintw(gameOverWindow, 14,2,"              ╚██████╔╝ ╚████╔╝ ███████╗██║  ██║           *");  
+        mvwprintw(gameOverWindow, 15,2,"  *   *   *    ╚═════╝   ╚═══╝  ╚══════╝╚═╝  ╚═╝   *   *   *");
+        mvwprintw(gameOverWindow, 16,2,"*   *   *   *   *   *   *   *   *   *   *   *   *   *   * *");
+        mvwprintw(gameOverWindow, 17,2,"* * * * * * * * * * * * * * * * * * * * * * * * * * * * * *");
         
                                   
 
