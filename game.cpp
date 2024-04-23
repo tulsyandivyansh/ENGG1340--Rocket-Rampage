@@ -3,8 +3,6 @@
 #include <string>
 #include <cstdlib>
 #include <ctime>
-#include <chrono>
-#include <thread>
 #include "menu.h"
 #include <vector>
 using namespace std;
@@ -12,7 +10,7 @@ using namespace std;
 //Define game window size
 int gameWindowSizeY = 30;
 int gameWindowSizeX = 60;
-int occurence = 0;
+int iteration = 0;
 //The Player class keeps track of the player's name, score, and remaining lives
 class Player {
 public:
@@ -60,7 +58,41 @@ public:
     }
 
 };
-
+int level(int iteration){
+    if (iteration < 200){
+        return 1; 
+    }
+    else if (iteration < 400){
+        return 2;
+    }
+    else if (iteration < 600){
+        return 3;
+    }
+    else if (iteration < 800){
+        return 4;
+    }
+    else if (iteration < 1000){
+        return 5;
+    }
+    else if (iteration < 1200){
+        return 6;
+    }
+    else if (iteration < 1400){
+        return 7;
+    }
+    else if (iteration < 1600){
+        return 8;
+    }
+    else if (iteration < 1800){
+        return 9;
+    }
+    else if (iteration < 2000){
+        return 10;
+    }
+    else{
+        return 11; 
+    }
+}
 //The Paddle class represents the player's paddle and is responsible for moving it left and right based on user input
 class Paddle {
 public:
@@ -86,12 +118,12 @@ public:
         switch(input) {
             case KEY_LEFT:
                 if(x > 2) {
-                    x -= 2;
+                    x -= 4;
                 }
                 break;
             case KEY_RIGHT:
                 if(x < gameWindowSizeX - 7) {
-                    x += 2;
+                    x += 4;
                 }
                 break;
             default:
@@ -182,7 +214,7 @@ int game(string playerName) {
 
     //Initialize the player, level, ball and paddle
     Player player;
-    player.init(playerName, 0, 3);
+    player.init(playerName, 0, 100);
 
 
     Paddle paddle;
@@ -214,16 +246,256 @@ int game(string playerName) {
             died = true;
             break;
         }
-         if(occurence%10 == 0){
-            enemy.push_back(Enemy(0, rand()%55 +2));
-            
-        }
+        if (iteration < 200){
+            if(iteration % 20 == 0){
+                enemy.push_back(Enemy(0, rand()%50 +2));    
+            }
 
             wrefresh(gameWindow);
 
             for(int i=0; i <= enemy.size()-1;i++){
 
-                if(enemy[i].y >=25)
+                if(enemy[i].y ==20)
+                {
+                    enemy[i].erase(gameWindow);
+                    player.lives -= 1;
+                    enemy.erase(enemy.begin() + i);
+                    continue;
+                }
+                if((iteration+1)%5 == 0){
+                    enemy[i].erase(gameWindow);
+                    (enemy[i].y)+=1;
+                    enemy[i].draw(gameWindow);
+                    wrefresh(gameWindow);
+                }
+            }
+        }
+        else if (iteration < 400){
+            if(iteration % 15 == 0){
+                enemy.push_back(Enemy(0, rand()%55 +2));    
+            }
+
+            wrefresh(gameWindow);
+
+            for(int i=0; i <= enemy.size()-1;i++){
+
+                if(enemy[i].y ==20)
+                {
+                    enemy[i].erase(gameWindow);
+                    player.lives -= 1;
+                    enemy.erase(enemy.begin() + i);
+                    continue;
+                }
+                if((iteration+1)%4 == 0){
+                    enemy[i].erase(gameWindow);
+                    (enemy[i].y)+=1;
+                    enemy[i].draw(gameWindow);
+                    wrefresh(gameWindow);
+                }
+            }
+        }
+        else if (iteration < 600){
+            if(iteration % 10 == 0){
+                enemy.push_back(Enemy(0, rand()%55 +2));    
+            }
+
+            wrefresh(gameWindow);
+
+            for(int i=0; i <= enemy.size()-1;i++){
+
+                if(enemy[i].y ==20)
+                {
+                    enemy[i].erase(gameWindow);
+                    player.lives -= 1;
+                    enemy.erase(enemy.begin() + i);
+                    continue;
+                }
+                if((iteration+1)%4 == 0){
+                    enemy[i].erase(gameWindow);
+                    (enemy[i].y)+=1;
+                    enemy[i].draw(gameWindow);
+                    wrefresh(gameWindow);
+                }
+            }
+        }
+        else if (iteration < 800){
+            if(iteration % 8 == 0){
+                enemy.push_back(Enemy(0, rand()%55 +2));    
+            }
+
+            wrefresh(gameWindow);
+
+            for(int i=0; i <= enemy.size()-1;i++){
+
+                if(enemy[i].y ==20)
+                {
+                    enemy[i].erase(gameWindow);
+                    player.lives -= 1;
+                    enemy.erase(enemy.begin() + i);
+                    continue;
+                }
+                if((iteration+1)%3 == 0){
+                    enemy[i].erase(gameWindow);
+                    (enemy[i].y)+=1;
+                    enemy[i].draw(gameWindow);
+                    wrefresh(gameWindow);
+                }
+            }
+        }
+        else if (iteration < 1000){
+            if(iteration % 7 == 0){
+                enemy.push_back(Enemy(0, rand()%55 +2));    
+            }
+
+            wrefresh(gameWindow);
+
+            for(int i=0; i <= enemy.size()-1;i++){
+
+                if(enemy[i].y ==20)
+                {
+                    enemy[i].erase(gameWindow);
+                    player.lives -= 1;
+                    enemy.erase(enemy.begin() + i);
+                    continue;
+                }
+                if((iteration+1)%3 == 0){
+                    enemy[i].erase(gameWindow);
+                    (enemy[i].y)+=1;
+                    enemy[i].draw(gameWindow);
+                    wrefresh(gameWindow);
+                }
+            }
+        }
+        else if (iteration < 1200){
+            if(iteration % 6 == 0){
+                enemy.push_back(Enemy(0, rand()%55 +2));    
+            }
+
+            wrefresh(gameWindow);
+
+            for(int i=0; i <= enemy.size()-1;i++){
+
+                if(enemy[i].y == 20)
+                {
+                    enemy[i].erase(gameWindow);
+                    player.lives -= 1;
+                    enemy.erase(enemy.begin() + i);
+                    continue;
+                }
+                if((iteration+1)%3 == 0){
+                    enemy[i].erase(gameWindow);
+                    (enemy[i].y)+=1;
+                    enemy[i].draw(gameWindow);
+                    wrefresh(gameWindow);
+                }
+            }
+        }
+        else if (iteration < 1400){
+            if(iteration % 5 == 0){
+                enemy.push_back(Enemy(0, rand()%55 +2));    
+            }
+
+            wrefresh(gameWindow);
+
+            for(int i=0; i <= enemy.size()-1;i++){
+
+                if(enemy[i].y ==20)
+                {
+                    enemy[i].erase(gameWindow);
+                    player.lives -= 1;
+                    enemy.erase(enemy.begin() + i);
+                    continue;
+                }
+                if((iteration+1)%3 == 0){
+                    enemy[i].erase(gameWindow);
+                    (enemy[i].y)+=1;
+                    enemy[i].draw(gameWindow);
+                    wrefresh(gameWindow);
+                }
+            }
+        }
+        else if (iteration < 1600){
+            if(iteration % 5 == 0){
+                enemy.push_back(Enemy(0, rand()%55 +2));    
+            }
+
+            wrefresh(gameWindow);
+
+            for(int i=0; i <= enemy.size()-1;i++){
+
+                if(enemy[i].y ==20)
+                {
+                    enemy[i].erase(gameWindow);
+                    player.lives -= 1;
+                    enemy.erase(enemy.begin() + i);
+                    continue;
+                }
+                if((iteration+1)%2 == 0){
+                    enemy[i].erase(gameWindow);
+                    (enemy[i].y)+=1;
+                    enemy[i].draw(gameWindow);
+                    wrefresh(gameWindow);
+                }
+            }
+        }
+        else if (iteration < 1800){
+            if(iteration % 4 == 0){
+                enemy.push_back(Enemy(0, rand()%55 +2));    
+            }
+
+            wrefresh(gameWindow);
+
+            for(int i=0; i <= enemy.size()-1;i++){
+
+                if(enemy[i].y ==20)
+                {
+                    enemy[i].erase(gameWindow);
+                    player.lives -= 1;
+                    enemy.erase(enemy.begin() + i);
+                    continue;
+                }
+                if((iteration+1)%2 == 0){
+                    enemy[i].erase(gameWindow);
+                    (enemy[i].y)+=1;
+                    enemy[i].draw(gameWindow);
+                    wrefresh(gameWindow);
+                }
+            }
+        }
+        else if (iteration < 2000){
+            if(iteration % 3 == 0){
+                enemy.push_back(Enemy(0, rand()%55 +2));    
+            }
+
+            wrefresh(gameWindow);
+
+            for(int i=0; i <= enemy.size()-1;i++){
+
+                if(enemy[i].y == 20)
+                {
+                    enemy[i].erase(gameWindow);
+                    player.lives -= 1;
+                    enemy.erase(enemy.begin() + i);
+                    continue;
+                }
+                if((iteration+1)%2 == 0){
+                    enemy[i].erase(gameWindow);
+                    (enemy[i].y)+=1;
+                    enemy[i].draw(gameWindow);
+                    wrefresh(gameWindow);
+                }
+            }
+        }
+        else{
+            if(iteration % 3 == 0){
+                enemy.push_back(Enemy(0, rand()%55 +2));    
+            }
+
+            wrefresh(gameWindow);
+
+            for(int i=0; i <= enemy.size()-1;i++){
+
+                if(enemy[i].y ==20)
                 {
                     enemy[i].erase(gameWindow);
                     player.lives -= 1;
@@ -234,15 +506,16 @@ int game(string playerName) {
                 (enemy[i].y)+=1;
                 enemy[i].draw(gameWindow);
                 wrefresh(gameWindow);
-
-
+                
             }
+        }
+
 
 
 
         //Initialize new ball on losing a life
         if(input == 'a' || input == 'A') {
-            balls.push_back(Ball((paddle.y)+5, (paddle.x)+2, -1));
+            balls.push_back(Ball((paddle.y)+5, (paddle.x)+2, -2));
             ball_num++;
             if (ball_num == 50){
                 died = true;
@@ -261,16 +534,14 @@ int game(string playerName) {
              balls[i].y += balls[i].dy;
              balls[i].draw(gameWindow);
         }
-        //Clears ball from last position to not leave a trail
-
         //Update paddle position
         paddle.erase(gameWindow);
         paddle.update(input);
         paddle.draw(gameWindow);
 
         //Update player info
-        string playerInfo = "Score:" + to_string(player.score) + "                                       " + "Lives:" + to_string(player.lives);
-        mvwprintw(infoWindow, 1, 1, playerInfo.c_str());
+        string playerInfo = "Score:" + to_string(player.score) + "           Level:" + to_string(level(iteration)) + "          " + "Lives:" + to_string(player.lives);
+        mvwprintw(infoWindow, 1, 1, playerInfo.c_str());                                                 
         wrefresh(infoWindow);
 
         //Refresh game window
@@ -280,7 +551,7 @@ int game(string playerName) {
         flushinp();
         //Sleep for 100000 microseconds before updating
         usleep(100000);
-        occurence++;
+        iteration++;
     }
 
     if(died) gameOver(player.name, player.score);
