@@ -86,7 +86,7 @@ public:
                        " / \\\n"
                        " |0|\n"
                        "/   \\\n"
-                       "U U U \n"), x(0), y(0) {};
+                       "U U U\n"), x(0), y(0) {};
     //Paddle position
     int x, y;
 
@@ -135,7 +135,7 @@ public:
     //Erase paddle from the game window
     void erase(WINDOW* window){
         for (int i = 0; i < 6; ++i){
-            mvwprintw(window, y+i, x, "      ");
+            mvwprintw(window, y+i, x, "     ");
         }
     }
 };
@@ -244,6 +244,7 @@ int game(string playerName) {
         }
         for(int i = balls.size()-1; i >= 0; i--){
              if (balls[i].y == 2){
+                balls[i].erase(gameWindow);
                 balls.erase(balls.begin() + i);
                 continue;
              }
@@ -279,4 +280,3 @@ int game(string playerName) {
     else mainmenu();
 
     return 0;
-}
