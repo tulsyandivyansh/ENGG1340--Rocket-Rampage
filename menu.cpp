@@ -1,4 +1,5 @@
 #include <ncurses.h>
+#include <unistd.h>
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -8,309 +9,326 @@
 
 using namespace std;
 
-int displayMainMenu();
-int promptForName();
-int showInstructions();
-int displayCredits();
+int mainmenu();
+int inputName();
+int instructions1();
+int credits();
 
-// Function to display the main menu using ncurses
-int displayMainMenu() {
-    // Create a new window for the menu
-    WINDOW* mainWin = newwin(26, 60, 0, 0);
-    // Draw a box around the window
-    box(mainWin, 0, 0);
-    wrefresh(mainWin);
+int mainmenu() {
 
-    // Array of menu options
-    string options[] = {"PLAY GAME", "HOW TO PLAY", "HIGH SCORE", "CREDITS", "QUIT"};
-    // Current menu selection
-    int currentSelection = 0;
-    int userInput;
-        // Displaying the game title and decoration
+    //main menu window initialization (rows,cols,y,x)
+    WINDOW* menuWindow = newwin(100, 120, 0, 0); 
+    box(menuWindow, 0, 0);
+    wrefresh(menuWindow);
 
-    while(true) {
-        mvwprintw(mainWin, 1,2,  "* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *");
-        mvwprintw(mainWin, 2,2,  "*   *   *   *   *   *   *   *   *   *   *   *   *   *   *   * *  *  * ");
-        mvwprintw(mainWin, 3, 2, "*      ██████╗   ██████╗   ██████╗ ██╗  ██╗ ███████╗ ████████╗       *");
-        mvwprintw(mainWin, 4, 2, "*      ██╔══██╗ ██╔═══██╗ ██╔════╝ ██║ ██╔╝ ██╔════╝ ╚══██╔══╝       *");
-        mvwprintw(mainWin, 5, 2, "*      ██████╔╝ ██║   ██║ ██║      █████╔╝  █████╗      ██║          *");
-        mvwprintw(mainWin, 6, 2, "*      ██╔══██╗ ██║   ██║ ██║      ██╔═██╗  ██╔══╝      ██║          *");
-        mvwprintw(mainWin, 7, 2, "*      ██║  ██║ ╚██████╔╝ ╚██████╗ ██║  ██╗ ███████╗    ██║          *");
-        mvwprintw(mainWin, 8, 2, "*      ╚═╝  ╚═╝  ╚═════╝   ╚═════╝ ╚═╝  ╚═╝ ╚══════╝    ╚═╝          *");
-        mvwprintw(mainWin, 9, 2, "*                                                                    *");
-        mvwprintw(mainWin, 10, 2,"* ██████╗   █████╗  ███╗   ███╗ ██████╗   █████╗   ██████╗  ███████╗ *");
-        mvwprintw(mainWin, 11, 2,"* ██╔══██╗ ██╔══██╗ ████╗ ████║ ██╔══██╗ ██╔══██╗ ██╔════╝  ██╔════╝ *");
-        mvwprintw(mainWin, 12, 2,"* ██████╔╝ ███████║ ██╔████╔██║ ██████╔╝ ███████║ ██║  ███╗ █████╗   *");
-        mvwprintw(mainWin, 13, 2,"* ██╔══██╗ ██╔══██║ ██║╚██╔╝██║ ██╔═══╝  ██╔══██║ ██║   ██║ ██╔══╝   *");
-        mvwprintw(mainWin, 14, 2,"* ██║  ██║ ██║  ██║ ██║ ╚═╝ ██║ ██║      ██║  ██║ ╚██████╔╝ ███████╗ *");
-        mvwprintw(mainWin, 15, 2,"* ╚═╝  ╚═╝ ╚═╝  ╚═╝ ╚═╝     ╚═╝ ╚═╝      ╚═╝  ╚═╝  ╚═════╝  ╚══════╝ *");
-        mvwprintw(mainWin, 16, 2,"* *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *  *");
-        mvwprintw(mainWin, 17, 2,"* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * **");
+    //main menu options
+    string menu1[5]= {"PLAY GAME","HOW TO PLAY","HIGH SCORE","CREDITS","QUIT"};
+    //variable to get user input
+    int choice;
+    //variable to store the current option selected
+    int highlight=0;
 
+    while(TRUE) {
+        //printing main menu screen
+    
+                                                    
 
-                                                            
-        
-
-        // Iterate over options to display them
-        for(int i = 0; i < 5; ++i) {
-            // Apply bold font style
-            wattron(mainWin, A_BOLD);
-            // Highlight the current selection
-            if(i == currentSelection) {
-                wattron(mainWin, A_REVERSE);
+        mvwprintw(menuWindow, 1,2,"* * * * * * * * * * * * * * * * * * * * * * * * * * * * *");
+        mvwprintw(menuWindow, 2,2,"*   *   *   *   *   *   *   *   *   *   *   *    *      *");
+        mvwprintw(menuWindow, 3,2,"*      _____   ____   _____ _  ________ _______      *");      
+        mvwprintw(menuWindow, 4,2,"*     |  __ \\ / __ \\ / ____| |/ /  ____|__   __|     *");    
+        mvwprintw(menuWindow, 5,2,"*     | |__) | |  | | |    | ' /| |__     | |        *");     
+        mvwprintw(menuWindow, 6,2,"*     |  _  /| |  | | |    |  < |  __|    | |        *");    
+        mvwprintw(menuWindow, 7,2,"*     | | \\ \\| |__| | |____| . \\| |____   | |        *");    
+        mvwprintw(menuWindow, 8,2,"*     |_|  \\_\\____/ \\_____|_|\\_\\______|  |_|        *");    
+        mvwprintw(menuWindow, 9,2,"* _____            __  __ _____        _____ ______  *");
+        mvwprintw(menuWindow, 10,2,"*|  __ \\     /\\   |  \\/  |  __ \\ /\\   / ____|  ____| *");
+        mvwprintw(menuWindow, 11,2,"*| |__) |   /  \\  | \\  / | |__) /  \\ | |  __| |__    *");
+        mvwprintw(menuWindow, 12,2,"*|  _  /   / /\\ \\ | |\\/| |  ___/ /\\ \\| | |_ |  __|   *"); 
+        mvwprintw(menuWindow, 13,2,"*| | \\ \\  / ____ \\| |  | | |  / ____ \\ |__| | |____  *");
+        mvwprintw(menuWindow, 14,2,"*|_|  \\_\\/_/    \\_\\_|  |_|_| /_/    \\_\\_____|______| *");
+        mvwprintw(menuWindow, 15,2,"*  *  *   *   *   *     *     *   *     *   *   *  *  * *");
+        mvwprintw(menuWindow, 16,2,"* *  *   *  *   *    *     *    *    *    *   *  *  *  **"); 
+        mvwprintw(menuWindow, 17,2,"* * * * * * * * * * * * * * * * * * * * * * * * * * * * *");  
+        for(int i=0;i<5;i++) {
+            //making all options bold
+            wattron(menuWindow, A_BOLD);
+            //highlighting the selected choice
+            if(i==highlight) {
+                wattron(menuWindow, A_REVERSE);
             }
-            // Display the option centered
-            mvwprintw(mainWin, 18 + i + 1, (60 - options[i].length()) / 2, options[i].c_str());
-            wattroff(mainWin, A_REVERSE); // Remove highlight from other options
+            //printing the choices
+            mvwprintw(menuWindow, 18+i+1, ((60-menu1[i].length())/2), menu1[i].c_str());//printing options
+            wattroff(menuWindow, A_REVERSE);//de-highlighting the non selected options
         }
-
-        // Get user input
-        userInput = getch();
-
-        // Update the current selection based on user input
-        switch(userInput) {
+        //getting user input
+        choice = getch();
+        //changing highlighted option according to user option
+        switch(choice) {
             case KEY_UP:
-                currentSelection = (currentSelection - 1 + 5) % 5;
+                highlight--;
+                //checking whether the choice is going out of bounds
+                if(highlight<0)
+                    highlight=4;
                 break;
             case KEY_DOWN:
-                currentSelection = (currentSelection + 1) % 5;
+                highlight++;
+                //checking whether the choice is going out of bounds
+                if(highlight>4)
+                    highlight=0;
                 break;
             default:
                 break;
         }
-
-        // Check if Enter key is pressed
-        if(userInput == 10) { 
-            break; // Exit the loop
+        //checking whether enter is pressed
+        if(choice==10) { 
+            break;
         }
-
-        // Refresh the window to update the menu display
-        wrefresh(mainWin);
+        //refresh window
+        wrefresh(menuWindow);
     }
-
-    // Execute the action based on selected option
-    switch(currentSelection) {
-        case 0: 
-            promptForName();
-            break;
-        case 1: 
-            showInstructions();
-            break;
-        case 2:
-            highscores();
-            break;
-        case 3:
-            displayCredits();
-            break;
-        case 4:
-            return 0; // Quit the application
+    //traversing to the screen as per the user's choice
+    if(highlight==0) {
+        inputName();
+    } else if(highlight==1) {
+        instructions1();
+    } else if(highlight==2) {
+        highscores();
+    } else if(highlight==3) {
+        credits();
     }
 
     return 0;
 }
 
+int inputName() {
 
-int promptForName() {
-    // Initialize the window for name input
-    WINDOW* inputWindow = newwin(26, 60, 0, 0);
+    // input window initialization (rows, columns, y, x)
+    WINDOW* win = newwin(26, 60, 0, 0);
 
-    // Draw a border around the window
-    box(inputWindow, 0, 0);
+    // Draw a box around the window
+    box(win, 0, 0);
 
-    // Declare a string for the play button label
-    string playButtonLabel = "PLAY GAME";
 
-    // Make the play button text bold and highlighted
-    wattron(inputWindow, A_BOLD);
-    wattron(inputWindow, A_REVERSE);
-    mvwprintw(inputWindow, 19, (60 - playButtonLabel.length()) / 2, playButtonLabel.c_str());
-    wattroff(inputWindow, A_REVERSE);  // Turn off highlight after drawing the button
+    //creating a play button:
 
-    // String to collect the player's name
+    //create a string that stores text displayed on the button
+    string playButton= "PLAY GAME";
+
+    //makes text bold 
+    wattron(win, A_BOLD);
+
+    //highlighting the play button
+    wattron(win, A_REVERSE);
+
+    //prints play button
+    mvwprintw(win, 19, ((60-playButton.length())/2), playButton.c_str());
+    
+    //turn off highlighting
+    wattroff(win, A_REVERSE);
+
+
+    // Create a string to store the player name
     string playerName;
-
-    // Print a prompt for the player to enter their name
-    mvwprintw(inputWindow, 11, 21, "Enter your name:");
-    mvwprintw(inputWindow, 14, 23, "-----------");
-
-    // Variables to handle character input and impose character limit
-    int charInput;
-    int maxChars = 7;
-
-    while ((charInput = wgetch(inputWindow)) != '\n') { // Continue until 'Enter' key is pressed
-        if (charInput == KEY_BACKSPACE || charInput == 127) {
-            // Handle backspace operation
+    // Get input from the user until they press enter
+    int ch;
+    //declare and initialise variable to count and subsequently limit character count for name
+    int char_limit = 0;
+    //print a prompt to enter name
+    mvwprintw(win, 11, 21, "Enter your name:");
+    mvwprintw(win, 14, 23, "-----------");
+    while ((ch = wgetch(win)) != '\n') {
+        
+        if (ch == KEY_BACKSPACE || ch == 127) {
+            // Handle backspace key
             if (!playerName.empty()) {
-                playerName.pop_back(); // Remove last character
-                mvwprintw(inputWindow, 13, 25, "       "); // Clear previous input
-                mvwprintw(inputWindow, 13, 25, playerName.c_str()); // Update the display
+                playerName.erase(playerName.size() - 1, 1);
+                mvwprintw(win, 13, 25, "       ");
+                mvwprintw(win, 13, 25, playerName.c_str());
+                //account for backspace in character count
+                char_limit--;
             }
-        } else if (isprint(charInput) && playerName.length() < maxChars) {
-            // Add character to playerName if it doesn't exceed the limit
-            playerName.push_back(charInput);
-            mvwprintw(inputWindow, 13, 25, playerName.c_str());
-        }
-        // Refresh window after each input to update the display
-        wrefresh(inputWindow);
-    }
+        } else if (isprint(ch)) {
+            // Handle printable characters
+            //set character count limit to 7
+            if (char_limit!=7){
+                playerName += ch;
+                mvwprintw(win, 13, 25, playerName.c_str()); 
+                //account for increment in character count
+                char_limit++;
+            }
+            
 
-    // Use default name if no name was entered
-    if (playerName.empty()) {
+        }
+        //refresh window
+        wrefresh(win);
+        
+    }
+    //setting default name to "NONAME"
+    if(playerName.empty()) {
         playerName = "NONAME";
     }
-
-    // Pass the playerName to the game function
     game(playerName);
     return 0;
 }
 
-
-int showInstructions() {
-    // Initialize the window for game instructions
-    WINDOW* instructionWin = newwin(26, 60, 0, 0);
-    box(instructionWin, 0, 0);  // Draw a box around the window
-    wrefresh(instructionWin);   // Refresh to show the box
-
-    // Loop indefinitely until 'Enter' is pressed
-    while(true) {
-        // Detailed instructions on how to play the game
-        mvwprintw(instructionWin, 5, 13, "1. Use the left and right arrow keys to");
-        mvwprintw(instructionWin, 6, 13, "   move the missile.");
-        mvwprintw(instructionWin, 8, 13, "2. The goal is to destroy enemies with");
-        mvwprintw(instructionWin, 9, 13, "   your missile.");
-        mvwprintw(instructionWin, 11, 13, "3. Earn points each time a missile");
-        mvwprintw(instructionWin, 12, 13, "   hits an enemy.");
-        mvwprintw(instructionWin, 14, 13, "4. You have 1 minute to accumulate");
-        mvwprintw(instructionWin, 15, 13, "   as many points as possible.");
-        mvwprintw(instructionWin, 17, 13, "5. Your score is the total number of");
-        mvwprintw(instructionWin, 18, 13, "   enemies defeated within the time.");
-        mvwprintw(instructionWin, 20, 22, "Enjoy the game!");
-
-        // Display "BACK TO MENU" option with highlighting
-        wattron(instructionWin, A_BOLD);  // Apply bold to the text
-        wattron(instructionWin, A_REVERSE);  // Highlight the text
-        mvwprintw(instructionWin, 24, 45, "BACK TO MENU->");
-        wattroff(instructionWin, A_REVERSE);  // Turn off highlight
-
-        // Refresh the window to update display
-        wrefresh(instructionWin);
-
-        // Wait for user input
-        int userInput = getch();
-        if (userInput == '\n') {  // Check if 'Enter' is pressed
-            break;  // Exit the loop if 'Enter' is pressed
-        }
-    }
-
-    // Return to main menu after instructions
-    displayMainMenu();
-    return 0;
-}
-
-int displayCredits() {
-    // Initialize a window for displaying credits
-    WINDOW* creditsWindow = newwin(26, 60, 0, 0);
-    box(creditsWindow, 0, 0);  // Draw a box around the window
-    wrefresh(creditsWindow);   // Refresh the window to show the box
-
-    // Credits for the development team
-    mvwprintw(creditsWindow, 13, 24, "Cheung HonLung");
-    mvwprintw(creditsWindow, 15, 24, "Divyansh Tulsyan");
-    mvwprintw(creditsWindow, 17, 24, "Jaehun Chun");
-    mvwprintw(creditsWindow, 19, 24, "Meeth Jaswani");
-    mvwprintw(creditsWindow, 21, 24, "Shrey");
-
-    // Loop to handle navigation back to main menu
- // Display ASCII art title "Credits"
-    while (true) {
-        // Display ASCII art title "Credits"
-        mvwprintw(creditsWindow, 1,2,"* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *");
-        mvwprintw(creditsWindow, 2,2,"*   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *");
-        mvwprintw(creditsWindow, 3,2,"*   ██████╗ ██████╗  ███████╗ ██████╗  ██╗ ████████╗ ███████╗    *");
-        mvwprintw(creditsWindow, 4,2,"*  ██╔════╝ ██╔══██╗ ██╔════╝ ██╔══██╗ ██║ ╚══██╔══╝ ██╔════╝    *");
-        mvwprintw(creditsWindow, 5,2,"*  ██║      ██████╔╝ █████╗   ██║  ██║ ██║    ██║    ███████╗    *");
-        mvwprintw(creditsWindow, 6,2,"*  ██║      ██╔══██╗ ██╔══╝   ██║  ██║ ██║    ██║    ╚════██║    *");
-        mvwprintw(creditsWindow, 7,2,"*  ╚██████╗ ██║  ██║ ███████╗ ██████╔╝ ██║    ██║    ███████║    *");
-        mvwprintw(creditsWindow, 8,2,"*   ╚═════╝ ╚═╝  ╚═╝ ╚══════╝ ╚═════╝  ╚═╝    ╚═╝    ╚══════╝    *");
-        mvwprintw(creditsWindow, 9,2,"*   *   *   *   *   *   *   *   *   *   *   *   *   *   *   *    *");
-        mvwprintw(creditsWindow, 10,2,"* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * ** * ");
-        
-        // Display the "BACK TO HOME" option with bold and reverse video (highlight)
-        wattron(creditsWindow, A_BOLD);
-        wattron(creditsWindow, A_REVERSE);
-        mvwprintw(creditsWindow, 24, 24, "BACK TO HOME");
-        wattroff(creditsWindow, A_REVERSE);  // Turn off highlight
-
-        // Wait for user input
-        int userInput = getch();
-
-        // Break the loop and return to main menu if 'Enter' is pressed
-        if (userInput == '\n') {
+int instructions1() {
+    //instruction window initialization (rows,cols,y,x)
+    WINDOW* instrucionWindow = newwin(26, 60, 0, 0); 
+    box(instrucionWindow, 0, 0);
+    wrefresh(instrucionWindow);
+    int choice;
+    int highlight3=1;
+    for(;;) {   
+        //instructions on how to play the game
+        mvwprintw(instrucionWindow, 5, 13, "1.");
+        mvwprintw(instrucionWindow, 5, 15, "Use the left and right arrow keys to");
+        mvwprintw(instrucionWindow, 6, 15, "move the missile.");
+        mvwprintw(instrucionWindow, 8, 13, "2.");
+        mvwprintw(instrucionWindow, 8, 15, "The goal is to destroy enemies with");
+        mvwprintw(instrucionWindow, 9, 15, "your missile.");
+        mvwprintw(instrucionWindow, 11, 13, "3.");
+        mvwprintw(instrucionWindow, 11, 15, "Earn points each time a missile");
+        mvwprintw(instrucionWindow, 12, 15, "hits an enemy.");
+        mvwprintw(instrucionWindow, 14, 13, "4.");
+        mvwprintw(instrucionWindow, 14, 15, "You have 1 minute to accumulate");
+        mvwprintw(instrucionWindow, 16, 13, "as many points as possible.");
+        mvwprintw(instrucionWindow, 16, 15, "5.");
+        mvwprintw(instrucionWindow, 17, 15, "Your score is the total number of");
+        mvwprintw(instrucionWindow, 20, 22, "enemies defeated with each level.");
+        //making all options bold 
+        wattron(instrucionWindow, A_BOLD);
+        //highlighting "BACK TO MENU" option
+        wattron(instrucionWindow, A_REVERSE);
+        //printing "BACK TO MENU->" option
+        mvwprintw(instrucionWindow, 24, 45, "BACK TO MENU->");
+        //switching off the highlight function
+        wattroff(instrucionWindow, A_REVERSE);
+        //refresh window
+        wrefresh(instrucionWindow);
+        //getting user input
+        choice = getch();
+        //checking whether user pressed enter
+        if(choice==10) {
             break;
         }
-
-        wrefresh(creditsWindow);  // Refresh the window to update display
     }
-
-    // Call to the main menu function
-    displayMainMenu();
+    //going back to main menu
+    mainmenu();
     return 0;
 }
 
-int concludeGameSession(const string& playerName, int playerScore) {
-    // Initialize the game over window
-    WINDOW* gameOverWindow = newwin(26, 60, 0, 0);
-    box(gameOverWindow, 0, 0);  // Draw a border around the window
-    wrefresh(gameOverWindow);   // Refresh the window to show the border
+int credits() {
+    //credits window initialization (rows,cols,y,x)
+    WINDOW* endWindow = newwin(26, 60, 0, 0); 
+    box(endWindow, 0, 0);
+    wrefresh(endWindow);
 
-    // Record player's name and score in a file for high score tracking
+    //variable to get user input
+    int choice;
+
+    // Adding the names under the ASCII art
+    mvwprintw(endWindow, 13, 24, "Divyansh Tulsyan");
+    mvwprintw(endWindow, 14, 23, " ");
+    mvwprintw(endWindow, 15, 23, "Jaehun Chun");
+    mvwprintw(endWindow, 16, 23, " ");
+    mvwprintw(endWindow, 17, 23, "Meeth Jaswani");
+    mvwprintw(endWindow, 18, 23, " ");
+    mvwprintw(endWindow, 19, 22, "Shreyansh Mishra");
+    mvwprintw(endWindow, 20, 23, " ");
+    mvwprintw(endWindow, 21, 23, "Cheung HonLung");
+
+    for(;;) {
+        //printing "Credits" on the screen
+        mvwprintw(endWindow, 1,2,"* * * * * * * * * * * * * * * * * * * * * * * * * * * * *");
+        mvwprintw(endWindow, 2,2,"*   *   *   *   *   *   *   *   *   *   *   *   *   *   *");
+        mvwprintw(endWindow, 3,2,"*  ________       *     *   *  *_   _*  __  *  * *      *");
+        mvwprintw(endWindow, 4,2,"* /   __   |  *    *  *   *    | | (_) |  |   *    * *  *");
+        mvwprintw(endWindow, 5,2,"* |  |  |__| _ ___   ___    ___| |  _  |  |   _____     *");
+        mvwprintw(endWindow, 6,2,"* |  |  ___ | ' __| / _ \\  /  _  | | | | __| / ____| *  *");
+        mvwprintw(endWindow, 7,2,"* |  | |   ||  /   | ___/ |  (_| | | | | |   \\__  \\ *   *");
+        mvwprintw(endWindow, 8,2,"*  \\_______||__|    \\___|  \\__,__| |_| \\___| |____/  *  *");
+        mvwprintw(endWindow, 9,2,"*   *     *     *     *     *     *     *     *     *   *");
+        mvwprintw(endWindow, 10,2,"*     *     *     *     *     *     *     *     *    *  *");
+        mvwprintw(endWindow, 11,2,"* * * * * * * * * * * * * * * * * * * * * * * ** * * *  *");
+        
+        // printing BACK TO HOME option
+        //making all options bold
+        wattron(endWindow, A_BOLD);
+        //highlighting BACK TO HOME option
+        wattron(endWindow,A_REVERSE);
+        mvwprintw(endWindow, 24, 24, "BACK TO HOME");
+        wattroff(endWindow,A_REVERSE);
+        //switching off highlight function
+        
+        //getting user input
+        choice=getch();
+
+        //if user presses enter break
+        if(choice==10) {
+            break;
+        }
+        wrefresh(endWindow);
+    }
+    //going back to the main menu page
+    mainmenu();
+    return 0;
+}
+    
+
+int gameOver(string playerName, int playerScore) {
+    //gameover window initialization (rows,cols,y,x)
+    WINDOW* endWindow = newwin(26, 60, 0, 0); 
+    box(endWindow, 0, 0);
+    wrefresh(endWindow);
+
+    //sending player name and player score to store it in the file for high score screen
     InputToFile(playerName, playerScore);
 
-    // Variable to store user input
-    int userInput;
-
-    // Loop until the user presses 'Enter'
-        // Display "Game Over" graphics using ASCII art
-    while(true) {
-        mvwprintw(gameOverWindow, 1,2,"* * * * * * * * * * * * * * * * * * * * * * * * * * * * * *");
-        mvwprintw(gameOverWindow, 2,2,"*   *   *   *   *   *   *   *   *   *   *   *   *   *   *  *");    
-        mvwprintw(gameOverWindow, 3,2,"  *   *   *  ██████╗  █████╗ ███╗   ███╗███████╗  *   *    *");    
-        mvwprintw(gameOverWindow, 4,2,"            ██╔════╝ ██╔══██╗████╗ ████║██╔════╝           *");    
-        mvwprintw(gameOverWindow, 5,2,"            ██║  ███╗███████║██╔████╔██║█████╗             *");
-        mvwprintw(gameOverWindow, 6,2,"            ██║   ██║██╔══██║██║╚██╔╝██║██╔══╝             *");
-        mvwprintw(gameOverWindow, 7,2,"            ╚██████╔╝██║  ██║██║ ╚═╝ ██║███████╗           *");
-        mvwprintw(gameOverWindow, 8,2,"             ╚═════╝ ╚═╝  ╚═╝╚═╝     ╚═╝╚══════╝           *");
-        mvwprintw(gameOverWindow, 9,2,"                                                           *");  
-        mvwprintw(gameOverWindow, 10,2,"               ██████╗ ██╗   ██╗███████╗██████╗            *");
-        mvwprintw(gameOverWindow, 11,2,"              ██╔═══██╗██║   ██║██╔════╝██╔══██╗           *");  
-        mvwprintw(gameOverWindow, 12,2,"              ██║   ██║██║   ██║█████╗  ██████╔╝           *");
-        mvwprintw(gameOverWindow, 13,2,"              ██║   ██║╚██╗ ██╔╝██╔══╝  ██╔══██╗           *");  
-        mvwprintw(gameOverWindow, 14,2,"              ╚██████╔╝ ╚████╔╝ ███████╗██║  ██║           *");  
-        mvwprintw(gameOverWindow, 15,2,"  *   *   *    ╚═════╝   ╚═══╝  ╚══════╝╚═╝  ╚═╝   *   *   *");
-        mvwprintw(gameOverWindow, 16,2,"*   *   *   *   *   *   *   *   *   *   *   *   *   *   * *");
-        mvwprintw(gameOverWindow, 17,2,"* * * * * * * * * * * * * * * * * * * * * * * * * * * * * *");
+    //getting user input
+    int choice;
+    for(;;) {
+        //printing "Game Over" on the screen
+        mvwprintw(endWindow, 1,2,"* * * * * * * * * * * * * * * * * * * * * * * * * * * * *");
+        mvwprintw(endWindow, 2,2,"*   *   *   *   *   *   *   *   *   *   *   *   *   *   *");
+        mvwprintw(endWindow, 3,2,"       *    ______    *       *         *     *    *  *");
+        mvwprintw(endWindow, 4,2,"   *     * /  ____|      *      *    *     *     *    *");
+        mvwprintw(endWindow, 5,2,"  *    *  |  |  ___   _____  _________     ___     *  *");
+        mvwprintw(endWindow, 6,2,"    *   * |  | |_  | /  _  | |  _   _ \\  / _  \\  *    *");
+        mvwprintw(endWindow, 7,2," *       *|  |__|  | | (_| | | | | | | ||  __/    *   *");
+        mvwprintw(endWindow, 8,2," *     *   \\_______|  \\____| |_| |_| |_| \\____|    *  *");
+        mvwprintw(endWindow, 9,2,"    *     *     *     *     *     *     *     *     *   *");
+        mvwprintw(endWindow, 10,2,"*     *     *     *     *     *     *     *     *     *");
+        mvwprintw(endWindow, 11,2,"  *      *   ______   *      *     *   *      *    * *");
+        mvwprintw(endWindow, 12,2,"     *    * /  __  \\   *      *         *       *   *");
+        mvwprintw(endWindow, 13,2,"  *     *  |  |  |  | __    __  ___   __ ___  *      *");
+        mvwprintw(endWindow, 14,2,"     *    *|  |  |  | \\ \\  / / / _ \\ | '___|   *    *");
+        mvwprintw(endWindow, 15,2,"         * |  `--'  |  \\ \\/ / |  __/ | /    *     *  *");
+        mvwprintw(endWindow, 16,2," *     *    \\______/    \\__/   \\___| |_|   *   *    *");
+        mvwprintw(endWindow, 17,2,"*     *     *     *     *     *     *     *     *    * *");
+        mvwprintw(endWindow, 18,2,"   *     *     *     *     *     *     *     *    *    *"); 
+        mvwprintw(endWindow, 19,2,"*     *     *     *     *     *     *     *     *    * *"); 
+        mvwprintw(endWindow, 20,2,"   *     *     *     *     *     *     *     *    *    *");
+        mvwprintw(endWindow, 21,2,"* * * * * * * * * * * * * * * * * * * * * * * * * * * *");
         
-                                  
+        //making "BACK TO HOME" bold
+        wattron(endWindow, A_BOLD);
+        //highlighting "BACK TO HOME" option
+        wattron(endWindow,A_REVERSE);
+        mvwprintw(endWindow, 24, 27, "BACK TO HOME");
+        wattroff(endWindow,A_REVERSE);
+        //switching off the highlight function
 
+        //geting input from user
+        choice=getch();
 
-        // Display the "BACK TO HOME" option with highlighting
-        wattron(gameOverWindow, A_BOLD);  // Apply bold to the text
-        wattron(gameOverWindow, A_REVERSE);  // Highlight the text
-        mvwprintw(gameOverWindow, 24, 27, "BACK TO HOME");
-        wattroff(gameOverWindow, A_REVERSE);  // Turn off highlight
-
-        // Wait for user input
-        userInput = getch();
-
-        // If 'Enter' is pressed, exit the loop
-        if (userInput == '\n') {
+        //checking whether the user pressed enter
+        if(choice==10) {
             break;
         }
-
-        wrefresh(gameOverWindow);  // Refresh the window to update the display
+        //refreshing window
+        wrefresh(endWindow);
     }
-
-    // Return to the main menu after displaying the game over screen
-    displayMainMenu();
+    mainmenu();
     return 0;
 }
