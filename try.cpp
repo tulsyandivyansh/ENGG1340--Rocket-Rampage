@@ -3,6 +3,8 @@
 #include <string>
 #include <cstdlib>
 #include <ctime>
+#include <chrono>
+#include <thread>
 #include "menu.h"
 #include <vector>
 using namespace std;
@@ -32,7 +34,7 @@ class Enemy {
 public:
     string sprite = ("|0|\n"
                      "\\0/\n");
-    int x, y;
+    int x, y, dy;
 
     Enemy(int y, int x) {
         this->y = y;
@@ -56,8 +58,30 @@ public:
             mvwprintw(window, y+i+1, x, "    ");
         }
     }
-
+    
 };
+
+void speed(vector <Enemy> enemy, WINDOW* gameWindow, Player player, int iteration, int create, int speed){
+    if(iteration % create == 0){
+        enemy.push_back(Enemy(0, rand()%55));            
+    }
+
+    for(int i=0; i <= enemy.size()-1;i++){
+        if(enemy[i].y ==25)
+        {
+            enemy[i].erase(gameWindow);
+            player.lives -= 1;
+            enemy.erase(enemy.begin() + i);
+            continue;
+        }
+        if(iteration % speed == 0){
+            enemy[i].erase(gameWindow);
+            (enemy[i].y)+=1;
+            enemy[i].draw(gameWindow);
+            wrefresh(gameWindow);
+        }
+    }
+}
 int level(int iteration){
     if (iteration < 200){
         return 1; 
@@ -246,276 +270,53 @@ int game(string playerName) {
             died = true;
             break;
         }
-        if (iteration < 200){
-            if(iteration % 20 == 0){
-                enemy.push_back(Enemy(0, rand()%50 +2));    
-            }
-
-            wrefresh(gameWindow);
-
-            for(int i=0; i <= enemy.size()-1;i++){
-
-                if(enemy[i].y ==25)
-                {
-                    enemy[i].erase(gameWindow);
-                    player.lives -= 1;
-                    enemy.erase(enemy.begin() + i);
-                    continue;
-                }
-                if((iteration+1)%5 == 0){
-                    enemy[i].erase(gameWindow);
-                    (enemy[i].y)+=1;
-                    enemy[i].draw(gameWindow);
-                    wrefresh(gameWindow);
-                }
-            }
-        }
-        else if (iteration < 400){
-            if(iteration % 15 == 0){
-                enemy.push_back(Enemy(0, rand()%55 +2));    
-            }
-
-            wrefresh(gameWindow);
-
-            for(int i=0; i <= enemy.size()-1;i++){
-
-                if(enemy[i].y ==25)
-                {
-                    enemy[i].erase(gameWindow);
-                    player.lives -= 1;
-                    enemy.erase(enemy.begin() + i);
-                    continue;
-                }
-                if((iteration+1)%4 == 0){
-                    enemy[i].erase(gameWindow);
-                    (enemy[i].y)+=1;
-                    enemy[i].draw(gameWindow);
-                    wrefresh(gameWindow);
-                }
-            }
-        }
-        else if (iteration < 600){
-            if(iteration % 10 == 0){
-                enemy.push_back(Enemy(0, rand()%55 +2));    
-            }
-
-            wrefresh(gameWindow);
-
-            for(int i=0; i <= enemy.size()-1;i++){
-
-                if(enemy[i].y ==25)
-                {
-                    enemy[i].erase(gameWindow);
-                    player.lives -= 1;
-                    enemy.erase(enemy.begin() + i);
-                    continue;
-                }
-                if((iteration+1)%4 == 0){
-                    enemy[i].erase(gameWindow);
-                    (enemy[i].y)+=1;
-                    enemy[i].draw(gameWindow);
-                    wrefresh(gameWindow);
-                }
-            }
-        }
-        else if (iteration < 800){
-            if(iteration % 8 == 0){
-                enemy.push_back(Enemy(0, rand()%55 +2));    
-            }
-
-            wrefresh(gameWindow);
-
-            for(int i=0; i <= enemy.size()-1;i++){
-
-                if(enemy[i].y ==25)
-                {
-                    enemy[i].erase(gameWindow);
-                    player.lives -= 1;
-                    enemy.erase(enemy.begin() + i);
-                    continue;
-                }
-                if((iteration+1)%3 == 0){
-                    enemy[i].erase(gameWindow);
-                    (enemy[i].y)+=1;
-                    enemy[i].draw(gameWindow);
-                    wrefresh(gameWindow);
-                }
-            }
-        }
-        else if (iteration < 1000){
-            if(iteration % 7 == 0){
-                enemy.push_back(Enemy(0, rand()%55 +2));    
-            }
-
-            wrefresh(gameWindow);
-
-            for(int i=0; i <= enemy.size()-1;i++){
-
-                if(enemy[i].y ==25)
-                {
-                    enemy[i].erase(gameWindow);
-                    player.lives -= 1;
-                    enemy.erase(enemy.begin() + i);
-                    continue;
-                }
-                if((iteration+1)%3 == 0){
-                    enemy[i].erase(gameWindow);
-                    (enemy[i].y)+=1;
-                    enemy[i].draw(gameWindow);
-                    wrefresh(gameWindow);
-                }
-            }
-        }
-        else if (iteration < 1200){
-            if(iteration % 6 == 0){
-                enemy.push_back(Enemy(0, rand()%55 +2));    
-            }
-
-            wrefresh(gameWindow);
-
-            for(int i=0; i <= enemy.size()-1;i++){
-
-                if(enemy[i].y == 20)
-                {
-                    enemy[i].erase(gameWindow);
-                    player.lives -= 1;
-                    enemy.erase(enemy.begin() + i);
-                    continue;
-                }
-                if((iteration+1)%3 == 0){
-                    enemy[i].erase(gameWindow);
-                    (enemy[i].y)+=1;
-                    enemy[i].draw(gameWindow);
-                    wrefresh(gameWindow);
-                }
-            }
-        }
-        else if (iteration < 1400){
-            if(iteration % 5 == 0){
-                enemy.push_back(Enemy(0, rand()%55 +2));    
-            }
-
-            wrefresh(gameWindow);
-
-            for(int i=0; i <= enemy.size()-1;i++){
-
-                if(enemy[i].y ==25)
-                {
-                    enemy[i].erase(gameWindow);
-                    player.lives -= 1;
-                    enemy.erase(enemy.begin() + i);
-                    continue;
-                }
-                if((iteration+1)%3 == 0){
-                    enemy[i].erase(gameWindow);
-                    (enemy[i].y)+=1;
-                    enemy[i].draw(gameWindow);
-                    wrefresh(gameWindow);
-                }
-            }
-        }
-        else if (iteration < 1600){
-            if(iteration % 5 == 0){
-                enemy.push_back(Enemy(0, rand()%55 +2));    
-            }
-
-            wrefresh(gameWindow);
-
-            for(int i=0; i <= enemy.size()-1;i++){
-
-                if(enemy[i].y ==25)
-                {
-                    enemy[i].erase(gameWindow);
-                    player.lives -= 1;
-                    enemy.erase(enemy.begin() + i);
-                    continue;
-                }
-                if((iteration+1)%2 == 0){
-                    enemy[i].erase(gameWindow);
-                    (enemy[i].y)+=1;
-                    enemy[i].draw(gameWindow);
-                    wrefresh(gameWindow);
-                }
-            }
-        }
-        else if (iteration < 1800){
-            if(iteration % 4 == 0){
-                enemy.push_back(Enemy(0, rand()%55 +2));    
-            }
-
-            wrefresh(gameWindow);
-
-            for(int i=0; i <= enemy.size()-1;i++){
-
-                if(enemy[i].y ==25)
-                {
-                    enemy[i].erase(gameWindow);
-                    player.lives -= 1;
-                    enemy.erase(enemy.begin() + i);
-                    continue;
-                }
-                if((iteration+1)%2 == 0){
-                    enemy[i].erase(gameWindow);
-                    (enemy[i].y)+=1;
-                    enemy[i].draw(gameWindow);
-                    wrefresh(gameWindow);
-                }
-            }
-        }
-        else if (iteration < 2000){
-            if(iteration % 3 == 0){
-                enemy.push_back(Enemy(0, rand()%55 +2));    
-            }
-
-            wrefresh(gameWindow);
-
-            for(int i=0; i <= enemy.size()-1;i++){
-
-                if(enemy[i].y == 25)
-                {
-                    enemy[i].erase(gameWindow);
-                    player.lives -= 1;
-                    enemy.erase(enemy.begin() + i);
-                    continue;
-                }
-                if((iteration+1)%2 == 0){
-                    enemy[i].erase(gameWindow);
-                    (enemy[i].y)+=1;
-                    enemy[i].draw(gameWindow);
-                    wrefresh(gameWindow);
-                }
-            }
-        }
-        else{
-            if(iteration % 3 == 0){
-                enemy.push_back(Enemy(0, rand()%55 +2));    
-            }
-
-            wrefresh(gameWindow);
-
-            for(int i=0; i <= enemy.size()-1;i++){
-
-                if(enemy[i].y ==25)
-                {
-                    enemy[i].erase(gameWindow);
-                    player.lives -= 1;
-                    enemy.erase(enemy.begin() + i);
-                    continue;
-                }
-                enemy[i].erase(gameWindow);
-                (enemy[i].y)+=1;
-                enemy[i].draw(gameWindow);
-                wrefresh(gameWindow);
-                
-            }
-        }
-
-
+        
+        wrefresh(gameWindow);
+        switch(level(iteration)){
+            case 1:
+                speed(enemy, gameWindow, player, iteration, 20, 5);
+                break;
+            case 2:
+                speed(enemy, gameWindow, player, iteration, 15, 4);
+                break;
+            case 3:
+                speed(enemy, gameWindow, player, iteration, 10, 4);
+                break;
+            case 4:
+                speed(enemy, gameWindow, player, iteration, 8, 3);
+                break;
+            case 5:
+                speed(enemy, gameWindow, player, iteration, 7, 3);
+                break;
+            case 6:
+                speed(enemy, gameWindow, player, iteration, 6, 3);
+                break;
+            case 7:
+                speed(enemy, gameWindow, player, iteration, 5, 3);
+                break;
+            case 8:
+                speed(enemy, gameWindow, player, iteration, 5, 2);
+                break;
+            case 9:
+                speed(enemy, gameWindow, player, iteration, 4, 2);
+                break;
+            case 10:
+                speed(enemy, gameWindow, player, iteration, 3, 2);
+                break;
+            case 11:
+                speed(enemy, gameWindow, player, iteration, 3, 1);
+                break;
+        }    
 
 
         //Initialize new ball on losing a life
         if(input == 'a' || input == 'A') {
-            balls.push_back(Ball((paddle.y)+5, (paddle.x)+2, -2));
+            balls.push_back(Ball((paddle.y)+5, (paddle.x)+2, -1));
+            ball_num++;
+            if (ball_num == 2000){
+                died = true;
+                break;
+            }
         }
         for(int i = balls.size()-1; i >= 0; i--){
              if (balls[i].y == 2){
@@ -529,65 +330,14 @@ int game(string playerName) {
              balls[i].y += balls[i].dy;
              balls[i].draw(gameWindow);
         }
-
-        //Handle collision of player with the enemy rockets
-        for(int j=0; j <= enemy.size()-1;j++){
-            string rocket=paddle.sprite;
-            int rockety=paddle.y ;
-            int rocketx=paddle.x;
-            int lineIndex = 0;
-            int startPos = 0;
-            int endPos = rocket.find('\n');
-            while (endPos != string::npos) {
-                if (rockety+ lineIndex== enemy[j].y ||rockety+ lineIndex== (enemy[j].y )+ 1 ){
-                    string line = rocket.substr(startPos, endPos - startPos);
-                
-                    for (int i=0;i<line.length(); i++){
-                  if ((rocketx)+i== enemy[j].x || (rocketx)+i== (enemy[j].x) + 1 || (rocketx)+i== (enemy[j].x) + 2 ){
-                    enemy[j].erase(gameWindow);
-                    enemy.erase(enemy.begin() + j);
-                    player.lives-=1;   
-                    break;
-                    }
-                }
-                }
-            startPos = endPos + 1;
-            endPos = rocket.find('\n', startPos);
-            ++lineIndex;
-            
-        }
-    }
-    
-        
-        
-
-
-        //Handle collision with the enemy rockets
-        for(int i = balls.size()-1; i >= 0; i--){
-            for(int j=0; j <= enemy.size()-1;j++){
-                if(balls[i].x == enemy[j].x || balls[i].x == (enemy[j].x )+1 || balls[i].x == (enemy[j].x )+2)
-                { 
-                    if(balls[i].y == ((enemy[j].y)+1) || balls[i].y == (enemy[j].y) || balls[i].y == (enemy[j].y)+2){
-                        balls[i].erase(gameWindow);
-                        balls.erase(balls.begin() + i);
-                        enemy[j].erase(gameWindow);
-                        enemy.erase(enemy.begin() + j);
-                        player.score+=10;
-                        
-                    }
-                }
-                
-            }
-        }
-        
         //Update paddle position
         paddle.erase(gameWindow);
         paddle.update(input);
         paddle.draw(gameWindow);
 
         //Update player info
-        string playerInfo = "Score:" + to_string(player.score) + "           Level:" + to_string(level(iteration)) + "          " + "Lives:" + to_string(player.lives);
-        mvwprintw(infoWindow, 1, 1, playerInfo.c_str());                                                 
+        string playerInfo = "Score:" + to_string(player.score) + "                                       " + "Lives:" + to_string(player.lives);
+        mvwprintw(infoWindow, 1, 1, playerInfo.c_str());
         wrefresh(infoWindow);
 
         //Refresh game window
@@ -599,7 +349,9 @@ int game(string playerName) {
         usleep(100000);
         iteration++;
     }
-
+    delete gameWindow; 
+    delete infoWindow;
+    delete commandsWindow;
     if(died) gameOver(player.name, player.score);
     else mainmenu();
     return 0;
