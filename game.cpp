@@ -462,6 +462,6 @@ int game(string playerName) {
     }
 
     if(died) gameOver(player.name, player.score);
-    else mainmenu();
+    else startMenu();
     return 0;
 }
