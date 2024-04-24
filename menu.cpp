@@ -9,132 +9,129 @@
 
 using namespace std;
 
-int mainmenu();
-int inputName();
+int startMenu();
+int name();
 int instructions1();
 int credits();
 
-int mainmenu() {
+int startMenu() {
 
-    //main menu window initialization (rows,cols,y,x)
-    WINDOW* menuWindow = newwin(100, 120, 0, 0); 
+    // Start menu dimensions //
+    WINDOW* menuWindow = newwin(36, 60, 0, 0); 
     box(menuWindow, 0, 0);
     wrefresh(menuWindow);
 
-    //main menu options
-    string menu1[5]= {"PLAY GAME","HOW TO PLAY","HIGH SCORE","CREDITS","QUIT"};
-    //variable to get user input
+    // Start menu options // 
+    string menu0[5]= {"PLAY","PLAYER GUIDE","HIGH SCORE","CREDITS","QUIT"};
+
+    // User Input //
     int choice;
-    //variable to store the current option selected
-    int highlight=0;
+    
+    // Selected //
+    int selected=0;
 
     while(TRUE) {
-        //printing main menu screen
-    
-                                                    
+                                               
 
         mvwprintw(menuWindow, 1,2,"* * * * * * * * * * * * * * * * * * * * * * * * * * * * *");
         mvwprintw(menuWindow, 2,2,"*   *   *   *   *   *   *   *   *   *   *   *    *      *");
-        mvwprintw(menuWindow, 3,2,"*      _____   ____   _____ _  ________ _______      *");      
-        mvwprintw(menuWindow, 4,2,"*     |  __ \\ / __ \\ / ____| |/ /  ____|__   __|     *");    
-        mvwprintw(menuWindow, 5,2,"*     | |__) | |  | | |    | ' /| |__     | |        *");     
-        mvwprintw(menuWindow, 6,2,"*     |  _  /| |  | | |    |  < |  __|    | |        *");    
-        mvwprintw(menuWindow, 7,2,"*     | | \\ \\| |__| | |____| . \\| |____   | |        *");    
-        mvwprintw(menuWindow, 8,2,"*     |_|  \\_\\____/ \\_____|_|\\_\\______|  |_|        *");    
-        mvwprintw(menuWindow, 9,2,"* _____            __  __ _____        _____ ______  *");
-        mvwprintw(menuWindow, 10,2,"*|  __ \\     /\\   |  \\/  |  __ \\ /\\   / ____|  ____| *");
-        mvwprintw(menuWindow, 11,2,"*| |__) |   /  \\  | \\  / | |__) /  \\ | |  __| |__    *");
-        mvwprintw(menuWindow, 12,2,"*|  _  /   / /\\ \\ | |\\/| |  ___/ /\\ \\| | |_ |  __|   *"); 
-        mvwprintw(menuWindow, 13,2,"*| | \\ \\  / ____ \\| |  | | |  / ____ \\ |__| | |____  *");
-        mvwprintw(menuWindow, 14,2,"*|_|  \\_\\/_/    \\_\\_|  |_|_| /_/    \\_\\_____|______| *");
+        mvwprintw(menuWindow, 3,2,"*      _____   ____   _____ _  ________ _______         *");      
+        mvwprintw(menuWindow, 4,2,"*     |  __ \\ / __ \\ / ____| |/ /  ____|__   __|        *");    
+        mvwprintw(menuWindow, 5,2,"*     | |__) | |  | | |    | ' /| |__     | |           *");     
+        mvwprintw(menuWindow, 6,2,"*     |  _  /| |  | | |    |  < |  __|    | |           *");    
+        mvwprintw(menuWindow, 7,2,"*     | | \\ \\| |__| | |____| . \\| |____   | |           *");    
+        mvwprintw(menuWindow, 8,2,"*     |_|  \\_\\____/ \\___ __|_|\\_\\______|  |_|           *");    
+        mvwprintw(menuWindow, 9,2,"*  _____            __  __ _____        _____ ______    *");
+        mvwprintw(menuWindow, 10,2,"* |  __ \\     /\\   |  \\/  |  __ \\ /\\   / ____|  ____|   *");
+        mvwprintw(menuWindow, 11,2,"* | |__) |   /  \\  | \\  / | |__) /  \\ | |  __| |__      *");
+        mvwprintw(menuWindow, 12,2,"* |  _  /   / /\\ \\ | |\\/| |  ___/ /\\ \\| | |_ |  __|     *"); 
+        mvwprintw(menuWindow, 13,2,"* | | \\ \\  / ____ \\| |  | | |  / ____ \\ |__| | |____    *");
+        mvwprintw(menuWindow, 14,2,"* |_|  \\_\\/_/    \\_\\_|  |_|_| /_/    \\_\\_____|______|   *");
         mvwprintw(menuWindow, 15,2,"*  *  *   *   *   *     *     *   *     *   *   *  *  * *");
         mvwprintw(menuWindow, 16,2,"* *  *   *  *   *    *     *    *    *    *   *  *  *  **"); 
         mvwprintw(menuWindow, 17,2,"* * * * * * * * * * * * * * * * * * * * * * * * * * * * *");  
+       
+        // Menu Design // 
+
         for(int i=0;i<5;i++) {
-            //making all options bold
             wattron(menuWindow, A_BOLD);
-            //highlighting the selected choice
-            if(i==highlight) {
+
+            if(i==selected) {
                 wattron(menuWindow, A_REVERSE);
             }
-            //printing the choices
-            mvwprintw(menuWindow, 18+i+1, ((60-menu1[i].length())/2), menu1[i].c_str());//printing options
-            wattroff(menuWindow, A_REVERSE);//de-highlighting the non selected options
+
+            mvwprintw(menuWindow, 18+i+1, ((60-menu0[i].length())/2), menu0[i].c_str());//printing options
+            wattroff(menuWindow, A_REVERSE);//de-highlightinging the non selected options
         }
-        //getting user input
+        // User Input //
         choice = getch();
-        //changing highlighted option according to user option
+
+        // Hover Over Highlights //
         switch(choice) {
             case KEY_UP:
-                highlight--;
-                //checking whether the choice is going out of bounds
-                if(highlight<0)
-                    highlight=4;
+                selected--;
+                // Menu Boundary //
+                if(selected<0)
+                    selected=4;
                 break;
             case KEY_DOWN:
-                highlight++;
-                //checking whether the choice is going out of bounds
-                if(highlight>4)
-                    highlight=0;
+                selected++;
+                // Menu Boundary //
+                if(selected>4)
+                    selected=0;
                 break;
             default:
                 break;
         }
-        //checking whether enter is pressed
+        // Check User Input //
         if(choice==10) { 
             break;
         }
-        //refresh window
+        // End //
         wrefresh(menuWindow);
     }
-    //traversing to the screen as per the user's choice
-    if(highlight==0) {
-        inputName();
-    } else if(highlight==1) {
+    // Select //
+    if(selected==0) {
+        name();
+    } else if(selected==1) {
         instructions1();
-    } else if(highlight==2) {
+    } else if(selected==2) {
         highscores();
-    } else if(highlight==3) {
+    } else if(selected==3) {
         credits();
     }
 
     return 0;
 }
 
-int inputName() {
+int name() {
 
-    // input window initialization (rows, columns, y, x)
-    WINDOW* win = newwin(26, 60, 0, 0);
+    // Input Dimensions //
+    WINDOW* win = newwin(36, 60, 0, 0);
 
-    // Draw a box around the window
     box(win, 0, 0);
 
-
-    //creating a play button:
-
-    //create a string that stores text displayed on the button
+    // Play //
     string playButton= "PLAY GAME";
 
-    //makes text bold 
+    // Design //
     wattron(win, A_BOLD);
 
-    //highlighting the play button
     wattron(win, A_REVERSE);
 
-    //prints play button
+    // Plays //
     mvwprintw(win, 19, ((60-playButton.length())/2), playButton.c_str());
     
-    //turn off highlighting
     wattroff(win, A_REVERSE);
 
 
-    // Create a string to store the player name
+    // Store player name //
     string playerName;
-    // Get input from the user until they press enter
+    // Input until 'Enter' //
     int ch;
-    //declare and initialise variable to count and subsequently limit character count for name
+    // declare and initialise variable to count and subsequently limit character count for name
     int char_limit = 0;
-    //print a prompt to enter name
+    // print a prompt to enter name
     mvwprintw(win, 11, 21, "Enter your name:");
     mvwprintw(win, 14, 23, "-----------");
     while ((ch = wgetch(win)) != '\n') {
@@ -178,7 +175,7 @@ int instructions1() {
     box(instrucionWindow, 0, 0);
     wrefresh(instrucionWindow);
     int choice;
-    int highlight3=1;
+    int selected3=1;
     for(;;) {   
         //instructions on how to play the game
         mvwprintw(instrucionWindow, 5, 13, "1.");
@@ -214,7 +211,7 @@ int instructions1() {
         }
     }
     //going back to main menu
-    mainmenu();
+    startMenu();
     return 0;
 }
 
@@ -271,14 +268,14 @@ int credits() {
         wrefresh(endWindow);
     }
     //going back to the main menu page
-    mainmenu();
+    startMenu();
     return 0;
 }
     
 
 int gameOver(string playerName, int playerScore) {
     //gameover window initialization (rows,cols,y,x)
-    WINDOW* endWindow = newwin(26, 60, 0, 0); 
+    WINDOW* endWindow = newwin(36, 60, 0, 0); 
     box(endWindow, 0, 0);
     wrefresh(endWindow);
 
@@ -326,9 +323,9 @@ int gameOver(string playerName, int playerScore) {
         if(choice==10) {
             break;
         }
-        //refreshing window
+        // refreshing window
         wrefresh(endWindow);
     }
-    mainmenu();
+    startMenu();
     return 0;
 }
