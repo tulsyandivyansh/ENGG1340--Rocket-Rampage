@@ -199,7 +199,7 @@ int game(string playerName) {
 
     //Initialize the player, level, ball and paddle
     Player player;
-    player.init(playerName, 0, 100);
+    player.init(playerName, 0, 5);
 
 
     Paddle paddle;
@@ -239,7 +239,7 @@ int game(string playerName) {
 
             wrefresh(gameWindow);
 
-            for(int i=0; i <= enemy.size()-1;i++){
+            for(int i = enemy.size()-1; i >= 0; i--){
 
                 if(enemy[i].y ==25)
                 {
@@ -265,7 +265,7 @@ int game(string playerName) {
 
             wrefresh(gameWindow);
 
-            for(int i=0; i <= enemy.size()-1;i++){
+            for(int i = enemy.size()-1; i >= 0; i--){
 
                 if(enemy[i].y ==25)
                 {
@@ -291,7 +291,7 @@ int game(string playerName) {
 
             wrefresh(gameWindow);
 
-            for(int i=0; i <= enemy.size()-1;i++){
+            for(int i = enemy.size()-1; i >= 0; i--){
 
                 if(enemy[i].y ==25)
                 {
@@ -312,12 +312,12 @@ int game(string playerName) {
         }
         else if (iteration < 2400){
             if(iteration % 10 == 0){
-                enemy.push_back(Enemy(0, rand()%55 +2));    
+                enemy.push_back(Enemy(0, rand()%50 +2));    
             }
 
             wrefresh(gameWindow);
 
-            for(int i=0; i <= enemy.size()-1;i++){
+            for(int i = enemy.size()-1; i >= 0; i--){
 
                 if(enemy[i].y ==25)
                 {
@@ -339,12 +339,12 @@ int game(string playerName) {
         
         else {
             if(iteration % 8 == 0){
-                enemy.push_back(Enemy(0, rand()%55 +2));    
+                enemy.push_back(Enemy(0, rand()%50 +2));    
             }
 
             wrefresh(gameWindow);
 
-            for(int i=0; i <= enemy.size()-1;i++){
+            for(int i = enemy.size()-1; i >= 0; i--){
 
                 if(enemy[i].y ==25)
                 {
@@ -390,7 +390,7 @@ int game(string playerName) {
         }
 
 //Handle collision of player with the enemy rockets
-        for(int j=0; j <= enemy.size()-1;j++){
+        for(int j = enemy.size()-1; j >= 0; j--){
             string rocket=paddle.sprite;
             int rockety=paddle.y ;
             int rocketx=paddle.x;
@@ -405,7 +405,8 @@ int game(string playerName) {
                   if ((rocketx)+i== enemy[j].x || (rocketx)+i== (enemy[j].x) + 1 || (rocketx)+i== (enemy[j].x) + 2 ){
                     enemy[j].erase(gameWindow);
                     wrefresh(gameWindow);
-                    enemy.erase(enemy.begin() + j);   
+                    enemy.erase(enemy.begin() + j);  
+                    player.lives-=1; 
                     break;
                     }
                 }
@@ -423,7 +424,7 @@ int game(string playerName) {
 
         //Handle collision with the enemy rockets
         for(int i = balls.size()-1; i >= 0; i--){
-            for(int j=0; j <= enemy.size()-1;j++){
+            for(int j = enemy.size()-1; j >= 0; j--){
                 if(balls[i].x == enemy[j].x || balls[i].x == (enemy[j].x )+1 || balls[i].x == (enemy[j].x )+2)
                 { 
                     if(balls[i].y == ((enemy[j].y)+1) || balls[i].y == (enemy[j].y) || balls[i].y == (enemy[j].y)+2){
