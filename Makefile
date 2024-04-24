@@ -4,7 +4,7 @@ LIBS = -lncurses
 SRCS = main.cpp menu.cpp game.cpp highscore.cpp
 OBJS = $(SRCS:.cpp=.o)
 FILES = scores
-TARGET = breakout
+TARGET = rocket
 
 %.o: %.cpp
 	$(CC) $(CFLAGS) -c $< -o $@
