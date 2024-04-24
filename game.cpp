@@ -167,11 +167,10 @@ public:
     //Ball velocity
     int dx, dy;
     //Initialize ball
-    Ball(int y, int x, int dy, int dx) {
+    Ball(int y, int x, int dy) {
         this -> y = y;
         this -> x = x;
         this -> dy = dy;
-        this -> dx = dx;
     }
     //Draw ball in the game window
     void draw(WINDOW* window) {
@@ -516,9 +515,7 @@ int game(string playerName) {
 
         //Initialize new ball on losing a life
         if(input == 'a' || input == 'A') {
-            balls.push_back(Ball((paddle.y), (paddle.x)+2, -1, 0));
-            balls.push_back(Ball((paddle.y), (paddle.x)+2, -1, 1));
-            balls.push_back(Ball((paddle.y), (paddle.x)+2, -1, -1));
+            balls.push_back(Ball((paddle.y), (paddle.x)+2, -1.));
 
         }
         for(int i = balls.size()-1; i >= 0; i--){
@@ -531,7 +528,6 @@ int game(string playerName) {
 
         //Update ball position
              balls[i].y += balls[i].dy;
-             balls[i].x += balls[i].dx;
              balls[i].draw(gameWindow);
         }
 
