@@ -118,12 +118,12 @@ public:
         switch(input) {
             case KEY_LEFT:
                 if(x > 2) {
-                    x -= 4;
+                    x -= 2;
                 }
                 break;
             case KEY_RIGHT:
                 if(x < gameWindowSizeX - 7) {
-                    x += 4;
+                    x += 2;
                 }
                 break;
             default:
@@ -516,11 +516,6 @@ int game(string playerName) {
         //Initialize new ball on losing a life
         if(input == 'a' || input == 'A') {
             balls.push_back(Ball((paddle.y)+5, (paddle.x)+2, -2));
-            ball_num++;
-            if (ball_num == 50){
-                died = true;
-                break;
-            }
         }
         for(int i = balls.size()-1; i >= 0; i--){
              if (balls[i].y == 2){
@@ -534,6 +529,56 @@ int game(string playerName) {
              balls[i].y += balls[i].dy;
              balls[i].draw(gameWindow);
         }
+
+//Handle collision of player with the enemy rockets
+        for(int j=0; j <= enemy.size()-1;j++){
+            string rocket=paddle.sprite;
+            int rockety=paddle.y ;
+            int rocketx=paddle.x;
+            int lineIndex = 0;
+            int startPos = 0;
+            int endPos = rocket.find('\n');
+            while (endPos != string::npos) {
+                if (rockety+ lineIndex== enemy[j].y ||rockety+ lineIndex== (enemy[j].y )+ 1 ){
+                    string line = rocket.substr(startPos, endPos - startPos);
+                
+                    for (int i=0;i<line.length(); i++){
+                  if ((rocketx)+i== enemy[j].x || (rocketx)+i== (enemy[j].x) + 1 || (rocketx)+i== (enemy[j].x) + 2 ){
+                    enemy[j].erase(gameWindow);
+                    enemy.erase(enemy.begin() + j);   
+                    break;
+                    }
+                }
+                }
+            startPos = endPos + 1;
+            endPos = rocket.find('\n', startPos);
+            ++lineIndex;
+            
+        }
+    }
+    
+        
+        
+
+
+        //Handle collision with the enemy rockets
+        for(int i = balls.size()-1; i >= 0; i--){
+            for(int j=0; j <= enemy.size()-1;j++){
+                if(balls[i].x == enemy[j].x || balls[i].x == (enemy[j].x )+1 || balls[i].x == (enemy[j].x )+2)
+                { 
+                    if(balls[i].y == ((enemy[j].y)+1) || balls[i].y == (enemy[j].y) || balls[i].y == (enemy[j].y)+2){
+                        balls[i].erase(gameWindow);
+                        balls.erase(balls.begin() + i);
+                        enemy[j].erase(gameWindow);
+                        enemy.erase(enemy.begin() + j);
+                        player.score+=10;
+                        
+                    }
+                }
+                
+            }
+        }
+        
         //Update paddle position
         paddle.erase(gameWindow);
         paddle.update(input);
