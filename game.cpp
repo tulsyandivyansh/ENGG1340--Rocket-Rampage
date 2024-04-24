@@ -241,7 +241,7 @@ int game(string playerName) {
 
             for(int i=0; i <= enemy.size()-1;i++){
 
-                if(enemy[i].y ==20)
+                if(enemy[i].y ==25)
                 {
                     enemy[i].erase(gameWindow);
                     wrefresh(gameWindow);
@@ -267,7 +267,7 @@ int game(string playerName) {
 
             for(int i=0; i <= enemy.size()-1;i++){
 
-                if(enemy[i].y ==20)
+                if(enemy[i].y ==25)
                 {
                     enemy[i].erase(gameWindow);
                     wrefresh(gameWindow);
@@ -293,7 +293,7 @@ int game(string playerName) {
 
             for(int i=0; i <= enemy.size()-1;i++){
 
-                if(enemy[i].y ==20)
+                if(enemy[i].y ==25)
                 {
                     enemy[i].erase(gameWindow);
                     wrefresh(gameWindow);
@@ -319,7 +319,7 @@ int game(string playerName) {
 
             for(int i=0; i <= enemy.size()-1;i++){
 
-                if(enemy[i].y ==20)
+                if(enemy[i].y ==25)
                 {
                     enemy[i].erase(gameWindow);
                     wrefresh(gameWindow);
@@ -346,7 +346,7 @@ int game(string playerName) {
 
             for(int i=0; i <= enemy.size()-1;i++){
 
-                if(enemy[i].y ==20)
+                if(enemy[i].y ==25)
                 {
                     enemy[i].erase(gameWindow);
                     wrefresh(gameWindow);
