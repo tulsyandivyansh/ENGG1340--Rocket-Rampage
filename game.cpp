@@ -199,7 +199,7 @@ int game(string playerName) {
 
     //Initialize the player, level, ball and paddle
     Player player;
-    player.init(playerName, 0, 100);
+    player.init(playerName, 0, 5);
 
 
     Paddle paddle;
