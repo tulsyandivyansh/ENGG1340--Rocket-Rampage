@@ -193,7 +193,7 @@ int game(string playerName) {
     //Draw a box around the command window
     box(commandsWindow, 0, 0);
     //Print instructions
-    mvwprintw(commandsWindow, 1, 1, "[<][>]:Move Paddle        [A]: Shoot            [Q]:Quit");
+    mvwprintw(commandsWindow, 1, 1, "[<][>]:Move Paddle       [A]: Shoot             [Q]:Quit");
     //Refresh command window initially
     wrefresh(commandsWindow);
 
@@ -389,7 +389,7 @@ int game(string playerName) {
         }
 
 //Handle collision of player with the enemy rockets
-        for(int j=enemy.size()-1; j >= 0; j--){
+        for(int j = 0; j <= enemy.size()-1; j++){
             string rocket=paddle.sprite;
             int rockety=paddle.y ;
             int rocketx=paddle.x;
@@ -445,7 +445,7 @@ int game(string playerName) {
         paddle.draw(gameWindow);
 
         //Update player info
-        string playerInfo = "Score:" + to_string(player.score) + "           Level:" + to_string(level(iteration)) + "          " + "Lives:" + to_string(player.lives);
+        string playerInfo = "Score:" + to_string(player.score) + "                Level:" + to_string(level(iteration)) + "                   Lives:" + to_string(player.lives);
         mvwprintw(infoWindow, 1, 1, playerInfo.c_str());                                                 
         wrefresh(infoWindow);
 
