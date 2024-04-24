@@ -34,22 +34,26 @@ int startMenu() {
                                                
 
         mvwprintw(menuWindow, 1,2,"* * * * * * * * * * * * * * * * * * * * * * * * * * * * *");
-        mvwprintw(menuWindow, 2,2,"*   *   *   *   *   *   *   *   *   *   *   *    *      *");
-        mvwprintw(menuWindow, 3,2,"*      _____   ____   _____ _  ________ _______         *");      
-        mvwprintw(menuWindow, 4,2,"*     |  __ \\ / __ \\ / ____| |/ /  ____|__   __|        *");    
-        mvwprintw(menuWindow, 5,2,"*     | |__) | |  | | |    | ' /| |__     | |           *");     
-        mvwprintw(menuWindow, 6,2,"*     |  _  /| |  | | |    |  < |  __|    | |           *");    
-        mvwprintw(menuWindow, 7,2,"*     | | \\ \\| |__| | |____| . \\| |____   | |           *");    
-        mvwprintw(menuWindow, 8,2,"*     |_|  \\_\\____/ \\___ __|_|\\_\\______|  |_|           *");    
-        mvwprintw(menuWindow, 9,2,"*  _____            __  __ _____        _____ ______    *");
-        mvwprintw(menuWindow, 10,2,"* |  __ \\     /\\   |  \\/  |  __ \\ /\\   / ____|  ____|   *");
-        mvwprintw(menuWindow, 11,2,"* | |__) |   /  \\  | \\  / | |__) /  \\ | |  __| |__      *");
-        mvwprintw(menuWindow, 12,2,"* |  _  /   / /\\ \\ | |\\/| |  ___/ /\\ \\| | |_ |  __|     *"); 
-        mvwprintw(menuWindow, 13,2,"* | | \\ \\  / ____ \\| |  | | |  / ____ \\ |__| | |____    *");
-        mvwprintw(menuWindow, 14,2,"* |_|  \\_\\/_/    \\_\\_|  |_|_| /_/    \\_\\_____|______|   *");
-        mvwprintw(menuWindow, 15,2,"*  *  *   *   *   *     *     *   *     *   *   *  *  * *");
-        mvwprintw(menuWindow, 16,2,"* *  *   *  *   *    *     *    *    *    *   *  *  *  **"); 
-        mvwprintw(menuWindow, 17,2,"* * * * * * * * * * * * * * * * * * * * * * * * * * * * *");  
+        mvwprintw(menuWindow, 2,2,"*  *  *   *   *   *     *     *   *     *   *   *  *  * *");
+        mvwprintw(menuWindow, 3,2,"* *  *   *  *   *    *     *    *    *    *   *  *  *  **"); 
+        mvwprintw(menuWindow, 4,2,"*        _____   ____   _____ _  ________ _______         *");      
+        mvwprintw(menuWindow, 5,2,"*  *    |  __ \\ / __ \\ / ____| |/ /  ____|__   __|  *  *");    
+        mvwprintw(menuWindow, 6,2,"*   *   | |__) | |  | | |    | ' /| |__     | |       * *");     
+        mvwprintw(menuWindow, 7,2,"*  *    |  _  /| |  | | |    |  < |  __|    | |       *   *");    
+        mvwprintw(menuWindow, 8,2,"*   *   | | \\ \\| |__| | |____| . \\| |____   | |      *  *");    
+        mvwprintw(menuWindow, 9,2,"*  *    |_|  \\_ \\____/\\___ __|_|\\_\\______|  |_|  *     *");    
+        mvwprintw(menuWindow, 10,2,"*  *  *   *   *   *     *     *   *     *   *   *  *  * *");
+        mvwprintw(menuWindow, 11,2,"* *  *   *  *   *    *     *    *    *    *   *  *  *  **");
+        mvwprintw(menuWindow, 12,2,"*  *  *   *   *   *     *     *   *     *   *   *  *  * *");
+        mvwprintw(menuWindow, 13,2,"*  _____            __  __ _____        _____ ______    *");
+        mvwprintw(menuWindow, 14,2,"* |  __ \\     /\\   |  \\/  |  __ \\ /\\   / ____|  ____|   *");
+        mvwprintw(menuWindow, 15,2,"* | |__) |   /  \\  | \\  / | |__) /  \\ | |  __| |__      *");
+        mvwprintw(menuWindow, 16,2,"* |  _  /   / /\\ \\ | |\\/| |  ___/ /\\ \\| | |_ |  __|     *"); 
+        mvwprintw(menuWindow, 17,2,"* | | \\ \\  / ____ \\| |  | | |  / ____ \\ |__| | |____    *");
+        mvwprintw(menuWindow, 18,2,"* |_|  \\_\\/_/    \\_\\_|  |_|_| /_/    \\_\\_____|______|   *");
+        mvwprintw(menuWindow, 19,2,"*  *  *   *   *   *     *     *   *     *   *   *  *  * *");
+        mvwprintw(menuWindow, 20,2,"* *  *   *  *   *    *     *    *    *    *   *  *  *  **"); 
+        mvwprintw(menuWindow, 21,2,"* * * * * * * * * * * * * * * * * * * * * * * * * * * * *");  
        
         // Menu Design // 
 
@@ -60,7 +64,7 @@ int startMenu() {
                 wattron(menuWindow, A_REVERSE);
             }
 
-            mvwprintw(menuWindow, 18+i+1, ((60-menu0[i].length())/2), menu0[i].c_str());//printing options
+            mvwprintw(menuWindow, 25+i+1, ((60-menu0[i].length())/2), menu0[i].c_str());//printing options
             wattroff(menuWindow, A_REVERSE);//de-highlightinging the non selected options
         }
         // User Input //
@@ -189,10 +193,14 @@ int instructions1() {
         mvwprintw(instrucionWindow, 12, 15, "hits an enemy.");
         mvwprintw(instrucionWindow, 14, 13, "4.");
         mvwprintw(instrucionWindow, 14, 15, "You have 1 minute to accumulate");
-        mvwprintw(instrucionWindow, 16, 13, "as many points as possible.");
-        mvwprintw(instrucionWindow, 16, 15, "5.");
+        mvwprintw(instrucionWindow, 15, 15, "as many points as possible.");
+        mvwprintw(instrucionWindow, 17, 13, "5.");
         mvwprintw(instrucionWindow, 17, 15, "Your score is the total number of");
-        mvwprintw(instrucionWindow, 20, 22, "enemies defeated with each level.");
+        mvwprintw(instrucionWindow, 18, 15, "enemies defeated with each level.");
+        mvwprintw(instrucionWindow, 20, 13, "6.");
+        mvwprintw(instrucionWindow, 20, 15, "And most importantly- ENJOY!!");
+        
+
         //making all options bold 
         wattron(instrucionWindow, A_BOLD);
         //highlighting "BACK TO MENU" option
@@ -225,13 +233,13 @@ int credits() {
     int choice;
 
     // Adding the names under the ASCII art
-    mvwprintw(endWindow, 13, 24, "Divyansh Tulsyan");
+    mvwprintw(endWindow, 13, 23, "Divyansh Tulsyan");
     mvwprintw(endWindow, 14, 23, " ");
     mvwprintw(endWindow, 15, 23, "Jaehun Chun");
     mvwprintw(endWindow, 16, 23, " ");
     mvwprintw(endWindow, 17, 23, "Meeth Jaswani");
     mvwprintw(endWindow, 18, 23, " ");
-    mvwprintw(endWindow, 19, 22, "Shreyansh Mishra");
+    mvwprintw(endWindow, 19, 23, "Shreyansh Mishra");
     mvwprintw(endWindow, 20, 23, " ");
     mvwprintw(endWindow, 21, 23, "Cheung HonLung");
 
@@ -239,12 +247,12 @@ int credits() {
         //printing "Credits" on the screen
         mvwprintw(endWindow, 1,2,"* * * * * * * * * * * * * * * * * * * * * * * * * * * * *");
         mvwprintw(endWindow, 2,2,"*   *   *   *   *   *   *   *   *   *   *   *   *   *   *");
-        mvwprintw(endWindow, 3,2,"*  ________       *     *   *  *_   _*  __  *  * *      *");
-        mvwprintw(endWindow, 4,2,"* /   __   |  *    *  *   *    | | (_) |  |   *    * *  *");
-        mvwprintw(endWindow, 5,2,"* |  |  |__| _ ___   ___    ___| |  _  |  |   _____     *");
-        mvwprintw(endWindow, 6,2,"* |  |  ___ | ' __| / _ \\  /  _  | | | | __| / ____| *  *");
-        mvwprintw(endWindow, 7,2,"* |  | |   ||  /   | ___/ |  (_| | | | | |   \\__  \\ *   *");
-        mvwprintw(endWindow, 8,2,"*  \\_______||__|    \\___|  \\__,__| |_| \\___| |____/  *  *");
+        mvwprintw(endWindow, 3,2,"*    ________       *     *   *  *_   _*  __  *  * *    *");
+        mvwprintw(endWindow, 4,2,"*   /   __   |  *    *  *   *    | | (_) |  |   *       *");
+        mvwprintw(endWindow, 5,2,"*   |  |  |__| _ ___   ___    ___| |  _  |  |   _____   *");
+        mvwprintw(endWindow, 6,2,"*   |  |  ___ | ' __| / _ \\  /  _  | | | | __| / ____|  *");
+        mvwprintw(endWindow, 7,2,"*   |  | |   ||  /   | ___/ |  (_| | | | | |   \\__  \\   *");
+        mvwprintw(endWindow, 8,2,"*    \\_______||__|    \\___|  \\__,__| |_| \\___| |____/ *");
         mvwprintw(endWindow, 9,2,"*   *     *     *     *     *     *     *     *     *   *");
         mvwprintw(endWindow, 10,2,"*     *     *     *     *     *     *     *     *    *  *");
         mvwprintw(endWindow, 11,2,"* * * * * * * * * * * * * * * * * * * * * * * ** * * *  *");
