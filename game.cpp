@@ -232,14 +232,14 @@ int game(string playerName) {
             break;
         }
         
-        else if (iteration < 600){
+        if (iteration < 600){
             if(iteration % 20 == 0){
                 enemy.push_back(Enemy(0, rand()%50 +2));    
             }
 
             wrefresh(gameWindow);
 
-            for(int i=0; i <= enemy.size()-1;i++){
+            for(int i=enemy.size()-1; i >= 0; i--){
 
                 if(enemy[i].y ==25)
                 {
@@ -265,7 +265,7 @@ int game(string playerName) {
 
             wrefresh(gameWindow);
 
-            for(int i=0; i <= enemy.size()-1;i++){
+            for(int i=enemy.size()-1; i >= 0; i--){
 
                 if(enemy[i].y ==25)
                 {
@@ -291,7 +291,7 @@ int game(string playerName) {
 
             wrefresh(gameWindow);
 
-            for(int i=0; i <= enemy.size()-1;i++){
+            for(int i=enemy.size()-1; i >= 0; i--){
 
                 if(enemy[i].y ==25)
                 {
@@ -317,7 +317,7 @@ int game(string playerName) {
 
             wrefresh(gameWindow);
 
-            for(int i=0; i <= enemy.size()-1;i++){
+            for(int i=enemy.size()-1; i >= 0; i--){
 
                 if(enemy[i].y ==25)
                 {
@@ -344,7 +344,7 @@ int game(string playerName) {
 
             wrefresh(gameWindow);
 
-            for(int i=0; i <= enemy.size()-1;i++){
+            for(int i=enemy.size()-1; i >= 0; i--){
 
                 if(enemy[i].y ==25)
                 {
@@ -371,7 +371,6 @@ int game(string playerName) {
         //Initialize new ball on losing a life
         if(input == 'a' || input == 'A') {
             balls.push_back(Ball((paddle.y), (paddle.x)+2, -1.));
-
         }
         for(int i = balls.size()-1; i >= 0; i--){
              if ((balls[i].y == 2) || (balls[i].x == 1) || (balls[i].x == 58)){
@@ -390,7 +389,7 @@ int game(string playerName) {
         }
 
 //Handle collision of player with the enemy rockets
-        for(int j=0; j <= enemy.size()-1;j++){
+        for(int j=enemy.size()-1; j >= 0; j--){
             string rocket=paddle.sprite;
             int rockety=paddle.y ;
             int rocketx=paddle.x;
@@ -414,8 +413,8 @@ int game(string playerName) {
             endPos = rocket.find('\n', startPos);
             ++lineIndex;
             
+            }
         }
-    }
     
         
         
@@ -423,7 +422,7 @@ int game(string playerName) {
 
         //Handle collision with the enemy rockets
         for(int i = balls.size()-1; i >= 0; i--){
-            for(int j=0; j <= enemy.size()-1;j++){
+            for(int j= enemy.size()-1; j >= 0; j--){
                 if(balls[i].x == enemy[j].x || balls[i].x == (enemy[j].x )+1 || balls[i].x == (enemy[j].x )+2)
                 { 
                     if(balls[i].y == ((enemy[j].y)+1) || balls[i].y == (enemy[j].y) || balls[i].y == (enemy[j].y)+2){
@@ -436,8 +435,7 @@ int game(string playerName) {
                         player.score+=10;
                         
                     }
-                }
-                
+                }         
             }
         }
         
@@ -460,7 +458,6 @@ int game(string playerName) {
         usleep(100000);
         iteration++;
     }
-
     if(died) gameOver(player.name, player.score);
     else startMenu();
     return 0;
