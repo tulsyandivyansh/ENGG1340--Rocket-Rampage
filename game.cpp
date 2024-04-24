@@ -398,17 +398,17 @@ int game(string playerName) {
             int endPos = rocket.find('\n');
             while (endPos != string::npos) {
                 if (rockety+ lineIndex== enemy[j].y ||rockety+ lineIndex== (enemy[j].y )+ 1 ){
-                    string line = rocket.substr(startPos, endPos - startPos);
-                
+                    string line = rocket.substr(startPos, endPos - startPos);                
                     for (int i=0;i<line.length(); i++){
-                  if ((rocketx)+i== enemy[j].x || (rocketx)+i== (enemy[j].x) + 1 || (rocketx)+i== (enemy[j].x) + 2 ){
-                    enemy[j].erase(gameWindow);
-                    wrefresh(gameWindow);
-                    enemy.erase(enemy.begin() + j);   
-                    break;
+                        if ((rocketx)+i== enemy[j].x || (rocketx)+i== (enemy[j].x) + 1 || (rocketx)+i== (enemy[j].x) + 2 ){
+                        player.lives-=1;
+                        enemy[j].erase(gameWindow);
+                        wrefresh(gameWindow);
+                        enemy.erase(enemy.begin() + j);   
+                        break;
                     }
                 }
-                }
+            }
             startPos = endPos + 1;
             endPos = rocket.find('\n', startPos);
             ++lineIndex;
