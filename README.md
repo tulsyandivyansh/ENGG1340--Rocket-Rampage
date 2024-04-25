@@ -13,7 +13,7 @@
 A rocket-missle game implemented in C++ and ncurses for the Linux command line, for the final project of HKU's ENGG1340.
 
 ### Gameplay
-//https://user-images.githubusercontent.com/62847649/236627143-70ff03c3-d35b-45a5-a86c-4d0bae8307f3.mp4  
+https://github.com/tulsyandivyansh/ENGG1340--Rocket-Shooter/assets/62593950/761700d7-05b2-4b3e-9005-e5d6a6cfbd49
 
 #### Instructions
 * Use the left and right arrow keys to move the rocket and [A] key to shoot.  
