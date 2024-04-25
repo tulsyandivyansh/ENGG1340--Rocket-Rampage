@@ -187,7 +187,7 @@ int instructions1() {
         mvwprintw(instrucionWindow, 6, 15, "move the paddle and [A] key to shoot.");
         mvwprintw(instrucionWindow, 8, 13, "2.");
         mvwprintw(instrucionWindow, 8, 15, "The goal is to destroy enemies with");
-        mvwprintw(instrucionWindow, 9, 15, "your missile.");
+        mvwprintw(instrucionWindow, 9, 15, "your missiles.");
         mvwprintw(instrucionWindow, 11, 13, "3.");
         mvwprintw(instrucionWindow, 11, 15, "Earn points each time a missile");
         mvwprintw(instrucionWindow, 12, 15, "hits an enemy.");
