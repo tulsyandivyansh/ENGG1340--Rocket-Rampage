@@ -461,6 +461,7 @@ int game(string playerName) {
         usleep(100000);
         iteration++;
     }
+    iteration = 0;
 
     if(died) gameOver(player.name, player.score);
     else startMenu();
