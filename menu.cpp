@@ -184,7 +184,7 @@ int instructions1() {
         //instructions on how to play the game
         mvwprintw(instrucionWindow, 5, 13, "1.");
         mvwprintw(instrucionWindow, 5, 15, "Use the left and right arrow keys to");
-        mvwprintw(instrucionWindow, 6, 15, "move the paddle and /'[A]/' to shoot.");
+        mvwprintw(instrucionWindow, 6, 15, "move the paddle and [A] key to shoot.");
         mvwprintw(instrucionWindow, 8, 13, "2.");
         mvwprintw(instrucionWindow, 8, 15, "The goal is to destroy enemies with");
         mvwprintw(instrucionWindow, 9, 15, "your missile.");
