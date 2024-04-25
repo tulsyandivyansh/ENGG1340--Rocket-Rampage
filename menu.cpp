@@ -184,7 +184,7 @@ int instructions1() {
         //instructions on how to play the game
         mvwprintw(instrucionWindow, 5, 13, "1.");
         mvwprintw(instrucionWindow, 5, 15, "Use the left and right arrow keys to");
-        mvwprintw(instrucionWindow, 6, 15, "move the missile.");
+        mvwprintw(instrucionWindow, 6, 15, "move the paddle and /'[A]/' to shoot.");
         mvwprintw(instrucionWindow, 8, 13, "2.");
         mvwprintw(instrucionWindow, 8, 15, "The goal is to destroy enemies with");
         mvwprintw(instrucionWindow, 9, 15, "your missile.");
@@ -192,11 +192,11 @@ int instructions1() {
         mvwprintw(instrucionWindow, 11, 15, "Earn points each time a missile");
         mvwprintw(instrucionWindow, 12, 15, "hits an enemy.");
         mvwprintw(instrucionWindow, 14, 13, "4.");
-        mvwprintw(instrucionWindow, 14, 15, "You have 1 minute to accumulate");
+        mvwprintw(instrucionWindow, 14, 15, "You have 5 Lives to accumulate");
         mvwprintw(instrucionWindow, 15, 15, "as many points as possible.");
         mvwprintw(instrucionWindow, 17, 13, "5.");
         mvwprintw(instrucionWindow, 17, 15, "Your score is the total number of");
-        mvwprintw(instrucionWindow, 18, 15, "enemies defeated with each level.");
+        mvwprintw(instrucionWindow, 18, 15, "enemies defeated.");
         mvwprintw(instrucionWindow, 20, 13, "6.");
         mvwprintw(instrucionWindow, 20, 15, "And most importantly- ENJOY!!");
         
