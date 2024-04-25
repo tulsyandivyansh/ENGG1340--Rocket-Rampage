@@ -1,1 +1,53 @@
-# ENGG1340--Rocket-Shooter
+# ENGG1340--Rocket-Rampage
+<br/>
+<div align="center">
+  <h3 align="center">ENGG1340 Rocket Rampage</h3>
+  <p align="center"><i> A rocket-missle game made for the Linux terminal</i></p>
+  <img width="480" height="480" src="https://github.com/tulsyandivyansh/ENGG1340--Rocket-Shooter/assets/62593950/e8949b24-ae46-40fb-ac0a-2ba1d56c3304" alt="Screenshot">
+</div>
+
+<br/>
+<hr/>
+
+### About
+A rocket-missle game implemented in C++ and ncurses for the Linux command line, for the final project of HKU's ENGG1340.
+
+### Gameplay
+//https://user-images.githubusercontent.com/62847649/236627143-70ff03c3-d35b-45a5-a86c-4d0bae8307f3.mp4  
+
+#### Instructions
+* Use the left and right arrow keys to move the rocket and [A] key to shoot.  
+* The goal is to destroy enemies with your missiles. 
+* The player earns points each time a missile hits an enemy.
+* The player has 5 Lives to accumulate as many points as possible.
+* The player will loose a life if either enemy touches the rocket or goes beyond it. 
+* The score is the total number of enemies defeated.
+
+### Project Requirements
+
+| Coding Requirements                      | Feature                                                                                                    |
+| ---------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| Generation of Random Events.              | We randomised the generation of the enemy ships at the top of the screen, when the game starts.             |   
+| Data Structures for Storing Game Status  | We use different classes to store the status of in-game objects like the missles, the paddle, and the level. The player data is also stored in a class at any given point.                                                                                               |
+| Dynamic Memory Management (DMM)          | We utilize dynamic memory allocation to create and remove instances of the ball in each round of gameplay. |
+| File Input/Output                        | We use file handling to maintain a record of the top scores in the leaderboard.                          |
+| Multiple Files of Program Code           | We use separate files for handling different parts of the game - the gameplay, the menu, and the highscores functionality, which are joined together by main.cpp.                                                                                                   |
+
+
+### External Libraries
+`ncurses` - The ncurses library was used to draw console graphics smoothly instead of having to redraw the whole window every time the game updates.
+
+### Instructions for Building
+* Clone the project repository: `git clone https://github.com/ArcticKangaroo/ENGG1340-Breakout.git`
+* Navigate to the project directory: `cd ENGG1340-Breakout/`
+* Make the game: `make breakout`
+* Execute the game: `./breakout`
+* To remove the game, run `make clean`
+
+### Project Members
+This project was made by:
+* Meeth Jaswani
+* Jaehue Chun
+* Divyansh Tulsyan  
+* Shreyansh Mishra  
+* Cheung HonLung
