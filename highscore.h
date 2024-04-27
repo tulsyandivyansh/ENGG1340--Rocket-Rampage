@@ -6,17 +6,17 @@
 #include <ncurses.h>
 using namespace std;
 
-struct PlayerScores
+struct player_scores
 {
-    string PlayerName;
-    int PlayerScore;
+    string player_alias;
+    int player_score;
 };
 
-void InputToFile(string playerName, int playerScore);
+void file_input(string player_alias, int player_score);
 
-bool ScoreComparison(const PlayerScores& s1, const PlayerScores& s2);
+bool compare_scores(const player_scores& score1, const player_scores& score2);
 
-vector<PlayerScores> SortFile();
+vector<player_scores> sort_file();
 
 int highscores();
 
