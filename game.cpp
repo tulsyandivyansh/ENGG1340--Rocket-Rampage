@@ -59,46 +59,43 @@ public:
 
 };
 int level(int iteration){
-    if (iteration < 200){
-        return 1; 
-    }
-    else if (iteration < 600){
-        return 2;
+    if (iteration < 600){
+        return 1;
     }
     else if (iteration < 1200){
-        return 3;
+        return 2;
     }
     else if (iteration < 1800){
-        return 4;
+        return 3;
     }
     else if (iteration < 2400){
-        return 5;
+        return 4;
     }
     else {
-        return 6;
+        return 5;
     }
 }
-// Rocket class -> user input changes rocket direction left and right //
-class Rocket {
+//The Paddle class represents the player's paddle and is responsible for moving it left and right based on user input
+class Paddle {
 public:
-    // Rocket design //
+    //Paddle art
     string sprite;
-    Rocket(): sprite ( "  .\n"
+    Paddle(): sprite ( "  .\n"
                        "  |\n"
                        " / \\\n"
                        " |0|\n"
                        "/   \\\n"
                        "U U U\n"), x(0), y(0) {};
-    // Rocket pos //
+    //Paddle position
     int x, y;
 
-    // Initialize Rocket //
+    //Initialize paddle
     void init(int y, int x) {
         this -> y = y;
         this -> x = x;
     }
 
-    // Update Rocket position based on input // 
+    //Update paddle position according to player input
     void update(int input) {
         switch(input) {
             case KEY_LEFT:
@@ -122,7 +119,7 @@ public:
         this -> y = y;
     }
 
-    // Display Rocket in the game window //
+    //Draw paddle in the game window
     void draw(WINDOW* window) {
         int lineIndex = 0;
         int startPos = 0;
@@ -134,7 +131,7 @@ public:
             ++lineIndex;
         }
     }
-    // Erase Rocket from the game window 
+    //Erase paddle from the game window
     void erase(WINDOW* window){
         for (int i = 0; i < 6; ++i){
             mvwprintw(window, y+i, x, "     ");
@@ -142,34 +139,34 @@ public:
     }
 };
 
-// Class for handling bullets // 
-class Bullet {
+//The Ball class is responsible for handling the ball
+class Ball {
 public:
-    // Bullet art //
+    //Ball art
     string sprite = "o";
-    // Bullet pos //
+    //Ball position
     int x, y;
-    // Bullet speed //
+    //Ball velocity
     int dx, dy;
-    // Initialize Bullet
-    Bullet(int y, int x, int dy) {
+    //Initialize ball
+    Ball(int y, int x, int dy) {
         this -> y = y;
         this -> x = x;
         this -> dy = dy;
     }
-    // Display Bullet in the game window //
+    //Draw ball in the game window
     void draw(WINDOW* window) {
         mvwprintw(window, y, x, sprite.c_str());
     }
 
-    // Erase Bullet from the game window
+    //Erase ball from the game window
     void erase(WINDOW* window) {
         mvwprintw(window, y, x, " ");
     }
 };
 
-// The game function runs the main game - it accepts the player name as a parameter and passes it to the player class
-int game(string player_alias) {
+//The game function runs the main game - it accepts the player name as a parameter and passes it to the player class
+int game(string playerName) {
 
     //Randomize seed
     srand(time(nullptr));
@@ -193,26 +190,26 @@ int game(string player_alias) {
     //Draw a box around the command window
     box(commandsWindow, 0, 0);
     //Print instructions
-    mvwprintw(commandsWindow, 1, 1, "[<][>]:Move Rocket        [A]: Shoot            [Q]:Quit");
+    mvwprintw(commandsWindow, 1, 1, "[<][>]:Move Paddle        [A]: Shoot            [Q]:Quit");
     //Refresh command window initially
     wrefresh(commandsWindow);
 
-    //Initialize the player, level, Bullet and Rocket
+    //Initialize the player, level, ball and paddle
     Player player;
-    player.init(player_alias, 0, 5);
+    player.init(playerName, 0, 5);
 
 
-    Rocket Rocket;
-    Rocket.init(22, 30);
+    Paddle paddle;
+    paddle.init(22, 30);
     //Draw all the components and refresh the game window initially
-    Rocket.draw(gameWindow);
+    paddle.draw(gameWindow);
     wrefresh(gameWindow);
-    vector<Bullet> Bullets;
+    vector<Ball> balls;
     vector<Enemy> enemy;
     //Flags to handle losing a life and player death
     bool restart = false;
     bool died = false;
-    int Bullet_num = 0;
+    int ball_num = 0;
     //Game loop
     while(true) {
         //Randomize seed
@@ -232,7 +229,8 @@ int game(string player_alias) {
             break;
         }
         
-        else if (iteration < 600){
+        switch(level(iteration)){
+            case 1:
             if(iteration % 20 == 0){
                 enemy.push_back(Enemy(0, rand()%50 +2));    
             }
@@ -257,8 +255,9 @@ int game(string player_alias) {
                     wrefresh(gameWindow);
                 }
             }
-        }
-        else if (iteration < 1200){
+            break;
+
+            case 2:
             if(iteration % 14 == 0){
                 enemy.push_back(Enemy(0, rand()%50 +2));    
             }
@@ -283,8 +282,9 @@ int game(string player_alias) {
                     wrefresh(gameWindow);
                 }
             }
-        }
-        else if (iteration < 1800){
+            break;
+            
+            case 3:
             if(iteration % 12 == 0){
                 enemy.push_back(Enemy(0, rand()%50 +2));    
             }
@@ -309,8 +309,9 @@ int game(string player_alias) {
                     wrefresh(gameWindow);
                 }
             }
-        }
-        else if (iteration < 2400){
+            break;
+
+            case 4:
             if(iteration % 10 == 0){
                 enemy.push_back(Enemy(0, rand()%50 +2));    
             }
@@ -335,9 +336,9 @@ int game(string player_alias) {
                     wrefresh(gameWindow);
                 }
             }
-        }
+            break;
         
-        else {
+            case 5:
             if(iteration % 8 == 0){
                 enemy.push_back(Enemy(0, rand()%50 +2));    
             }
@@ -363,37 +364,38 @@ int game(string player_alias) {
                 }
                 
             }
+            break;
         }
 
 
 
 
-        // Initialize new Bullet on Bullet Erase
+        //Initialize new ball on losing a life
         if(input == 'a' || input == 'A') {
-            Bullets.push_back(Bullet((Rocket.y), (Rocket.x)+2, -1.));
+            balls.push_back(Ball((paddle.y), (paddle.x)+2, -1.));
 
         }
-        for(int i = Bullets.size()-1; i >= 0; i--){
-             if ((Bullets[i].y == 2) || (Bullets[i].x == 1) || (Bullets[i].x == 58)){
-                Bullets[i].erase(gameWindow);
+        for(int i = balls.size()-1; i >= 0; i--){
+             if ((balls[i].y == 2) || (balls[i].x == 1) || (balls[i].x == 58)){
+                balls[i].erase(gameWindow);
                 wrefresh(gameWindow);
-                Bullets.erase(Bullets.begin() + i);
+                balls.erase(balls.begin() + i);
                 continue;
              }
-             Bullets[i].erase(gameWindow);
+             balls[i].erase(gameWindow);
              wrefresh(gameWindow);
 
-        // Update Bullet position
-             Bullets[i].y += Bullets[i].dy;
-             Bullets[i].draw(gameWindow);
+        //Update ball position
+             balls[i].y += balls[i].dy;
+             balls[i].draw(gameWindow);
              wrefresh(gameWindow);
         }
 
-// Handle collision of player with the enemy rockets //
+//Handle collision of player with the enemy rockets
         for(int j = enemy.size()-1; j >= 0; j--){
-            string rocket=Rocket.sprite;
-            int rockety=Rocket.y ;
-            int rocketx=Rocket.x;
+            string rocket=paddle.sprite;
+            int rockety=paddle.y ;
+            int rocketx=paddle.x;
             int lineIndex = 0;
             int startPos = 0;
             int endPos = rocket.find('\n');
@@ -422,15 +424,15 @@ int game(string player_alias) {
         
 
 
-        // Handle collision with the enemy rockets //
-        for(int i = Bullets.size()-1; i >= 0; i--){
+        //Handle collision with the enemy rockets
+        for(int i = balls.size()-1; i >= 0; i--){
             for(int j = enemy.size()-1; j >= 0; j--){
-                if(Bullets[i].x == enemy[j].x || Bullets[i].x == (enemy[j].x )+1 || Bullets[i].x == (enemy[j].x )+2)
+                if(balls[i].x == enemy[j].x || balls[i].x == (enemy[j].x )+1 || balls[i].x == (enemy[j].x )+2)
                 { 
-                    if(Bullets[i].y == ((enemy[j].y)+1) || Bullets[i].y == (enemy[j].y) || Bullets[i].y == (enemy[j].y)+2){
-                        Bullets[i].erase(gameWindow);
+                    if(balls[i].y == ((enemy[j].y)+1) || balls[i].y == (enemy[j].y) || balls[i].y == (enemy[j].y)+2){
+                        balls[i].erase(gameWindow);
                         wrefresh(gameWindow);
-                        Bullets.erase(Bullets.begin() + i);
+                        balls.erase(balls.begin() + i);
                         enemy[j].erase(gameWindow);
                         wrefresh(gameWindow);
                         enemy.erase(enemy.begin() + j);
@@ -442,28 +444,28 @@ int game(string player_alias) {
             }
         }
         
-        // Update Rocket position //
-        Rocket.erase(gameWindow);
-        Rocket.update(input);
-        Rocket.draw(gameWindow);
+        //Update paddle position
+        paddle.erase(gameWindow);
+        paddle.update(input);
+        paddle.draw(gameWindow);
 
-        // Update player info //
+        //Update player info
         string playerInfo = "Score:" + to_string(player.score) + "           Level:" + to_string(level(iteration)) + "          " + "Lives:" + to_string(player.lives);
         mvwprintw(infoWindow, 1, 1, playerInfo.c_str());                                                 
         wrefresh(infoWindow);
 
-        // Refresh game window // 
+        //Refresh game window
         wrefresh(gameWindow);
 
-        // Clear buffered input from previous frame //
+        //Clear buffered input from previous frame
         flushinp();
-        // Sleep for 100000 microseconds before updating //
+        //Sleep for 100000 microseconds before updating
         usleep(100000);
         iteration++;
     }
     iteration = 0;
 
-    if(died) gameEnd(player.name, player.score);
+    if(died) gameOver(player.name, player.score);
     else startMenu();
     return 0;
 }
