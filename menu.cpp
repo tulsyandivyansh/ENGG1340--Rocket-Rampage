@@ -10,16 +10,17 @@
 using namespace std;
 
 int startMenu();
-int name();
-int instructions1();
+int playerguide();
 int credits();
+int name();
+
 
 int startMenu() {
 
     // Start menu dimensions //
-    WINDOW* menuWindow = newwin(36, 60, 0, 0); 
-    box(menuWindow, 0, 0);
-    wrefresh(menuWindow);
+    WINDOW* menu_Display = newwin(36, 60, 0, 0); 
+    box(menu_Display, 0, 0);
+    wrefresh(menu_Display);
 
     // Start menu options // 
     string menu0[5]= {"PLAY","PLAYER GUIDE","HIGH SCORE","CREDITS","QUIT"};
@@ -33,39 +34,39 @@ int startMenu() {
     while(TRUE) {
                                                
 
-        mvwprintw(menuWindow, 1,2,"* * * * * * * * * * * * * * * * * * * * * * * * * * * * *");
-        mvwprintw(menuWindow, 2,2,"*  *  *   *   *   *     *     *   *     *   *   *  *  * *");
-        mvwprintw(menuWindow, 3,2,"* *  *   *  *   *    *     *    *    *    *   *  *  *   *"); 
-        mvwprintw(menuWindow, 4,2,"*        _____   ____   _____ _  ________ _______       *");      
-        mvwprintw(menuWindow, 5,2,"*  *    |  __ \\ / __ \\ / ____| |/ /  ____|__   __|  *   *");    
-        mvwprintw(menuWindow, 6,2,"*   *   | |__) | |  | | |    | ' /| |__     | |  *   *  *");     
-        mvwprintw(menuWindow, 7,2,"*  *    |  _  /| |  | | |    |  < |  __|    | |  *   *  *");    
-        mvwprintw(menuWindow, 8,2,"*   *   | | \\ \\| |__| | |____| . \\| |____   | |  *   *  *");    
-        mvwprintw(menuWindow, 9,2,"*  *    |_|  \\_ \\____/\\___ __|_|\\_\\______|  |_|  *   *  *");    
-        mvwprintw(menuWindow, 10,2,"*  *  *   *   *   *     *     *   *     *   *   *  *    *");
-        mvwprintw(menuWindow, 11,2,"* *  *   *  *   *    *     *    *    *    *   *  *  *   *");
-        mvwprintw(menuWindow, 12,2,"*  *  *   *   *   *     *     *   *     *   *   *  *    *");
-        mvwprintw(menuWindow, 13,2,"*  _____            __  __ _____        _____ ______    *");
-        mvwprintw(menuWindow, 14,2,"* |  __ \\     /\\   |  \\/  |  __ \\ /\\   / ____|  ____|   *");
-        mvwprintw(menuWindow, 15,2,"* | |__) |   /  \\  | \\  / | |__) /  \\ | |  __| |__      *");
-        mvwprintw(menuWindow, 16,2,"* |  _  /   / /\\ \\ | |\\/| |  ___/ /\\ \\| | |_ |  __|     *"); 
-        mvwprintw(menuWindow, 17,2,"* | | \\ \\  / ____ \\| |  | | |  / ____ \\ |__| | |____    *");
-        mvwprintw(menuWindow, 18,2,"* |_|  \\_\\/_/    \\_\\_|  |_|_| /_/    \\_\\_____|______|   *");
-        mvwprintw(menuWindow, 19,2,"*  *  *   *   *   *     *     *   *     *   *   *  *  * *");
-        mvwprintw(menuWindow, 20,2,"* *  *   *  *   *    *     *    *    *    *   *  *  *  **"); 
-        mvwprintw(menuWindow, 21,2,"* * * * * * * * * * * * * * * * * * * * * * * * * * * * *");  
+        mvwprintw(menu_Display, 1,2,"* * * * * * * * * * * * * * * * * * * * * * * * * * * * *");
+        mvwprintw(menu_Display, 2,2,"*  *  *   *   *   *     *     *   *     *   *   *  *  * *");
+        mvwprintw(menu_Display, 3,2,"* *  *   *  *   *    *     *    *    *    *   *  *  *   *"); 
+        mvwprintw(menu_Display, 4,2,"*        _____   ____   _____ _  ________ _______       *");      
+        mvwprintw(menu_Display, 5,2,"*  *    |  __ \\ / __ \\ / ____| |/ /  ____|__   __|  *   *");    
+        mvwprintw(menu_Display, 6,2,"*   *   | |__) | |  | | |    | ' /| |__     | |  *   *  *");     
+        mvwprintw(menu_Display, 7,2,"*  *    |  _  /| |  | | |    |  < |  __|    | |  *   *  *");    
+        mvwprintw(menu_Display, 8,2,"*   *   | | \\ \\| |__| | |____| . \\| |____   | |  *   *  *");    
+        mvwprintw(menu_Display, 9,2,"*  *    |_|  \\_ \\____/\\___ __|_|\\_\\______|  |_|  *   *  *");    
+        mvwprintw(menu_Display, 10,2,"*  *  *   *   *   *     *     *   *     *   *   *  *    *");
+        mvwprintw(menu_Display, 11,2,"* *  *   *  *   *    *     *    *    *    *   *  *  *   *");
+        mvwprintw(menu_Display, 12,2,"*  *  *   *   *   *     *     *   *     *   *   *  *    *");
+        mvwprintw(menu_Display, 13,2,"*  _____            __  __ _____        _____ ______    *");
+        mvwprintw(menu_Display, 14,2,"* |  __ \\     /\\   |  \\/  |  __ \\ /\\   / ____|  ____|   *");
+        mvwprintw(menu_Display, 15,2,"* | |__) |   /  \\  | \\  / | |__) /  \\ | |  __| |__      *");
+        mvwprintw(menu_Display, 16,2,"* |  _  /   / /\\ \\ | |\\/| |  ___/ /\\ \\| | |_ |  __|     *"); 
+        mvwprintw(menu_Display, 17,2,"* | | \\ \\  / ____ \\| |  | | |  / ____ \\ |__| | |____    *");
+        mvwprintw(menu_Display, 18,2,"* |_|  \\_\\/_/    \\_\\_|  |_|_| /_/    \\_\\_____|______|   *");
+        mvwprintw(menu_Display, 19,2,"*  *  *   *   *   *     *     *   *     *   *   *  *  * *");
+        mvwprintw(menu_Display, 20,2,"* *  *   *  *   *    *     *    *    *    *   *  *  *  **"); 
+        mvwprintw(menu_Display, 21,2,"* * * * * * * * * * * * * * * * * * * * * * * * * * * * *");  
        
         // Menu Design // 
 
         for(int i=0;i<5;i++) {
-            wattron(menuWindow, A_BOLD);
+            wattron(menu_Display, A_BOLD);
 
             if(i==selected) {
-                wattron(menuWindow, A_REVERSE);
+                wattron(menu_Display, A_REVERSE);
             }
 
-            mvwprintw(menuWindow, 25+i+1, ((60-menu0[i].length())/2), menu0[i].c_str());//printing options
-            wattroff(menuWindow, A_REVERSE);//de-highlightinging the non selected options
+            mvwprintw(menu_Display, 25+i+1, ((60-menu0[i].length())/2), menu0[i].c_str());//printing options
+            wattroff(menu_Display, A_REVERSE);//de-highlightinging the non selected options
         }
         // User Input //
         choice = getch();
@@ -92,13 +93,13 @@ int startMenu() {
             break;
         }
         // End //
-        wrefresh(menuWindow);
+        wrefresh(menu_Display);
     }
     // Select //
     if(selected==0) {
         name();
     } else if(selected==1) {
-        instructions1();
+        playerguide();
     } else if(selected==2) {
         highscores();
     } else if(selected==3) {
@@ -108,109 +109,45 @@ int startMenu() {
     return 0;
 }
 
-int name() {
-
-    // Input Dimensions //
-    WINDOW* win = newwin(36, 60, 0, 0);
-
-    box(win, 0, 0);
-
-    // Play //
-    string playButton= "PLAY GAME";
-
-    // Design //
-    wattron(win, A_BOLD);
-
-    wattron(win, A_REVERSE);
-
-    // Plays //
-    mvwprintw(win, 19, ((60-playButton.length())/2), playButton.c_str());
-    
-    wattroff(win, A_REVERSE);
-
-
-    // Store player name //
-    string playerName;
-    // Input until 'Enter' //
-    int ch;
-    // declare and initialise variable to count and subsequently limit character count for name
-    int char_limit = 0;
-    // print a prompt to enter name
-    mvwprintw(win, 11, 21, "Enter your name:");
-    mvwprintw(win, 14, 23, "-----------");
-    while ((ch = wgetch(win)) != '\n') {
-        
-        if (ch == KEY_BACKSPACE || ch == 127) {
-            // Handle backspace key
-            if (!playerName.empty()) {
-                playerName.erase(playerName.size() - 1, 1);
-                mvwprintw(win, 13, 25, "       ");
-                mvwprintw(win, 13, 25, playerName.c_str());
-                //account for backspace in character count
-                char_limit--;
-            }
-        } else if (isprint(ch)) {
-            // Handle printable characters
-            //set character count limit to 7
-            if (char_limit!=7){
-                playerName += ch;
-                mvwprintw(win, 13, 25, playerName.c_str()); 
-                //account for increment in character count
-                char_limit++;
-            }
-            
-
-        }
-        //refresh window
-        wrefresh(win);
-        
-    }
-    //setting default name to "NONAME"
-    if(playerName.empty()) {
-        playerName = "NONAME";
-    }
-    game(playerName);
-    return 0;
-}
-
-int instructions1() {
-    //instruction window initialization (rows,cols,y,x)
-    WINDOW* instrucionWindow = newwin(26, 60, 0, 0); 
-    box(instrucionWindow, 0, 0);
-    wrefresh(instrucionWindow);
+int playerguide() {
+    // player guide window initialization (rows,cols,y,x) //
+    WINDOW* playerguidewindow = newwin(26, 60, 0, 0); 
+    box(playerguidewindow, 0, 0);
+    wrefresh(playerguidewindow);
     int choice;
     int selected3=1;
     for(;;) {   
-        //instructions on how to play the game
-        mvwprintw(instrucionWindow, 5, 13, "1.");
-        mvwprintw(instrucionWindow, 5, 15, "Use the left and right arrow keys to");
-        mvwprintw(instrucionWindow, 6, 15, "move the paddle and [A] key to shoot.");
-        mvwprintw(instrucionWindow, 8, 13, "2.");
-        mvwprintw(instrucionWindow, 8, 15, "The goal is to destroy enemies with");
-        mvwprintw(instrucionWindow, 9, 15, "your missiles.");
-        mvwprintw(instrucionWindow, 11, 13, "3.");
-        mvwprintw(instrucionWindow, 11, 15, "Earn points each time a missile");
-        mvwprintw(instrucionWindow, 12, 15, "hits an enemy.");
-        mvwprintw(instrucionWindow, 14, 13, "4.");
-        mvwprintw(instrucionWindow, 14, 15, "You have 5 Lives to accumulate");
-        mvwprintw(instrucionWindow, 15, 15, "as many points as possible.");
-        mvwprintw(instrucionWindow, 17, 13, "5.");
-        mvwprintw(instrucionWindow, 17, 15, "Your score is the total number of");
-        mvwprintw(instrucionWindow, 18, 15, "enemies defeated.");
-        mvwprintw(instrucionWindow, 20, 13, "6.");
-        mvwprintw(instrucionWindow, 20, 15, "And most importantly- ENJOY!!");
+        // player guide //
+        mvwprintw(playerguidewindow, 5, 13, "1.");
+        mvwprintw(playerguidewindow, 5, 15, "Use the left and right arrow keys to");
+        mvwprintw(playerguidewindow, 6, 15, "move the Rocket and [A] key to shoot.");
+        mvwprintw(playerguidewindow, 8, 13, "2.");
+        mvwprintw(playerguidewindow, 8, 15, "The goal is to destroy enemies with");
+        mvwprintw(playerguidewindow, 9, 15, "your missiles.");
+        mvwprintw(playerguidewindow, 11, 13, "3.");
+        mvwprintw(playerguidewindow, 11, 15, "Earn points each time a missile");
+        mvwprintw(playerguidewindow, 12, 15, "hits an enemy.");
+        mvwprintw(playerguidewindow, 14, 13, "4.");
+        mvwprintw(playerguidewindow, 14, 15, "You have 5 Lives to accumulate");
+        mvwprintw(playerguidewindow, 15, 15, "as many points as possible.");
+        mvwprintw(playerguidewindow, 17, 13, "5.");
+        mvwprintw(playerguidewindow, 17, 15, "Your score is the total number of");
+        mvwprintw(playerguidewindow, 18, 15, "enemies defeated.");
+        mvwprintw(playerguidewindow, 20, 13, "6.");
+        mvwprintw(playerguidewindow, 20, 15, "And most importantly- ENJOY!!");
         
+        // Text format // 
 
-        //making all options bold 
-        wattron(instrucionWindow, A_BOLD);
+        // making all options bold
+        wattron(playerguidewindow, A_BOLD);
         //highlighting "BACK TO MENU" option
-        wattron(instrucionWindow, A_REVERSE);
+        wattron(playerguidewindow, A_REVERSE);
         //printing "BACK TO MENU->" option
-        mvwprintw(instrucionWindow, 24, 45, "BACK TO MENU->");
+        mvwprintw(playerguidewindow, 24, 45, "BACK TO MENU->");
         //switching off the highlight function
-        wattroff(instrucionWindow, A_REVERSE);
+        wattroff(playerguidewindow, A_REVERSE);
         //refresh window
-        wrefresh(instrucionWindow);
+        wrefresh(playerguidewindow);
         //getting user input
         choice = getch();
         //checking whether user pressed enter
@@ -218,7 +155,7 @@ int instructions1() {
             break;
         }
     }
-    //going back to main menu
+    // going back to main menu 
     startMenu();
     return 0;
 }
@@ -279,16 +216,80 @@ int credits() {
     startMenu();
     return 0;
 }
-    
 
-int gameOver(string playerName, int playerScore) {
-    //gameover window initialization (rows,cols,y,x)
+int name() {
+
+    // Input Dimensions //
+    WINDOW* win = newwin(36, 60, 0, 0);
+
+    box(win, 0, 0);
+
+    // Play //
+
+    string play_option= "PLAY GAME";
+
+    // Design //
+
+    wattron(win, A_BOLD);
+
+    wattron(win, A_REVERSE);
+
+    // Plays //
+
+    mvwprintw(win, 19, ((60-play_option.length())/2), play_option.c_str());
+    
+    wattroff(win, A_REVERSE);
+
+
+    // Store player name //
+    string player_alias;
+    // Input until 'Enter' //
+    int ch;
+    int char_limit = 0;
+    
+    // Enter Name and edit //
+
+    mvwprintw(win, 11, 21, "Enter your name:");
+    mvwprintw(win, 14, 23, "-----------");
+    while ((ch = wgetch(win)) != '\n') {
+        
+        if (ch == KEY_BACKSPACE || ch == 127) {
+            if (!player_alias.empty()) {
+                player_alias.erase(player_alias.size() - 1, 1);
+                mvwprintw(win, 13, 25, "       ");
+                mvwprintw(win, 13, 25, player_alias.c_str());
+                char_limit--;
+            }
+        } else if (isprint(ch)) {
+            // char  limit = 7 //
+            if (char_limit!=7){
+                player_alias += ch;
+                mvwprintw(win, 13, 25, player_alias.c_str()); 
+                char_limit++;
+            }
+            
+
+        }
+        // Refresh //
+        wrefresh(win);
+        
+    }
+    // default name //
+    if(player_alias.empty()) {
+        player_alias = "*no_name*";
+    }
+    game(player_alias);
+    return 0;
+}   
+
+int gameEnd(string player_alias, int player_score) {
+    //gameEnd window initialization (rows,cols,y,x)
     WINDOW* endWindow = newwin(36, 60, 0, 0); 
     box(endWindow, 0, 0);
     wrefresh(endWindow);
 
     //sending player name and player score to store it in the file for high score screen
-    InputToFile(playerName, playerScore);
+    file_input(player_alias, player_score);
 
     //getting user input
     int choice;
