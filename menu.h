@@ -11,11 +11,8 @@ using namespace std;
 
 int startMenu();
 int name();
-int instructions1();
-int instructions2();
-int instructions3();
-int instructions4();
-int gameOver(string playerName, int playerScore);
+int playerguide();
+int gameEnd(string player_alias, int player_score);
 int highscore();
 int credits();
 
