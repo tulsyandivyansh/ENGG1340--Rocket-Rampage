@@ -9,6 +9,6 @@
 
 using namespace std;
 
-int game(string playerName);
+int game(string player_alias);
 
 #endif
