@@ -9,70 +9,94 @@
 
 using namespace std;
 
-// Structure to store player's name and score
-struct PlayerScores {
-    string PlayerName;
-    int PlayerScore;
+// stores player name and score //
+struct player_scores 
+{
+    string player_alias;
+    int player_score;
 };
 
-// Function to input the player name and score into a file
-void InputToFile(const string& playerName, int playerScore) {
-    ofstream scorefile("scores", ios_base::app);
-    if (scorefile.is_open()) {
-        scorefile << playerName << " " << playerScore << "\n";
+// input player name and score into score file //
+void file_input(string player_alias, int player_score) 
+{
+    player_scores player1;
+    player1.player_alias = player_alias;
+    player1.player_score = player_score;
+    ofstream score_file;
+
+    score_file.open("scores", ios_base::app);
+    if (score_file.is_open()) {
+        score_file << player1.player_alias << " " << player1.player_score << endl;
+        score_file.close();
     }
 }
 
-// Comparator for sorting scores in descending order
-bool ScoreComparison(const PlayerScores& s1, const PlayerScores& s2) {
-    return s1.PlayerScore > s2.PlayerScore;
+// check which score is higher //
+bool compare_scores(const player_scores& score1, const player_scores& score2) 
+{
+    return score1.player_score > score2.player_score;
 }
 
-// Function to sort the scores in descending order and return them as a vector
-vector<PlayerScores> SortFile() {
-    vector<PlayerScores> scores;
-    ifstream inputFile("scores");
-
-    if (inputFile.is_open()) {
-        PlayerScores tempScore;
-        while (inputFile >> tempScore.PlayerName >> tempScore.PlayerScore) {
-            scores.push_back(tempScore);
+// sort scores in order and return score
+vector<player_scores> sort_file() 
+{
+    vector<player_scores> scores;
+    // temp_score variable -> store the score in the inputfile in a variable //
+    player_scores temp_score; 
+    ifstream input_file("scores");
+    // opening scores file to retieve the values
+    if (input_file.is_open()) { 
+        while (input_file >> temp_score.player_alias >> temp_score.player_score) {
+            scores.push_back(temp_score);
         }
-    }
-
-    sort(scores.begin(), scores.end(), ScoreComparison);
+        input_file.close();
+        // using the sort() function and using the compare_scores as defined above to sort in descending order
+        sort(scores.begin(), scores.end(), compare_scores); 
+    } 
     return scores;
 }
 
-// Function to display and output the high scores using ncurses
-int highscores() {
-    WINDOW* hsWindow = newwin(26, 60, 0, 0);
-    box(hsWindow, 0, 0);
-    wrefresh(hsWindow);
+//function to display and output the top 5 highscores
+int highscores() 
+{
 
-    vector<PlayerScores> sortedScores = SortFile();
+    WINDOW* score_window = newwin(26,60,0,0);
+    // highscore window //
+    box(score_window, 0, 0);
+    wrefresh(score_window);
 
+    // Getting and sorting the scores in order using sort_file() function
+    vector<player_scores> sortedScores = sort_file();
+
+    //Printing the sorted scores in a window page using ncurses
     int row = 12;
     int choice;
-    wattron(hsWindow, A_BOLD);
-    mvwprintw(hsWindow, 3, 24, "HIGH SCORES");
-    mvwprintw(hsWindow, 10, 21, "NAME        SCORE");
-    wattroff(hsWindow, A_BOLD);
+        wattron(score_window, A_BOLD);
+        mvwprintw(score_window, 3, 24, "TOP  SCORES");
+        mvwprintw(score_window, 10, 21, "NAME        SCORE");
+        wattroff(score_window, A_BOLD);
 
-    for (const auto& score : sortedScores) {
-        mvwprintw(hsWindow, row, 21, score.PlayerName.c_str());
-        mvwprintw(hsWindow, row++, 33, to_string(score.PlayerScore).c_str());
-    }
-
-    wattron(hsWindow, A_REVERSE);
-    mvwprintw(hsWindow, 24, 24, "BACK TO MENU");
-    wattroff(hsWindow, A_REVERSE);
-    wrefresh(hsWindow);
-
-    do {
-        choice = getch();
-    } while (choice != 10); // 10 is the ASCII code for Enter
-
+        //adding only the top 5 names and scores
+        for (int i = 0; i < 5 && i < sortedScores.size(); i++) {
+            mvwprintw(score_window, row, 21, sortedScores[i].player_alias.c_str());
+            mvwprintw(score_window, row++, 33, to_string(sortedScores[i].player_score).c_str());
+        }
+        // highlighting "BACK TO MENU" option
+        wattron(score_window, A_REVERSE);
+        mvwprintw(score_window, 24, 24, "BACK TO MENU");
+        wattroff(score_window, A_REVERSE);
+        // switching off highlight option
+        wrefresh(score_window);
+        for(;;)
+        {
+            // getting user input
+            choice=getch();
+            // checking whether user pressed enter
+            if(choice==10)
+            {
+                break;
+            }
+        }
     startMenu();
     return 0;
 }
