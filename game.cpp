@@ -8,11 +8,12 @@
 using namespace std;
 
 //Define game window size
-int gameWindowSizeY = 30;
-int gameWindowSizeX = 60;
+int gameY = 30;
+int gameX = 60;
+//To count number of iterations to decide level
 int iteration = 0;
 //The Player class keeps track of the player's name, score, and remaining lives
-class Player {
+class Player{
 public:
     //Player name
     string name;
@@ -75,27 +76,27 @@ int level(int iteration){
         return 5;
     }
 }
-//The Paddle class represents the player's paddle and is responsible for moving it left and right based on user input
-class Paddle {
+//The Player Rocket class represents the player's rocket and is responsible for moving it left and right based on user input
+class PlayerRocket {
 public:
-    //Paddle art
+    //Rocket art
     string sprite;
-    Paddle(): sprite ( "  .\n"
+    PlayerRocket(): sprite ( "  .\n"
                        "  |\n"
                        " / \\\n"
                        " |0|\n"
                        "/   \\\n"
                        "U U U\n"), x(0), y(0) {};
-    //Paddle position
+    //Pposition
     int x, y;
 
-    //Initialize paddle
+    //Initialize PlayerRocket
     void init(int y, int x) {
         this -> y = y;
         this -> x = x;
     }
 
-    //Update paddle position according to player input
+    //Update PlayerRocket position according to player input
     void update(int input) {
         switch(input) {
             case KEY_LEFT:
@@ -104,7 +105,7 @@ public:
                 }
                 break;
             case KEY_RIGHT:
-                if(x < gameWindowSizeX - 7) {
+                if(x < gameX - 7) {
                     x += 2;
                 }
                 break;
@@ -119,7 +120,7 @@ public:
         this -> y = y;
     }
 
-    //Draw paddle in the game window
+    //Draw PlayerRocket in the game window
     void draw(WINDOW* window) {
         int lineIndex = 0;
         int startPos = 0;
@@ -131,7 +132,7 @@ public:
             ++lineIndex;
         }
     }
-    //Erase paddle from the game window
+    //Erase PlayerRocket from the game window
     void erase(WINDOW* window){
         for (int i = 0; i < 6; ++i){
             mvwprintw(window, y+i, x, "     ");
@@ -179,7 +180,7 @@ int game(string playerName) {
     wrefresh(infoWindow);
 
     //Create a window for the game
-    WINDOW* gameWindow = newwin(gameWindowSizeY, gameWindowSizeX, 3, 0);
+    WINDOW* gameWindow = newwin(gameY, gameX, 3, 0);
     //Draw a box around the game window
     box(gameWindow, 0, 0);
     //Refresh the game window initially
@@ -190,19 +191,19 @@ int game(string playerName) {
     //Draw a box around the command window
     box(commandsWindow, 0, 0);
     //Print instructions
-    mvwprintw(commandsWindow, 1, 1, "[<][>]:Move Paddle        [A]: Shoot            [Q]:Quit");
+    mvwprintw(commandsWindow, 1, 1, "[<][>]:Move Rocket        [A]: Shoot            [Q]:Quit");
     //Refresh command window initially
     wrefresh(commandsWindow);
 
-    //Initialize the player, level, ball and paddle
+    //Initialize the player, level, ball and Rocket
     Player player;
     player.init(playerName, 0, 5);
 
 
-    Paddle paddle;
-    paddle.init(22, 30);
+    PlayerRocket playerRocket;
+    playerRocket.init(22, 30);
     //Draw all the components and refresh the game window initially
-    paddle.draw(gameWindow);
+    playerRocket.draw(gameWindow);
     wrefresh(gameWindow);
     vector<Ball> balls;
     vector<Enemy> enemy;
@@ -372,7 +373,7 @@ int game(string playerName) {
 
         //Initialize new ball on losing a life
         if(input == 'a' || input == 'A') {
-            balls.push_back(Ball((paddle.y), (paddle.x)+2, -1.));
+            balls.push_back(Ball((playerRocket.y), (playerRocket.x)+2, -1.));
 
         }
         for(int i = balls.size()-1; i >= 0; i--){
@@ -391,11 +392,11 @@ int game(string playerName) {
              wrefresh(gameWindow);
         }
 
-//Handle collision of player with the enemy rockets
+    //Handle collision of player with the enemy rockets
         for(int j = enemy.size()-1; j >= 0; j--){
-            string rocket=paddle.sprite;
-            int rockety=paddle.y ;
-            int rocketx=paddle.x;
+            string rocket=playerRocket.sprite;
+            int rockety=playerRocket.y ;
+            int rocketx=playerRocket.x;
             int lineIndex = 0;
             int startPos = 0;
             int endPos = rocket.find('\n');
@@ -444,10 +445,10 @@ int game(string playerName) {
             }
         }
         
-        //Update paddle position
-        paddle.erase(gameWindow);
-        paddle.update(input);
-        paddle.draw(gameWindow);
+        //Update PlayerRocket position
+        playerRocket.erase(gameWindow);
+        playerRocket.update(input);
+        playerRocket.draw(gameWindow);
 
         //Update player info
         string playerInfo = "Score:" + to_string(player.score) + "           Level:" + to_string(level(iteration)) + "          " + "Lives:" + to_string(player.lives);
