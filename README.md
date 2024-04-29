@@ -22,7 +22,7 @@ https://github.com/tulsyandivyansh/ENGG1340--Rocket-Shooter/assets/62593950/7617
 * The player has 5 Lives to accumulate as many points as possible.
 * The player will loose a life if either enemy touches the rocket or goes beyond it. 
 * the player gets 10 points for each enemy destroyed.
-* As time goes on, the level of the game increases. If the player reaches level 6, it considers as impossible stage, and game continues until the player loses all life. =
+* As time goes on, the level of the game increases. If the player reaches level 6, it considers as impossible stage, and game continues until the player loses all life.
 
 ### Project Requirements
 
