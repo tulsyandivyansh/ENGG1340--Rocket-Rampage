@@ -20,9 +20,9 @@ https://github.com/tulsyandivyansh/ENGG1340--Rocket-Shooter/assets/62593950/7617
 * The goal is to destroy enemies with your missiles. 
 * The player earns points each time a missile hits an enemy.
 * The player has 5 Lives to accumulate as many points as possible.
-* The player will loose a life if either enemy touches the rocket or goes beyond it. 
-* the player gets 10 points for each enemy destroyed.
-* As time goes on, the level of the game increases. If the player reaches level 6, it considers as impossible stage, and game continues until the player loses all life.
+* The player will lose a life if either enemy touches the rocket or goes beyond it. 
+* The player gets 10 points for each enemy destroyed.
+* As time goes on, the level of the game increases. If the player reaches level 6, it is considered as impossible stage, and the game continues until the player loses all life.
 
 ### Project Requirements
 
