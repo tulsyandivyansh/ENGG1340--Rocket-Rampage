@@ -21,15 +21,16 @@ https://github.com/tulsyandivyansh/ENGG1340--Rocket-Shooter/assets/62593950/7617
 * The player earns points each time a missile hits an enemy.
 * The player has 5 Lives to accumulate as many points as possible.
 * The player will loose a life if either enemy touches the rocket or goes beyond it. 
-* The score is the total number of enemies defeated.
+* the player gets 10 points for each enemy destroyed.
+* As time goes on, the level of the game increases. If the player reaches level 6, it considers as impossible stage, and game continues until the player loses all life. =
 
 ### Project Requirements
 
 | Coding Requirements                      | Feature                                                                                                    |
 | ---------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
 | Generation of Random Events.              | We randomised the generation of the enemy ships at the top of the screen, when the game starts.             |   
-| Data Structures for Storing Game Status  | We use different classes to store the status of in-game objects like the missles, the paddle, and the level. The player data is also stored in a class at any given point.                                                                                               |
-| Dynamic Memory Management (DMM)          | We utilize dynamic memory allocation to create and remove instances of the ball in each round of gameplay. |
+| Data Structures for Storing Game Status  | We use different classes to store the status of in-game objects like the missles, the rocket, and the level. The player data is also stored in a class at any given point.                                                                                               |
+| Dynamic Memory Management (DMM)          | We utilize dynamic memory allocation to create and change instances of the gameWindow, commandsWindow, infoWindows and in each round of gameplay. |
 | File Input/Output                        | We use file handling to maintain a record of the top scores in the leaderboard.                          |
 | Multiple Files of Program Code           | We use separate files for handling different parts of the game - the gameplay, the menu, and the highscores functionality, which are joined together by main.cpp.                                                                                                   |
 
