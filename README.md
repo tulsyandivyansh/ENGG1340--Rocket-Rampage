@@ -39,10 +39,10 @@ https://github.com/tulsyandivyansh/ENGG1340--Rocket-Shooter/assets/62593950/7617
 `ncurses` - The ncurses library was used to draw console graphics smoothly instead of having to redraw the whole window every time the game updates.
 
 ### Instructions for Building
-* Clone the project repository: `git clone https://github.com/ArcticKangaroo/ENGG1340-Breakout.git`
-* Navigate to the project directory: `cd ENGG1340-Breakout/`
-* Make the game: `make breakout`
-* Execute the game: `./breakout`
+* Clone the project repository: `git clone https://github.com/tulsyandivyansh/ENGG1340--Rocket-Rampage.git`
+* Navigate to the project directory: `cd ENGG1340--Rocket-Rampage/`
+* Make the game: `make rocket`
+* Execute the game: `./rocket`
 * To remove the game, run `make clean`
 
 ### Project Members
