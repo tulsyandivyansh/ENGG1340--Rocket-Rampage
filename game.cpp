@@ -7,25 +7,25 @@
 #include <vector>
 using namespace std;
 
-//Define game window size
+//Defining the window size for the game
 int gameY = 30;
 int gameX = 60;
 //To count number of iterations to decide level
 int iteration = 0;
-//The Player class keeps track of the player's name, score, and remaining lives
+//The Player class keeps track of the player's name, Points, and remaining lives
 class Player{
 public:
     //Player name
     string name;
-    //Player score
-    int score;
     //Player lives
     int lives;
+    //Player Points
+    int Points;
 
     //Initialize player
-    void init(string name, int score, int lives) {
+    void init(string name, int Points, int lives) {
         this -> name = name;
-        this -> score = score;
+        this -> Points = Points;
         this -> lives = lives;
     }
 };
@@ -437,7 +437,7 @@ int game(string playerName) {
                         enemy[j].erase(gameWindow);
                         wrefresh(gameWindow);
                         enemy.erase(enemy.begin() + j);
-                        player.score+=10;
+                        player.Points+=10;
                         
                     }
                 }
@@ -451,7 +451,7 @@ int game(string playerName) {
         playerRocket.draw(gameWindow);
 
         //Update player info
-        string playerInfo = "Score:" + to_string(player.score) + "           Level:" + to_string(level(iteration)) + "          " + "Lives:" + to_string(player.lives);
+        string playerInfo = "Points:" + to_string(player.Points) + "           Level:" + to_string(level(iteration)) + "          " + "Lives:" + to_string(player.lives);
         mvwprintw(infoWindow, 1, 1, playerInfo.c_str());                                                 
         wrefresh(infoWindow);
 
@@ -466,7 +466,7 @@ int game(string playerName) {
     }
     iteration = 0;
 
-    if(died) gameOver(player.name, player.score);
+    if(died) gameOver(player.name, player.Points);
     else startMenu();
     return 0;
 }
