@@ -32,6 +32,12 @@ void file_input(string player_alias, int player_score)
     }
 }
 
+// check which score is higher //
+bool compare_scores(const player_scores& score1, const player_scores& score2) 
+{
+    return score1.player_score > score2.player_score;
+}
+
 // sort scores in order and return score
 vector<player_scores> sort_file() 
 {
@@ -49,12 +55,6 @@ vector<player_scores> sort_file()
         sort(scores.begin(), scores.end(), compare_scores); 
     } 
     return scores;
-}
-
-// check which score is higher //
-bool compare_scores(const player_scores& score1, const player_scores& score2) 
-{
-    return score1.player_score > score2.player_score;
 }
 
 //function to display and output the top 5 highscores
