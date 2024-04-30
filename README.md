@@ -35,26 +35,13 @@ https://github.com/tulsyandivyansh/ENGG1340--Rocket-Shooter/assets/62593950/7617
      To save scores on the leaderboard, a save file with player name and score is used.
 #### Program codes in multiple files:
     Multiple files are used.
+                                                                                    |
+### Non-standard C/C++ libraries
+`ncurses` - Used to draw console graphics smoothly / Window Refresh
 
-
-
-### Project Requirements
-
-| Coding Requirements                      | Feature                                                                                                    |
-| ---------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
-| Generation of Random Events.              | We randomised the generation of the enemy ships at the top of the screen, when the game starts.             |   
-| Data Structures for Storing Game Status  | We use different classes to store the status of in-game objects like the missles, the rocket, and the level. The player data is also stored in a class at any given point.                                                                                               |
-| Dynamic Memory Management (DMM)          | We utilize dynamic memory allocation to create and change instances of the gameWindow, commandsWindow, infoWindows and in each round of gameplay. |
-| File Input/Output                        | We use file handling to maintain a record of the top scores in the leaderboard.                          |
-| Multiple Files of Program Code           | We use separate files for handling different parts of the game - the gameplay, the menu, and the highscores functionality, which are joined together by main.cpp.                                                                                                   |
-
-
-### External Libraries
-`ncurses` - The ncurses library was used to draw console graphics smoothly instead of having to redraw the whole window every time the game updates.
-
-### Instructions for Building
-* Clone the project repository: `git clone https://github.com/tulsyandivyansh/ENGG1340--Rocket-Rampage.git`
-* Navigate to the project directory: `cd ENGG1340--Rocket-Rampage/`
+### Compilation and execution instructions
+* Clone the repository: `git clone https://github.com/tulsyandivyansh/ENGG1340--Rocket-Rampage.git`
+* Ensure to be in the correct directory: `cd ENGG1340--Rocket-Rampage/`
 * Make the game: `make rocket`
 * Execute the game: `./rocket`
-* To remove the game, run `make clean`
+* To remove the game:`make clean`
