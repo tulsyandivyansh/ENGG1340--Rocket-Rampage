@@ -1,5 +1,5 @@
-#ifndef MENU_H
-#define MENU_H
+#ifndef DISPLAY_H
+#define DISPLAY_H
 
 #include <ncurses.h>
 #include <unistd.h>
