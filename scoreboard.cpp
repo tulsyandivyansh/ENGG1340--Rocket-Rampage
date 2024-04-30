@@ -5,7 +5,7 @@
 #include <vector>
 #include <ncurses.h>
 #include <cstring>
-#include "menu.h"
+#include "display.h"
 
 using namespace std;
 
