@@ -1,13 +1,4 @@
 # ENGG1340--Rocket-Rampage
-<br/>
-<div align="center">
-  <h3 align="center">ENGG1340 Rocket Rampage</h3>
-  <p align="center"><i> A rocket-missle game made for the Linux terminal</i></p>
-  <img width="480" height="480" src="https://github.com/tulsyandivyansh/ENGG1340--Rocket-Shooter/assets/62593950/e8949b24-ae46-40fb-ac0a-2ba1d56c3304" alt="Screenshot">
-</div>
-
-<br/>
-<hr/>
 
 ### About
 A rocket-missle game implemented in C++ and ncurses for the Linux command line, for the final project of HKU's ENGG1340.
