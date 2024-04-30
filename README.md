@@ -1,11 +1,15 @@
 # ENGG1340-RocketRampage
 
-### About
+### Identification of Team Members
+This project was made by:
+* Meeth Jaswani
+* Jaehue Chun
+* Divyansh Tulsyan  
+* Shreyansh Mishra  
+* Cheung HonLung
+
+### Game Description and Rules
 A rocket-missle game implemented in C++ and ncurses for the Linux command line, for the final project of HKU's ENGG1340.
-
-### Gameplay
-https://github.com/tulsyandivyansh/ENGG1340--Rocket-Shooter/assets/62593950/761700d7-05b2-4b3e-9005-e5d6a6cfbd49
-
 #### Instructions
 * Use the left and right arrow keys to move the rocket and [A] key to shoot.  
 * The goal is to destroy enemies with your missiles. 
@@ -14,6 +18,9 @@ https://github.com/tulsyandivyansh/ENGG1340--Rocket-Shooter/assets/62593950/7617
 * The player will lose a life if either enemy touches the rocket or goes beyond it. 
 * The player gets 10 points for each enemy destroyed.
 * As time goes on, the level of the game increases. If the player reaches level 6, it is considered as impossible stage, and the game continues until the player loses all life.
+
+### Gameplay
+https://github.com/tulsyandivyansh/ENGG1340--Rocket-Shooter/assets/62593950/761700d7-05b2-4b3e-9005-e5d6a6cfbd49
 
 ### Project Requirements
 
@@ -35,11 +42,3 @@ https://github.com/tulsyandivyansh/ENGG1340--Rocket-Shooter/assets/62593950/7617
 * Make the game: `make rocket`
 * Execute the game: `./rocket`
 * To remove the game, run `make clean`
-
-### Project Members
-This project was made by:
-* Meeth Jaswani
-* Jaehue Chun
-* Divyansh Tulsyan  
-* Shreyansh Mishra  
-* Cheung HonLung
