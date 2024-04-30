@@ -1,7 +1,7 @@
 CC = g++
 CFLAGS = -pedantic-errors -std=c++11 -g
 LIBS = -lncurses
-SRCS = main.cpp menu.cpp game.cpp highscore.cpp
+SRCS = main.cpp display.cpp rocket.cpp scoreboard.cpp
 OBJS = $(SRCS:.cpp=.o)
 FILES = scores
 TARGET = rocket
