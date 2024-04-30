@@ -1,5 +1,5 @@
-#ifndef HIGHSCORE_H
-#define HIGHSCORE_H
+#ifndef SCOREBOARD_H
+#define SCOREBOARD_H
 
 #include <vector>
 #include <string>
