@@ -1,6 +1,6 @@
 #include <ncurses.h>
 
-#include "menu.h"
+#include "display.h"
 
 int main() {
 
