@@ -23,7 +23,7 @@ int startMenu() {
     wrefresh(menu_Display);
 
     // Start menu options // 
-    string menu0[5]= {"PLAY","PLAYER GUIDE","HIGH SCORE","CREDITS","QUIT"};
+    string menu0[5]= {"PLAY","PLAYER GUIDE","SCOREBOARD","CREDITS","QUIT"};
 
     // User Input //
     int choice;
