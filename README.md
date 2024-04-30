@@ -22,6 +22,10 @@ A rocket-missle game implemented in C++ and ncurses for the Linux command line, 
 ### Gameplay
 https://github.com/tulsyandivyansh/ENGG1340--Rocket-Shooter/assets/62593950/761700d7-05b2-4b3e-9005-e5d6a6cfbd49
 
+Or access through Youtube->
+https://youtu.be/pfLsEaRmyLQ .
+
+
 ### Project Requirements
 #### Generation of random game sets or events: 
     We randomised the generation of the enemy ships at the top of the screen, when the game starts.
