@@ -463,10 +463,10 @@ int game(string playerName) {
         //Sleep for 100000 microseconds before updating
         usleep(100000);
         iteration++;
-    }
+    }./PlayerRocket
     iteration = 0;
 
-    if(died) gameOver(player.name, player.Points);
+    if(died) gameEnd(player.name, player.Points);
     else startMenu();
     return 0;
 }
