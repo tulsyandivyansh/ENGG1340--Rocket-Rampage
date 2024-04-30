@@ -3,9 +3,9 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-#include "menu.h"
-#include "game.h"
-#include "highscore.h"
+#include "display.h"
+#include "rocket.h"
+#include "scoreboard.h"
 
 using namespace std;
 
