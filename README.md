@@ -1,4 +1,4 @@
-# ENGG1340--Rocket-Rampage
+# ENGG1340-RocketRampage
 
 ### About
 A rocket-missle game implemented in C++ and ncurses for the Linux command line, for the final project of HKU's ENGG1340.
