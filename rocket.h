@@ -1,5 +1,5 @@
-#ifndef GAME_H
-#define GAME_H
+#ifndef ROCKET_H
+#define ROCKET_H
 
 #include <unistd.h>
 #include <ncurses.h>
