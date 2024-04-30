@@ -4,31 +4,26 @@
 
 int main() {
 
-    //Initialize ncurses
+    // curses //
     initscr();
     
-    //Don't buffer input 
+    // curses settings //
     cbreak(); 
 
-    //Enable input from special keys
     keypad(stdscr, TRUE);
 
-    //Don't echo input
     noecho(); 
 
-    //Don't display cursor
     curs_set(0); 
 
-    //Update screen initially (prevents getch() from clearing the screen)
     refresh(); 
 
-    //Set getch() to non-blocking mode
     nodelay(stdscr, TRUE); 
 
-    //Start the game from the main menu
+    // start game //
     startMenu();
 
-    //Clear terminal settings
+    // clear terminal settings //
     endwin();
 
     return 0;
