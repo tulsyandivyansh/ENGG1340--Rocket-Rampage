@@ -1,10 +1,10 @@
-#include <vector>
+#include <algorithm>
 #include <fstream>
 #include <iostream>
+#include <string>
+#include <vector>
 #include <ncurses.h>
 #include <cstring>
-#include <algorithm>
-#include <string>
 #include "display.h"
 
 using namespace std;
@@ -12,32 +12,27 @@ using namespace std;
 // stores player name and score //
 struct player_scores 
 {
-
-    int player_score;
     string player_alias;
+    int player_score;
 };
-
 // input player name and score into score file //
 void file_input(string player_alias, int player_score) 
 {
     player_scores player1;
-    player1.player_score = player_score;
     player1.player_alias = player_alias;
+    player1.player_score = player_score;
     ofstream score_file;
-
     score_file.open("scores", ios_base::app);
     if (score_file.is_open()) {
-        score_file << player1.player_score << " " << player1.player_alias << endl;
+        score_file << player1.player_alias << " " << player1.player_score << endl;
         score_file.close();
     }
 }
-
 // check which score is higher //
 bool compare_scores(const player_scores& score1, const player_scores& score2) 
 {
     return score1.player_score > score2.player_score;
 }
-
 // sort scores in order and return score
 vector<player_scores> sort_file() 
 {
@@ -47,7 +42,7 @@ vector<player_scores> sort_file()
     ifstream input_file("scores");
     // opening scores file to retieve the values
     if (input_file.is_open()) { 
-        while (input_file >> temp_score.player_alias >> temp_score.player_score) {
+        for (;input_file >> temp_score.player_alias >> temp_score.player_score;) {
             scores.push_back(temp_score);
         }
         input_file.close();
@@ -56,28 +51,24 @@ vector<player_scores> sort_file()
     } 
     return scores;
 }
-
 //function to display and output the top 5 highscores
 int highscores() 
 {
-
     WINDOW* score_window = newwin(26,60,0,0);
     // highscore window //
     box(score_window, 0, 0);
     wrefresh(score_window);
-
     // Getting and sorting the scores in order using sort_file() function
     vector<player_scores> sortedScores = sort_file();
-
     //Printing the sorted scores in a window page using ncurses
     int row = 12;
     int choice;
         wattron(score_window, A_BOLD);
-        mvwprintw(score_window, 10, 21, "SCORE        NAME");
         mvwprintw(score_window, 3, 24, "TOP  SCORES");
+        mvwprintw(score_window, 10, 21, "NAME        SCORE");
         wattroff(score_window, A_BOLD);
-        int i=0;
         //adding only the top 5 names and scores
+        int i=0;
         while (i < 5 && i < sortedScores.size()) {
             mvwprintw(score_window, row, 21, sortedScores[i].player_alias.c_str());
             mvwprintw(score_window, row++, 33, to_string(sortedScores[i].player_score).c_str());
