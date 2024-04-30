@@ -11,6 +11,7 @@ int gameY = 30;
 int gameX = 60;
 // level count system //
 int iteration = 0;
+
 // player name lives and points //
 class Player{
 public:
@@ -28,17 +29,22 @@ public:
         this -> lives = lives;
     }
 };
+
+// Enemy class to initialize enemy rockets and move rockets//
 class Enemy {
 public:
+    // Enemy ships
     string ship = ("|0|\n"
-                     "\\0/\n");
+                   "\\0/\n");
     int x, y;
 
+    // Initialize position of Enemy rockets
     Enemy(int y, int x) {
         this->y = y;
         this->x = x;
     }
-
+    
+    // Display Enemy Rocket in the game window //
     void draw(WINDOW* gameWindow) {
         int lineIndex = 0;
         int startPos = 0;
@@ -51,6 +57,7 @@ public:
         }
     }
 
+    // Erase Enemy Rocket in the game window //
     void erase(WINDOW* window){
         for (int i = 0; i < 3; ++i){
             mvwprintw(window, y+i+1, x, "    ");
@@ -58,23 +65,31 @@ public:
     }
 
 };
+
+// Function to count the number of iterations to control the speed of levels
 int level(int iteration){
+    // Speed for level 1
     if (iteration < 600){
         return 1;
     }
+    // Speed for level 2
     else if (iteration < 1200){
         return 2;
     }
+    // Speed for level 3
     else if (iteration < 1800){
         return 3;
     }
+    // Speed for level 4
     else if (iteration < 2400){
         return 4;
     }
+    // Speed for level 5
     else {
         return 5;
     }
 }
+
 // Rocket class -> user input changes rocket direction left and right //
 class PlayerRocket {
 public:
@@ -165,7 +180,7 @@ public:
     }
 };
 
-// main game func //
+// main game function //
 int game(string playerName) {
 
     // random seed //
@@ -199,7 +214,9 @@ int game(string playerName) {
     // display all the components and refresh the game window //
     playerRocket.draw(gameWindow);
     wrefresh(gameWindow);
+    // vector used to store bullets
     vector<bullet> bullets;
+    // vector used to store enemy rockets
     vector<Enemy> enemy;
     // life and player death flags // 
     bool restart = false;
@@ -223,26 +240,35 @@ int game(string playerName) {
             died = true;
             break;
         }
-        
+
+        // switch case to refer to the level of difficulty as the game progresses
         switch(level(iteration)){
             case 1:
+            
+            // if statement to maintain gaps between production of enemies
             if(iteration % 20 == 0){
+                //randomized allocation of position of enemy rocket
                 enemy.push_back(Enemy(0, rand()%50 +2));    
             }
 
             wrefresh(gameWindow);
 
+            //loop to depict the animation of enemy rockets dropping
             for(int i = enemy.size()-1; i >= 0; i--){
 
+                // To stop collison from the walls
                 if(enemy[i].y ==25)
                 {
+                    // delete enemy rocket from the vector if it reaches the bottom 
                     enemy[i].erase(gameWindow);
                     wrefresh(gameWindow);
                     player.lives -= 1;
                     enemy.erase(enemy.begin() + i);
                     continue;
                 }
+                // control speed of dropping
                 if((iteration+1)%7 == 0){
+                    // update enemy position
                     enemy[i].erase(gameWindow);
                     wrefresh(gameWindow);
                     (enemy[i].y)+=1;
@@ -253,23 +279,31 @@ int game(string playerName) {
             break;
 
             case 2:
+
+            // if statement to maintain gaps between production of enemies
             if(iteration % 14 == 0){
+                //randomized allocation of position of enemy rocket
                 enemy.push_back(Enemy(0, rand()%50 +2));    
             }
 
             wrefresh(gameWindow);
 
+            //loop to depict the animation of enemy rockets droping
             for(int i = enemy.size()-1; i >= 0; i--){
 
+                // To stop collison from the walls
                 if(enemy[i].y ==25)
                 {
+                    // delete enemy rocket from the vector if it reaches the bottom 
                     enemy[i].erase(gameWindow);
                     wrefresh(gameWindow);
                     player.lives -= 1;
                     enemy.erase(enemy.begin() + i);
                     continue;
                 }
+                 // control speed of dropping
                 if((iteration+1)%5 == 0){
+                    // update enemy position
                     enemy[i].erase(gameWindow);
                     wrefresh(gameWindow);
                     (enemy[i].y)+=1;
@@ -280,23 +314,31 @@ int game(string playerName) {
             break;
             
             case 3:
+
+            // if statement to maintain gaps between production of enemies
             if(iteration % 12 == 0){
+                //randomized allocation of position of enemy rocket
                 enemy.push_back(Enemy(0, rand()%50 +2));    
             }
 
             wrefresh(gameWindow);
 
+            //loop to depict the animation of enemy rockets droping
             for(int i = enemy.size()-1; i >= 0; i--){
 
+                // To stop collison from the walls
                 if(enemy[i].y ==25)
                 {
+                    // delete enemy rocket from the vector if it reaches the bottom 
                     enemy[i].erase(gameWindow);
                     wrefresh(gameWindow);
                     player.lives -= 1;
                     enemy.erase(enemy.begin() + i);
                     continue;
                 }
+                 // control speed of dropping
                 if((iteration+1)%4 == 0){
+                    // update enemy position
                     enemy[i].erase(gameWindow);
                     wrefresh(gameWindow);
                     (enemy[i].y)+=1;
@@ -307,23 +349,31 @@ int game(string playerName) {
             break;
 
             case 4:
+
+            // if statement to maintain gaps between production of enemies
             if(iteration % 10 == 0){
+                //randomized allocation of position of enemy rocket
                 enemy.push_back(Enemy(0, rand()%50 +2));    
             }
 
             wrefresh(gameWindow);
 
+            //loop to depict the animation of enemy rockets droping
             for(int i = enemy.size()-1; i >= 0; i--){
-
+                
+                // To stop collison from the walls
                 if(enemy[i].y ==25)
                 {
+                    // delete enemy rocket from the vector if it reaches the bottom 
                     enemy[i].erase(gameWindow);
                     wrefresh(gameWindow);
                     player.lives -= 1;
                     enemy.erase(enemy.begin() + i);
                     continue;
                 }
+                 // control speed of dropping
                 if((iteration+1)%4 == 0){
+                    // update enemy position
                     enemy[i].erase(gameWindow);
                     wrefresh(gameWindow);
                     (enemy[i].y)+=1;
@@ -334,23 +384,31 @@ int game(string playerName) {
             break;
         
             case 5:
+
+            // if statement to maintain gaps between production of enemies
             if(iteration % 8 == 0){
+                //randomized allocation of position of enemy rocket
                 enemy.push_back(Enemy(0, rand()%50 +2));    
             }
 
             wrefresh(gameWindow);
-
+            
+            //loop to depict the animation of enemy rockets droping
             for(int i = enemy.size()-1; i >= 0; i--){
 
+                // To stop collison from the walls
                 if(enemy[i].y ==25)
                 {
+                    // delete enemy rocket from the vector if it reaches the bottom 
                     enemy[i].erase(gameWindow);
                     wrefresh(gameWindow);
                     player.lives -= 1;
                     enemy.erase(enemy.begin() + i);
                     continue;
                 }
+                 // control speed of dropping
                 if((iteration+1)%3 == 0){
+                    // update enemy position
                     enemy[i].erase(gameWindow);
                     wrefresh(gameWindow);
                     (enemy[i].y)+=1;
@@ -365,11 +423,13 @@ int game(string playerName) {
 
 
 
-        // Initialize new bullet on losing a life
+        // Initialize new bullet on pressing 'a' on keyboard
         if(input == 'a' || input == 'A') {
             bullets.push_back(bullet((playerRocket.y), (playerRocket.x)+2, -1.));
 
         }
+
+        // Handle collision of bullets with walls
         for(int i = bullets.size()-1; i >= 0; i--){
              if ((bullets[i].y == 2) || (bullets[i].x == 1) || (bullets[i].x == 58)){
                 bullets[i].erase(gameWindow);
@@ -380,13 +440,13 @@ int game(string playerName) {
              bullets[i].erase(gameWindow);
              wrefresh(gameWindow);
 
-        // Update bullet position
+            // Update bullet position
              bullets[i].y += bullets[i].dy;
              bullets[i].draw(gameWindow);
              wrefresh(gameWindow);
         }
 
-    // Handle collision of player with the enemy rockets
+    // Handle collision of player rocket with the enemy rockets
         for(int j = enemy.size()-1; j >= 0; j--){
             string rocket=playerRocket.ship;
             int rockety=playerRocket.y ;
@@ -419,7 +479,7 @@ int game(string playerName) {
         
 
 
-        // Handle collision with the enemy rockets
+        // Handle collision of bullets with the enemy rockets
         for(int i = bullets.size()-1; i >= 0; i--){
             for(int j = enemy.size()-1; j >= 0; j--){
                 if(bullets[i].x == enemy[j].x || bullets[i].x == (enemy[j].x )+1 || bullets[i].x == (enemy[j].x )+2)
@@ -459,7 +519,7 @@ int game(string playerName) {
     }
     iteration = 0;
 
-    if(died) gameEnd(player.name, player.Points);
-    else startMenu();
+    // To end game if players and go back to menu
+    (died)? gameEnd(player.name, player.Points):startMenu();
     return 0;
 }
