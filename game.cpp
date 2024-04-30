@@ -12,7 +12,7 @@ int gameY = 30;
 int gameX = 60;
 //To count number of iterations to decide level
 int iteration = 0;
-//The Player class keeps track of the player's name, Points, and remaining lives
+//The Player class keeps track of the player's name, points, and remaining lives
 class Player{
 public:
     //Player name
