@@ -1,18 +1,17 @@
-#include <unistd.h>
-#include <ncurses.h>
 #include <string>
+#include <ncurses.h>
 #include <cstdlib>
 #include <ctime>
 #include "menu.h"
 #include <vector>
 using namespace std;
 
-//Defining the window size for the game
+// game window size
 int gameY = 30;
 int gameX = 60;
-//To count number of iterations to decide level
+// level count system //
 int iteration = 0;
-//The Player class keeps track of the player's name, points, and remaining lives
+// player name lives and points //
 class Player{
 public:
     //Player name
@@ -31,7 +30,7 @@ public:
 };
 class Enemy {
 public:
-    string sprite = ("|0|\n"
+    string ship = ("|0|\n"
                      "\\0/\n");
     int x, y;
 
@@ -43,11 +42,11 @@ public:
     void draw(WINDOW* gameWindow) {
         int lineIndex = 0;
         int startPos = 0;
-        int endPos = int(sprite.find('\n'));
+        int endPos = int(ship.find('\n'));
         while (endPos != string::npos) {
-            mvwprintw(gameWindow, y + lineIndex + 1, x,sprite.substr(startPos, endPos - startPos).c_str());
+            mvwprintw(gameWindow, y + lineIndex + 1, x,ship.substr(startPos, endPos - startPos).c_str());
             startPos = endPos + 1;
-            endPos =int( sprite.find('\n', startPos));
+            endPos =int( ship.find('\n', startPos));
             ++lineIndex;
         }
     }
@@ -76,27 +75,27 @@ int level(int iteration){
         return 5;
     }
 }
-//The Player Rocket class represents the player's rocket and is responsible for moving it left and right based on user input
+// Rocket class -> user input changes rocket direction left and right //
 class PlayerRocket {
 public:
-    //Rocket art
-    string sprite;
-    PlayerRocket(): sprite ( "  .\n"
+    // Rocket design //
+    string ship;
+    PlayerRocket(): ship ( "  .\n"
                        "  |\n"
                        " / \\\n"
                        " |0|\n"
                        "/   \\\n"
                        "U U U\n"), x(0), y(0) {};
-    //Pposition
+    // Rocket pos //
     int x, y;
 
-    //Initialize PlayerRocket
+    // Initialize PlayerRocket // 
     void init(int y, int x) {
         this -> y = y;
         this -> x = x;
     }
 
-    //Update PlayerRocket position according to player input
+    // Update PlayerRocket position based on input //
     void update(int input) {
         switch(input) {
             case KEY_LEFT:
@@ -120,19 +119,19 @@ public:
         this -> y = y;
     }
 
-    //Draw PlayerRocket in the game window
+    // Display PlayerRocket in the game window //
     void draw(WINDOW* window) {
         int lineIndex = 0;
         int startPos = 0;
-        int endPos = sprite.find('\n');
+        int endPos = ship.find('\n');
         while (endPos != string::npos) {
-            mvwprintw(window, y + lineIndex, x, sprite.substr(startPos, endPos - startPos).c_str());
+            mvwprintw(window, y + lineIndex, x, ship.substr(startPos, endPos - startPos).c_str());
             startPos = endPos + 1;
-            endPos = sprite.find('\n', startPos);
+            endPos = ship.find('\n', startPos);
             ++lineIndex;
         }
     }
-    //Erase PlayerRocket from the game window
+    // Erase PlayerRocket from the game window
     void erase(WINDOW* window){
         for (int i = 0; i < 6; ++i){
             mvwprintw(window, y+i, x, "     ");
@@ -140,91 +139,86 @@ public:
     }
 };
 
-//The Ball class is responsible for handling the ball
-class Ball {
+// Class for handling bullets //
+class bullet {
 public:
-    //Ball art
-    string sprite = "o";
-    //Ball position
+    // Bullet design //
+    string ship = "o";
+    // Bullet pos //
     int x, y;
-    //Ball velocity
+    // Bullet speed //
     int dx, dy;
-    //Initialize ball
-    Ball(int y, int x, int dy) {
+    //Initialize bullet
+    bullet(int y, int x, int dy) {
         this -> y = y;
         this -> x = x;
         this -> dy = dy;
     }
-    //Draw ball in the game window
+    // Display Bullet in the game window //
     void draw(WINDOW* window) {
-        mvwprintw(window, y, x, sprite.c_str());
+        mvwprintw(window, y, x, ship.c_str());
     }
 
-    //Erase ball from the game window
+    // Erase Bullet from the game window //
     void erase(WINDOW* window) {
         mvwprintw(window, y, x, " ");
     }
 };
 
-//The game function runs the main game - it accepts the player name as a parameter and passes it to the player class
+// main game func //
 int game(string playerName) {
 
-    //Randomize seed
+    // random seed //
     srand(time(nullptr));
 
-    //Create a window to show player info
+    // show player info //
     WINDOW* infoWindow = newwin(3, 60, 0, 0);
-    //Draw a box around the info window
     box(infoWindow, 0, 0);
-    //Refresh the info window initially
+    // refresh the info window //
     wrefresh(infoWindow);
 
-    //Create a window for the game
+    // game window //
     WINDOW* gameWindow = newwin(gameY, gameX, 3, 0);
-    //Draw a box around the game window
     box(gameWindow, 0, 0);
-    //Refresh the game window initially
+    // refresh the game window //
     wrefresh(gameWindow);
 
-    //Create a window to show controls
-    WINDOW* commandsWindow = newwin(3, 60, 33, 0);
-    //Draw a box around the command window
-    box(commandsWindow, 0, 0);
-    //Print instructions
-    mvwprintw(commandsWindow, 1, 1, "[<][>]:Move Rocket        [A]: Shoot            [Q]:Quit");
-    //Refresh command window initially
-    wrefresh(commandsWindow);
+    // window for controls //
+    WINDOW* instruction_tab = newwin(3, 60, 33, 0);
+    box(instruction_tab, 0, 0);
+    // instructions //
+    mvwprintw(instruction_tab, 1, 1, "[<][>]:Move Rocket        [A]: Shoot            [Q]:Quit");
+    // refresh instructions tab //
+    wrefresh(instruction_tab);
 
-    //Initialize the player, level, ball and Rocket
+    // initialize all components //
     Player player;
     player.init(playerName, 0, 5);
-
-
     PlayerRocket playerRocket;
     playerRocket.init(22, 30);
-    //Draw all the components and refresh the game window initially
+    // display all the components and refresh the game window //
     playerRocket.draw(gameWindow);
     wrefresh(gameWindow);
-    vector<Ball> balls;
+    vector<bullet> bullets;
     vector<Enemy> enemy;
-    //Flags to handle losing a life and player death
+    // life and player death flags // 
     bool restart = false;
     bool died = false;
-    int ball_num = 0;
-    //Game loop
+    int bullet_num = 0;
+    // main game loop
     while(true) {
         //Randomize seed
         srand(time(nullptr));
 
-        //Get player input
+        // player input //
         int input = getch();
 
-        //Quit if user presses 'Q'
+        // quit - 'Q' //
         if(input == 'q' || input == 'Q') {
             break;
         }
 
-        //If player dies, exit loop and show Game Over screen
+        // game over - exit loop and show end screen //
         if(player.lives == 0) {
             died = true;
             break;
@@ -371,30 +365,30 @@ int game(string playerName) {
 
 
 
-        //Initialize new ball on losing a life
+        // Initialize new bullet on losing a life
         if(input == 'a' || input == 'A') {
-            balls.push_back(Ball((playerRocket.y), (playerRocket.x)+2, -1.));
+            bullets.push_back(bullet((playerRocket.y), (playerRocket.x)+2, -1.));
 
         }
-        for(int i = balls.size()-1; i >= 0; i--){
-             if ((balls[i].y == 2) || (balls[i].x == 1) || (balls[i].x == 58)){
-                balls[i].erase(gameWindow);
+        for(int i = bullets.size()-1; i >= 0; i--){
+             if ((bullets[i].y == 2) || (bullets[i].x == 1) || (bullets[i].x == 58)){
+                bullets[i].erase(gameWindow);
                 wrefresh(gameWindow);
-                balls.erase(balls.begin() + i);
+                bullets.erase(bullets.begin() + i);
                 continue;
              }
-             balls[i].erase(gameWindow);
+             bullets[i].erase(gameWindow);
              wrefresh(gameWindow);
 
-        //Update ball position
-             balls[i].y += balls[i].dy;
-             balls[i].draw(gameWindow);
+        // Update bullet position
+             bullets[i].y += bullets[i].dy;
+             bullets[i].draw(gameWindow);
              wrefresh(gameWindow);
         }
 
-    //Handle collision of player with the enemy rockets
+    // Handle collision of player with the enemy rockets
         for(int j = enemy.size()-1; j >= 0; j--){
-            string rocket=playerRocket.sprite;
+            string rocket=playerRocket.ship;
             int rockety=playerRocket.y ;
             int rocketx=playerRocket.x;
             int lineIndex = 0;
@@ -425,15 +419,15 @@ int game(string playerName) {
         
 
 
-        //Handle collision with the enemy rockets
-        for(int i = balls.size()-1; i >= 0; i--){
+        // Handle collision with the enemy rockets
+        for(int i = bullets.size()-1; i >= 0; i--){
             for(int j = enemy.size()-1; j >= 0; j--){
-                if(balls[i].x == enemy[j].x || balls[i].x == (enemy[j].x )+1 || balls[i].x == (enemy[j].x )+2)
+                if(bullets[i].x == enemy[j].x || bullets[i].x == (enemy[j].x )+1 || bullets[i].x == (enemy[j].x )+2)
                 { 
-                    if(balls[i].y == ((enemy[j].y)+1) || balls[i].y == (enemy[j].y) || balls[i].y == (enemy[j].y)+2){
-                        balls[i].erase(gameWindow);
+                    if(bullets[i].y == ((enemy[j].y)+1) || bullets[i].y == (enemy[j].y) || bullets[i].y == (enemy[j].y)+2){
+                        bullets[i].erase(gameWindow);
                         wrefresh(gameWindow);
-                        balls.erase(balls.begin() + i);
+                        bullets.erase(bullets.begin() + i);
                         enemy[j].erase(gameWindow);
                         wrefresh(gameWindow);
                         enemy.erase(enemy.begin() + j);
@@ -445,25 +439,24 @@ int game(string playerName) {
             }
         }
         
-        //Update PlayerRocket position
+        // Update PlayerRocket position
         playerRocket.erase(gameWindow);
         playerRocket.update(input);
         playerRocket.draw(gameWindow);
 
-        //Update player info
+        // Update player info
         string playerInfo = "Points:" + to_string(player.Points) + "           Level:" + to_string(level(iteration)) + "          " + "Lives:" + to_string(player.lives);
         mvwprintw(infoWindow, 1, 1, playerInfo.c_str());                                                 
         wrefresh(infoWindow);
 
-        //Refresh game window
+        // Refresh game window
         wrefresh(gameWindow);
 
-        //Clear buffered input from previous frame
         flushinp();
-        //Sleep for 100000 microseconds before updating
+        // Sleep for 100000 microseconds before updating
         usleep(100000);
         iteration++;
-    }./PlayerRocket
+    }
     iteration = 0;
 
     if(died) gameEnd(player.name, player.Points);
