@@ -25,10 +25,14 @@ https://github.com/tulsyandivyansh/ENGG1340--Rocket-Shooter/assets/62593950/7617
 ### Project Requirements
 #### Generation of random game sets or events: 
     We randomised the generation of the enemy ships at the top of the screen, when the game starts.
-* Data structures for storing game status: We use different classes to store the status of in-game objects like the missles, the rocket, and the level. The player data is also stored in a class at any given point.
-* Dynamic memory management: We utilize dynamic memory allocation to create and change instances of the gameWindow, instructions_window, infoWindows and in each round of gameplay.
-* File input/output: To save scores on the leaderboard, a save file with player name and score is used.
-* Program codes in multiple files: Multiple files are used.
+#### Data structures for storing game status: 
+    We use different classes to store the status of in-game objects like the missles, the rocket, and the level. The player data is also stored in a class at any given point.
+#### Dynamic memory management:
+    We utilize dynamic memory allocation to create and change instances of the gameWindow, instructions_window, infoWindows and in each round of gameplay.
+#### File input/output:
+     To save scores on the leaderboard, a save file with player name and score is used.
+#### Program codes in multiple files:
+    Multiple files are used.
 
 
 
